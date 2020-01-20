@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://example.com/</loc>
-  <lastmod>2020-01-20T00:56:00Z</lastmod>
+  <lastmod>2020-01-20T05:20:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/2020/</loc>
@@ -22,23 +22,11 @@
   <lastmod>2020-01-19T23:02:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/blog/.ipynb_checkpoints/index-checkpoint.html</loc>
-  <lastmod>2020-01-19T22:47:00Z</lastmod>
- </url>
- <url>
   <loc>https://example.com/categories/</loc>
-  <lastmod>2020-01-20T03:18:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/categories/.ipynb_checkpoints/index-checkpoint.html</loc>
-  <lastmod>2020-01-20T03:08:00Z</lastmod>
+  <lastmod>2020-01-20T05:20:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/cat_book-notes/</loc>
-  <lastmod>2020-01-20T03:29:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/categories/cat_book-notes/.ipynb_checkpoints/index-checkpoint.html</loc>
   <lastmod>2020-01-20T03:29:00Z</lastmod>
  </url>
  <url>
@@ -47,27 +35,11 @@
  </url>
  <url>
   <loc>https://example.com/galleries/</loc>
-  <lastmod>2020-01-19T22:03:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/index.src.html</loc>
-  <lastmod>2020-01-20T00:47:00Z</lastmod>
+  <lastmod>2020-01-20T05:20:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/listings/</loc>
   <lastmod>2020-01-19T22:03:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/pages/</loc>
-  <lastmod>2020-01-19T22:52:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/posts/</loc>
-  <lastmod>2020-01-20T03:24:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/posts/.ipynb_checkpoints/index-checkpoint.html</loc>
-  <lastmod>2020-01-19T22:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/posts/json-notes/</loc>
@@ -75,10 +47,6 @@
  </url>
  <url>
   <loc>https://example.com/posts/never-split-the-difference/</loc>
-  <lastmod>2020-01-20T04:57:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/posts/never-split-the-difference/.ipynb_checkpoints/index-checkpoint.html</loc>
   <lastmod>2020-01-20T04:57:00Z</lastmod>
  </url>
  <url>
@@ -96,9 +64,5 @@
  <url>
   <loc>https://example.com/test-page/</loc>
   <lastmod>2020-01-19T23:01:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/untitled/</loc>
-  <lastmod>2020-01-19T23:12:00Z</lastmod>
  </url>
 </urlset>
