@@ -1,6 +1,6 @@
 <!--
-.. title:  
-.. slug: inside-the-black-box-notes
+.. title:   
+.. slug: inside-the-black-box
 .. date: 2020-01-22 15:56:51 UTC-08:00
 .. tags: 
 .. category: Book Notes
