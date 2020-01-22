@@ -10,4 +10,4 @@
 -->
 
 # [Programming Notes](categories/cat_programming-notes)
-# [Book Notes](categories/cat_book-notes)
+# [Book Notes](book-notes)
