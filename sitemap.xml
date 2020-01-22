@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://example.com/</loc>
-  <lastmod>2020-01-20T05:20:00Z</lastmod>
+  <lastmod>2020-01-20T06:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/2020/</loc>
@@ -22,12 +22,20 @@
   <lastmod>2020-01-19T23:02:00Z</lastmod>
  </url>
  <url>
+  <loc>https://example.com/book-notes/</loc>
+  <lastmod>2020-01-20T06:44:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://example.com/categories/</loc>
   <lastmod>2020-01-20T05:20:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/cat_book-notes/</loc>
   <lastmod>2020-01-20T03:29:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/categories/cat_book-notes/.ipynb_checkpoints/index-checkpoint.html</loc>
+  <lastmod>2020-01-20T04:47:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/cat_programming-notes/</loc>
@@ -42,8 +50,16 @@
   <lastmod>2020-01-19T22:03:00Z</lastmod>
  </url>
  <url>
+  <loc>https://example.com/posts/inside-the-black-box/</loc>
+  <lastmod>2020-01-22T22:59:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://example.com/posts/json-notes/</loc>
-  <lastmod>2020-01-20T03:00:00Z</lastmod>
+  <lastmod>2020-01-20T07:05:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/json-notes/.ipynb_checkpoints/index-checkpoint.html</loc>
+  <lastmod>2020-01-20T04:47:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/posts/never-split-the-difference/</loc>
@@ -51,7 +67,7 @@
  </url>
  <url>
   <loc>https://example.com/posts/sample-book-2/</loc>
-  <lastmod>2020-01-20T03:24:00Z</lastmod>
+  <lastmod>2020-01-20T06:59:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/posts/sample-book-notes/</loc>
@@ -60,6 +76,10 @@
  <url>
   <loc>https://example.com/posts/sample-programming-notes/</loc>
   <lastmod>2020-01-20T00:59:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/test-folder/inside-the-black-box/</loc>
+  <lastmod>2020-01-22T23:10:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/test-page/</loc>
