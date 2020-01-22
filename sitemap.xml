@@ -34,10 +34,6 @@
   <lastmod>2020-01-20T03:29:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/categories/cat_book-notes/.ipynb_checkpoints/index-checkpoint.html</loc>
-  <lastmod>2020-01-20T04:47:00Z</lastmod>
- </url>
- <url>
   <loc>https://example.com/categories/cat_programming-notes/</loc>
   <lastmod>2020-01-20T01:00:00Z</lastmod>
  </url>
@@ -50,16 +46,12 @@
   <lastmod>2020-01-19T22:03:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/inside-the-black-box/</loc>
-  <lastmod>2020-01-22T22:59:00Z</lastmod>
+  <loc>https://example.com/posts/inside-the-black-box-notes/</loc>
+  <lastmod>2020-01-22T23:55:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/posts/json-notes/</loc>
   <lastmod>2020-01-20T07:05:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/posts/json-notes/.ipynb_checkpoints/index-checkpoint.html</loc>
-  <lastmod>2020-01-20T04:47:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/posts/never-split-the-difference/</loc>
@@ -76,10 +68,6 @@
  <url>
   <loc>https://example.com/posts/sample-programming-notes/</loc>
   <lastmod>2020-01-20T00:59:00Z</lastmod>
- </url>
- <url>
-  <loc>https://example.com/posts/test-folder/inside-the-black-box/</loc>
-  <lastmod>2020-01-22T23:10:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/test-page/</loc>
