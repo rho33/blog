@@ -9,8 +9,12 @@
 .. type: text
 -->
 
-Notes from books I've read.  
+Notes from useful or interesting non-fiction books I have read  
+
+
+Many posts are brief but include outside links to more detailed notes.
 
 
 * [Inside the Black Box](../posts/inside-the-black-box)
 * [Never Split the Difference](../posts/never-split-the-difference)
+- [The Tipping Point](../posts/the-tipping-point)
