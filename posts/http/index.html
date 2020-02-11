@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>http | My Site</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https:///posts/http/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><!-- Font Awesome --><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<meta name="author" content="Ryan">
+<link rel="prev" href="../tcpip/" title="TCP/IP" type="text/html">
+<link rel="next" href="../the-tipping-point/" title="the tipping point" type="text/html">
+<meta property="og:site_name" content="My Site">
+<meta property="og:title" content="http">
+<meta property="og:url" content="https:///posts/http/">
+<meta property="og:description" content="HTTP/HTTPS - hypertext transfer protocol
+
+communication protocol between web servers and clients
+each command executed independently (i.e. stateless)
+when you enter a URL in your browser, this actuall">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-01-27T18:58:14-08:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="https://">
+
+            <span id="blog-title">My Site</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto">
+<li class="nav-item dropdown">
+<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topics</a>
+            <div class="dropdown-menu">
+                    <a href="../../categories/cat_trading/" class="dropdown-item">Python</a>
+                    <a href="../../categories/cat_python/" class="dropdown-item">Books</a>
+                    <a href="../../archive.html/" class="dropdown-item">Misc</a>
+                    <a href="../" class="dropdown-item">All Posts</a>
+            </div>
+                </li>
+<li class="nav-item">
+<a href="../../about-me/" class="nav-link">About</a>
+
+                
+            </li>
+</ul>
+<ul class="navbar-nav navbar-right">
+<li class="nav-item">
+    <a href="index.md" id="sourcelink" class="nav-link">Source</a>
+    </li>
+
+
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">http</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-27T18:58:14-08:00" itemprop="datePublished" title="2020-01-27 18:58">2020-01-27 18:58</time></a>
+            </p>
+            
+        <p class="sourceline"><a href="index.md" class="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<h2>HTTP/HTTPS - hypertext transfer protocol</h2>
+<ul>
+<li>communication protocol between web servers and clients</li>
+<li>each command executed independently (i.e. stateless)</li>
+<li>when you enter a URL in your browser, this actually sends an HTTP command to the Web server directing it to fetch and transmit the requested Web page.</li>
+<li>client sends request, server sends response</li>
+<li>HTTP requests made up of: endpoint, method, headers, data (body)</li>
+<li>endpoint (route) is the url you request for</li>
+<li>http methods (verbs)<ul>
+<li>get - retrieves data from server<ul>
+<li>less secure, typically not used with a form</li>
+</ul>
+</li>
+<li>post - submits data to server</li>
+<li>put - updates data already on server</li>
+<li>delete - deletes data from server</li>
+</ul>
+</li>
+<li>http header fields (https://en.wikipedia.org/wiki/List_of_HTTP_header_fields)<ul>
+<li>general - general applicability for both request and response messages.</li>
+<li>response<ul>
+<li>Set-Cookie - An HTTP cookie<ul>
+<li>Set-Cookie: UserID=JohnDoe; Max-Age=3600; Version=1</li>
+</ul>
+</li>
+<li>Server - A name for the server<ul>
+<li>example:<ul>
+<li>Server: Apache/2.4.1 (Unix)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Content-Type - the media type of the content<ul>
+<li>example:<ul>
+<li>Content-Type: text/html; charset=utf-8</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Content-Length - The length of the response body in octets (8-bit bytes)<ul>
+<li>example:<ul>
+<li>Content-Length: 348</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Date - The date and time that the message was sent<ul>
+<li>example:<ul>
+<li>Date: Tue, 15 Nov 1994 08:12:31 GMT</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>request (http://gethttp.info/most-common-http-headers.php)<ul>
+<li>Host - specifies domain of the server it is communicating with<ul>
+<li>examples:<ul>
+<li>Host: gethttp.info</li>
+<li>Host: apple.com:8080</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Cookie - An HTTP cookie previously sent by the server with Set-Cookie</li>
+<li>Accept - how the client tells the server what kind of content it can accept in the HTTP response<ul>
+<li>examples:<ul>
+<li>Accept: text/html, text/plain; q=0.6, <em>/</em>; q=0.1</li>
+<li>Accept: application/graphql, application/json; q=0.8, application/xml; q=0.7</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Accept-Encoding - defines what type of content encoding the client can accept in the response body<ul>
+<li>examples:<ul>
+<li>Accept-Encoding: gzip, deflate</li>
+<li>Accept-Encoding: br, gzip;q=0.9, deflate;q=0.8, *;q=0.1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Accept-Language - tells the server the cient's preferred natural language<ul>
+<li>examples:<ul>
+<li>Accept-Language: en-GB, en-US, en;q=0.9</li>
+<li>Accept-Language: de-AT, de-DE;q=0.9, en;q=0.5</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Authorization - specifies the authorization scheme and any associated data or token<ul>
+<li>
+</li>
+<li>examples:<ul>
+<li>Authorization: Basic ZmFsa2VuOmpvc2h1YTU=</li>
+<li>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Referer - tells server where requested URL came from (e.g. from a link, typed into browser address bar...)<ul>
+<li>examples<ul>
+<li>Referer: https://www.google.co.uk/</li>
+<li>Referer: https://www.quora.com/profile/Lee-Dowthwaite</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>User-Agent - identifies the requesting system<ul>
+<li>examples:<ul>
+<li>User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The data (sometimes called “body” or “message”) contains information you want to be sent to the server. This option is only used with POST, PUT, PATCH or DELETE requests.</li>
+</ul>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../tcpip/" rel="prev" title="TCP/IP">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../the-tipping-point/" rel="next" title="the tipping point">Next post</a>
+            </li>
+        </ul></nav></aside></article><!--End of body content--><footer id="footer">
+            Contents © 2020         <a href="mailto:n.tesla@example.com">Ryan</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script src="../../assets/js/moment-with-locales.min.js"></script><!-- fancy dates --><script>
+        moment.locale("en");
+        fancydates(2, "YYYY-MM-DD HH:mm");
+        </script><!-- end fancy dates --><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

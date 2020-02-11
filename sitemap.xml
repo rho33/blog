@@ -6,71 +6,139 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
-  <loc>https://example.com/</loc>
-  <lastmod>2020-01-20T06:44:00Z</lastmod>
+  <loc>https:///</loc>
+  <lastmod>2020-02-11T23:18:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/2020/</loc>
+  <loc>https:///2020/</loc>
   <lastmod>2020-01-20T00:28:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/archive.html</loc>
-  <lastmod>2020-01-22T23:57:00Z</lastmod>
+  <loc>https:///archive.html</loc>
+  <lastmod>2020-02-11T05:42:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/blog/</loc>
-  <lastmod>2020-01-19T23:02:00Z</lastmod>
+  <loc>https:///blog/</loc>
+  <lastmod>2020-01-25T20:25:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/book-notes/</loc>
+  <loc>https:///blog/index-1.html</loc>
+  <lastmod>2020-02-11T05:42:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///book-notes/</loc>
   <lastmod>2020-01-20T06:44:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/categories/</loc>
+  <loc>https:///categories/</loc>
   <lastmod>2020-01-20T05:20:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/categories/cat_book-notes/</loc>
+  <loc>https:///categories/cat_book-notes/</loc>
   <lastmod>2020-01-20T03:29:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/categories/cat_programming-notes/</loc>
+  <loc>https:///categories/cat_programming-notes/</loc>
   <lastmod>2020-01-20T01:00:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/galleries/</loc>
-  <lastmod>2020-01-20T05:20:00Z</lastmod>
+  <loc>https:///galleries/</loc>
+  <lastmod>2020-02-11T23:18:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/listings/</loc>
+  <loc>https:///galleries/.ipynb_checkpoints/</loc>
+  <lastmod>2020-02-11T23:18:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///index.src.html</loc>
+  <lastmod>2020-02-11T09:21:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///listings/</loc>
   <lastmod>2020-01-19T22:03:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/inside-the-black-box/</loc>
+  <loc>https:///misc/</loc>
+  <lastmod>2020-02-11T09:19:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///not/</loc>
+  <lastmod>2020-02-10T21:17:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///posts/adapter-pattern/</loc>
+  <lastmod>2020-01-25T20:25:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///posts/f/</loc>
+  <lastmod>2020-01-23T01:15:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///posts/http/</loc>
+  <lastmod>2020-01-28T02:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///posts/inside-the-black-box/</loc>
   <lastmod>2020-01-22T23:57:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/json-notes/</loc>
+  <loc>https:///posts/json-notes/</loc>
   <lastmod>2020-01-20T07:05:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/never-split-the-difference/</loc>
+  <loc>https:///posts/multiprocessing/</loc>
+  <lastmod>2020-01-25T00:41:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///posts/never-split-the-difference/</loc>
   <lastmod>2020-01-20T04:57:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/sample-book-2/</loc>
+  <loc>https:///posts/praw-notes/</loc>
+  <lastmod>2020-01-27T01:57:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///posts/reading-and-writing-to-files/</loc>
+  <lastmod>2020-01-25T02:24:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///posts/restful-api/</loc>
+  <lastmod>2020-01-27T01:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///posts/sample-book-2/</loc>
   <lastmod>2020-01-20T06:59:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/sample-book-notes/</loc>
+  <loc>https:///posts/sample-book-notes/</loc>
   <lastmod>2020-01-20T00:28:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/sample-programming-notes/</loc>
+  <loc>https:///posts/sample-programming-notes/</loc>
   <lastmod>2020-01-20T00:59:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/test-page/</loc>
+  <loc>https:///posts/tcpip/</loc>
+  <lastmod>2020-01-27T19:47:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///posts/the-tipping-point/</loc>
+  <lastmod>2020-02-10T20:31:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///posts/threading/</loc>
+  <lastmod>2020-01-25T00:23:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///posts/uml/</loc>
+  <lastmod>2020-01-25T21:26:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///python/</loc>
+  <lastmod>2020-02-11T06:08:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https:///test-page/</loc>
   <lastmod>2020-01-19T23:01:00Z</lastmod>
  </url>
 </urlset>

@@ -1,7 +1,7 @@
 div.prompt {
   padding: 0.6em;
   font-size: 13px;
-  background-color: #E9E9E9;
+  background-color: #878787;
   margin-right: 1em;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -17,9 +17,17 @@ div.output_area pre {
   font-size: 13px;
 }
 
+div.inner_cell {
+  color: #000000;
+}
+
+div.hl-ipython3 {
+  color: #000000;
+}
+
 div.text_cell_render {
   padding: 0px;
-  color: #333333;
+  color: #DDDDDD;
 }
 
 .rendered_html p {

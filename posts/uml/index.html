@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UML | My Site</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https:///posts/uml/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><!-- Font Awesome --><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<meta name="author" content="Ryan">
+<link rel="prev" href="../adapter-pattern/" title="Adapter Pattern" type="text/html">
+<link rel="next" href="../praw-notes/" title="PRAW Notes" type="text/html">
+<meta property="og:site_name" content="My Site">
+<meta property="og:title" content="UML">
+<meta property="og:url" content="https:///posts/uml/">
+<meta property="og:description" content="Unified modeling language (UML) is a way of visualizing a software program using a collection of diagrams
+In software engineering, a class diagram in the Unified Modeling Language (UML) is a type of s">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-01-25T13:26:02-08:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="https://">
+
+            <span id="blog-title">My Site</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto">
+<li class="nav-item dropdown">
+<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topics</a>
+            <div class="dropdown-menu">
+                    <a href="../../categories/cat_trading/" class="dropdown-item">Python</a>
+                    <a href="../../categories/cat_python/" class="dropdown-item">Books</a>
+                    <a href="../../archive.html/" class="dropdown-item">Misc</a>
+                    <a href="../" class="dropdown-item">All Posts</a>
+            </div>
+                </li>
+<li class="nav-item">
+<a href="../../about-me/" class="nav-link">About</a>
+
+                
+            </li>
+</ul>
+<ul class="navbar-nav navbar-right">
+<li class="nav-item">
+    <a href="index.md" id="sourcelink" class="nav-link">Source</a>
+    </li>
+
+
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">UML</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-25T13:26:02-08:00" itemprop="datePublished" title="2020-01-25 13:26">2020-01-25 13:26</time></a>
+            </p>
+            
+        <p class="sourceline"><a href="index.md" class="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<ul>
+<li>Unified modeling language (UML) is a way of visualizing a software program using a collection of diagrams</li>
+<li>In software engineering, a class diagram in the Unified Modeling Language (UML) is a type of static structure diagram that describes the structure of a system by showing the system's classes, their attributes, operations (or methods), and the relationships among objects.</li>
+</ul>
+<h4>Class Diagram:</h4>
+<p><!-- - <img src='../../images/uml-class-example.png' align='left' width=40%><br /><br /><br /><br /><br /><br /><br /><br /><br /> -->
+<img alt="image" src="../../images/uml-class-example.png"></p>
+<ul>
+<li>displayed as rectangles divided into (horizontal) compartments<ul>
+<li>1st compartment = name of class</li>
+<li>2nd compartment = attributes</li>
+<li>3rd compartment = operations</li>
+<li>To specify the visibility of a class member (i.e. any attribute or method), these notations must be placed before the member's name:<ul>
+<li>+ Public</li>
+<li>- Private</li>
+<li># Protected</li>
+<li>~ Package</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>Relationships</h4>
+<p><img alt="image" src="../../images/uml-associations.png"></p>
+<h5>Dependency</h5>
+<ul>
+<li>typically (but not always) implies that an object accepts another object as a method parameter, instantiates, or uses another object. A dependency is very much implied by an association.</li>
+<li>To quote from the 3rd edition of UML Distilled (now just out) "a dependency exists between two elements if changes to the definition of one element (the supplier) may cause changes to the other (the client)". (https://martinfowler.com/bliki/DependencyAndAssociation.html)<ul>
+<li>You don't want to show every dependency on a UML diagram. There are far too many. You need to be very selective and show only those that are important to whatever it is you are communicating. (https://martinfowler.com/bliki/DependencyAndAssociation.html)</li>
+</ul>
+</li>
+</ul>
+<h5>Association</h5>
+<ul>
+<li>almost always implies that one object has the other object as a field/property/attribute (terminology differs).</li>
+<li>
+<p>arrows describe navigability</p>
+<ul>
+<li>if B is navigable from A (usually meaning A has B as an attribute) then the arrow will point at B (see 2nd example below).
+<img alt="image" src="../../images/uml-navigability.png">
+</li>
+</ul>
+</li>
+<li>
+<p>association types:</p>
+<ul>
+<li>bi-directional<ul>
+<li>associations assumed to be bi-directional</li>
+</ul>
+</li>
+<li>uni-directional<ul>
+<li>In a unidirectional association, two classes are related, but only one class knows that the relationship exists.</li>
+</ul>
+</li>
+<li>
+<p>aggregation</p>
+<ul>
+<li>"has a" relationship</li>
+<li>e.g. class and student, company and people</li>
+<li>
+<p>composition</p>
+<ul>
+<li>"is part of"</li>
+<li>"owns"</li>
+<li>the composed (contained) object cannot exist without the other entity (container)</li>
+<li>e.g. company and accounts<br><img alt="image" src="../../images/association-composition-aggregation.jpg">
+</li>
+</ul>
+</li>
+<li>
+<p>In Aggregation (that is not composition), both the entries can survive individually which means ending one entity will not effect the other entity</p>
+<ul>
+<li>reflexive - objects of same class related to each other</li>
+</ul>
+</li>
+</ul>
+<h5>Realization</h5>
+<ul>
+<li>a specialized abstraction relationship between two sets of model elements, one representing a specification (the supplier) and the other represents an implementation of the latter (the client)</li>
+<li>interface realization - relationship between a classifier and an interface where classifier conforms to the interface (e.g. adapter pattern)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../adapter-pattern/" rel="prev" title="Adapter Pattern">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../praw-notes/" rel="next" title="PRAW Notes">Next post</a>
+            </li>
+        </ul></nav></aside></article><!--End of body content--><footer id="footer">
+            Contents © 2020         <a href="mailto:n.tesla@example.com">Ryan</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script src="../../assets/js/moment-with-locales.min.js"></script><!-- fancy dates --><script>
+        moment.locale("en");
+        fancydates(2, "YYYY-MM-DD HH:mm");
+        </script><!-- end fancy dates --><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

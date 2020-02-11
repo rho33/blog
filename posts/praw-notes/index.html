@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PRAW Notes | My Site</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https:///posts/praw-notes/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><!-- Font Awesome --><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<meta name="author" content="Ryan">
+<link rel="prev" href="../uml/" title="UML" type="text/html">
+<link rel="next" href="../restful-api/" title="RESTful API" type="text/html">
+<meta property="og:site_name" content="My Site">
+<meta property="og:title" content="PRAW Notes">
+<meta property="og:url" content="https:///posts/praw-notes/">
+<meta property="og:description" content="In [46]:
+
+    
+import praw
+
+
+    
+
+
+
+
+
+
+In [47]:
+
+    
+# obviously not real passwords/api keys
+reddit = praw.Reddit(client_id='*****',
+                    client_secret='****',
+                    use">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-01-26T12:25:17-08:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="https://">
+
+            <span id="blog-title">My Site</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto">
+<li class="nav-item dropdown">
+<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topics</a>
+            <div class="dropdown-menu">
+                    <a href="../../categories/cat_trading/" class="dropdown-item">Python</a>
+                    <a href="../../categories/cat_python/" class="dropdown-item">Books</a>
+                    <a href="../../archive.html/" class="dropdown-item">Misc</a>
+                    <a href="../" class="dropdown-item">All Posts</a>
+            </div>
+                </li>
+<li class="nav-item">
+<a href="../../about-me/" class="nav-link">About</a>
+
+                
+            </li>
+</ul>
+<ul class="navbar-nav navbar-right">
+<li class="nav-item">
+    <a href="index.ipynb" id="sourcelink" class="nav-link">Source</a>
+    </li>
+
+
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">PRAW Notes</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-26T12:25:17-08:00" itemprop="datePublished" title="2020-01-26 12:25">2020-01-26 12:25</time></a>
+            </p>
+            
+        <p class="sourceline"><a href="index.ipynb" class="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">praw</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># obviously not real passwords/api keys</span>
+<span class="n">reddit</span> <span class="o">=</span> <span class="n">praw</span><span class="o">.</span><span class="n">Reddit</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="s1">'*****'</span><span class="p">,</span>
+                    <span class="n">client_secret</span><span class="o">=</span><span class="s1">'****'</span><span class="p">,</span>
+                    <span class="n">username</span><span class="o">=</span><span class="s1">'****'</span><span class="p">,</span>
+                    <span class="n">password</span><span class="o">=</span><span class="s1">'****'</span><span class="p">,</span>
+                    <span class="n">user_agent</span><span class="o">=</span><span class="s1">'****'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [58]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://pythonprogramming.net/parsing-comments-python-reddit-api-wrapper-praw-tutorial/</span>
+
+<span class="n">subreddit</span> <span class="o">=</span> <span class="n">reddit</span><span class="o">.</span><span class="n">subreddit</span><span class="p">(</span><span class="s1">'television'</span><span class="p">)</span>
+
+<span class="c1"># can choose between hot, top, controversial, new... just like on the website</span>
+<span class="n">hot_python</span> <span class="o">=</span> <span class="n">subreddit</span><span class="o">.</span><span class="n">hot</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">submission</span> <span class="ow">in</span> <span class="n">hot_python</span><span class="p">:</span>
+    <span class="c1"># stickied means pinned by moderator</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">submission</span><span class="o">.</span><span class="n">stickied</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Title: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">self text: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">ups: </span><span class="si">{}</span><span class="se">\n</span><span class="s1"> downs: </span><span class="si">{}</span><span class="se">\n</span><span class="s1"> Have we visited?: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                                                                             <span class="n">submission</span><span class="o">.</span><span class="n">selftext</span><span class="p">,</span> <span class="c1"># text in body textbox (under title)</span>
+                                                                           <span class="n">submission</span><span class="o">.</span><span class="n">ups</span><span class="p">,</span> <span class="c1"># up votes</span>
+                                                                           <span class="n">submission</span><span class="o">.</span><span class="n">downs</span><span class="p">,</span> <span class="c1"># down votes</span>
+                                                                           <span class="n">submission</span><span class="o">.</span><span class="n">visited</span><span class="p">))</span>
+        <span class="n">comments</span> <span class="o">=</span> <span class="n">submission</span><span class="o">.</span><span class="n">comments</span>
+        <span class="k">for</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="s1">'-'</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">comment</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comment</span><span class="o">.</span><span class="n">replies</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">reply</span> <span class="ow">in</span> <span class="n">comment</span><span class="o">.</span><span class="n">replies</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">'REPLY:'</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="o">+</span><span class="n">reply</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Title: HBO scores at the Directors Guild of America’s Awards: ‘Watchmen’ won best dramatic series, ‘Barry’ won best comedy series, ‘Chernobyl’ won best limited series, and ‘Song of Parkland’ won best children’s program
+self text: 
+ups: 3616
+ downs: 0
+ Have we visited?: False
+--------------------
+Barry is my favorite show
+REPLY:
+	Definitely deserves that award, can’t wait for season 3
+REPLY:
+	It's fucking perfect
+REPLY:
+	the whole cast is incredible. No Ho Hank is my favorite.
+REPLY:
+	Barry was my favorite show, but then Watchmen took the title. Now that watchmen is officially done, Barry is back to my favorite show.
+REPLY:
+	I binged the whole thing two or three days ago and it has easily become one of my new favorite shows. Brilliant all around.
+REPLY:
+	Everyone should watch it, absolutely amazing
+REPLY:
+	I want to start, what style of comedy is it?
+REPLY:
+	I am between Barry and The Boys. Barry for his quiet desperation, The Boys for the complete opposite.
+--------------------
+Wondering if Watchmen can keep they hype up all the way to  September for the Emmy's.
+REPLY:
+	lol I doubt it. The leftovers was snubbed. Thats one of my favourite shows(granted I have only watched a few shows of the prestige kind).
+REPLY:
+	Imo watchmen had a great premise, cool universe and started off with a nice plot. Then sorta crashed all of that in a ditch for a simple megalomaniacal villain plot.
+
+Its amazing in that it brought attention to the Tulsa massacre and that it dared to use race and racism as a central theme at the start, but then didnt manage to make any statements or dramatic insights into any of it. Demonic racists being beaten up by a heroic black character was fun to watch, but I feel it kind of lacks the depth of human experience and drama that Watchmen the comic (or the movie) brought to the surface. stellar performances and some quirky and original stuff throughout it though, so if it gets more content with more original characters I would enjoy watching it.
+REPLY:
+	It won't make it and it doesn't deserve it. I think people are giving it praise due to what it came from rather than what it is.
+--------------------
+Irony is Watchmen is a limited series too now /s
+REPLY:
+	I fully believe it was always planned as a limited series but HBO didn't want to compete with themselves for awards in that category since Chernobyl was pretty much a lock.
+--------------------
+Barry is a comedy?
+REPLY:
+	It's a dark comedy, or one could even call it a dark dramedy, but the comedy very important to its identity
+REPLY:
+	Hey Ike, ya shit bird. You want a little pie?
+REPLY:
+	[NoHo Hank is amazing](https://youtu.be/5zXrjeTNXJw)
+REPLY:
+	I can...stab him in the nut...
+REPLY:
+	How is it not??
+REPLY:
+	Of course? It’s hilarious every episode.
+REPLY:
+	Funnier than the Martian.
+REPLY:
+	optometrist by nature
+REPLY:
+	It’s not funny enough to win this award. It is funny, but there’s gotta be funnier stuff out there.
+--------------------
+Wait. What did Season 8 of Gane of Thrones win?
+REPLY:
+	What it deserved, nothing
+REPLY:
+	I watched GoT and Chernobyl.  One was the faithful  production of one of the greatest manmade disasters of modern times and the other was Chernobyl.
+REPLY:
+	Worst finale.
+--------------------
+No one I know is talking about Barry. I'm glad it's getting the love it deserves.
+REPLY:
+	I like it, but I love The Good Place and hope it wins something, anything, before it's over and gone forever. :(
+--------------------
+The nostalgia episode of Watchmen was my favorite bit of television from 2019. I didn’t love the finale nearly as much, but honestly I don’t know how the series could ever top the hooded justice backstory.
+REPLY:
+	Yeah I liked the new characters and the early episodes but felt the ending and bringing back Dr Manhattan wasn’t a compelling ending.  It was the easy way out and didn’t hold true to the character or the story.  Still it was well done and I accept my judgement may be skewed as a long time fan of the comic.
+--------------------
+No idea what Song of Parkland is but well deserved on all other fronts.
+REPLY:
+	I looked it up and it seems to be a documentary about the parkland school after the shooting, and really doesn’t strike me as a “children’s program”
+--------------------
+Watchmen over Succession? Ok...
+REPLY:
+	Succession is overrated, and that comes from someone that really enjoyed both seasons so far.
+
+(let the downvotes begin)
+--------------------
+Man I'm really on the outside looking in with the Watchmen series. There was stuff I liked but clearly not on the same level as a lot of other people, really started falling a part for me towards the end and so many unanswered/unexplored plot points.
+
+Chernobyl was great, don't know what Song of Parkland is.
+REPLY:
+	There was literally one thing that could be described as a plot point that needed further explanation, that being Lubeman, and that was addressed in the supplemental Peteypedia.
+REPLY:
+	I don’t think shows like watchmen really need to have answers to everything. It’s like a snippet of their world, you don’t get all the context on purpose.
+REPLY:
+	Same. Don't know why *Watchmen* gets so much hype. I got  bored halfway through and gave up.
+
+*The Boys*, however, I loved. A way, way better TV adaptation of the source material, imo.
+--------------------
+No love for Euphoria or Silicon Valley, huh? 
+
+Euphoria was amazingly well made with some of the best cinematography in any HBO show ever in my opinion.
+REPLY:
+	Also the soundtrack fit perfectly with the style of the show, labirinth did an amazing job!
+--------------------
+HBO is a level above every other TV service
+REPLY:
+	Looking at how many nominations Netflix has have for the Oscars and other awards in the last 2 years I would disagree.
+--------------------
+HBO: Maybe we CAN recover from that GoT fiasco
+
+Edit: people don’t understand a joke I guess
+REPLY:
+	The Outsider is pretty fuckin' good (so far).. and this genre isn't even my thing.
+REPLY:
+	12M viewers on average per episode during the final season, and [the DVDs/Blu-rays are selling well](https://www.mediaplaynews.com/game-of-thrones-final-season-tops-disc-sales-charts/) despite this dematerialized streaming era we're now living in.
+
+GoT fiasco? More like internet bias.
+
+Not saying S8 was a masterpiece, but it's not a financial fiasco for HBO, not at all.
+--------------------
+Well deserved all around
+--------------------
+The Boys is a better Watchmen show than Watchmen.
+--------------------
+"Game of Thrones" worst finale series.
+--------------------
+Deserved, Watchmen was great and that episode of Barry was insane and one of the best episodes of television I’ve ever seen
+REPLY:
+	Which Barry episode?
+--------------------
+Who even watches the Watchmen?
+--------------------
+Watchmen was great but didn't quite stick the landing IMO. The Manhattan reveal was cool, but I couldn't get past the cheap design and the direction of the story. Episode 6 however will go down as one of the best episodes of anything ever.
+--------------------
+and people thought HBO was in trouble when GoT was gone ... they did fine before GoT and they'll do fine afterwards (as evidenced)
+--------------------
+TIL HBO has its own award ceremony.
+--------------------
+Happy for watchmen, as a fan of the original I was nervous about a sequel but they did a spectacular job. “This extraordinary being” and “God walks into Abar” we’re seriously amazing
+REPLY:
+	Also a fan of the original and I had problems with “God walks into Abar” it’s the point where the story fell apart for me.  Was much more interested in the early episodes and the new characters like Will Reeves and Looking Glass.
+REPLY:
+	Is it just me or did the original Manhattan sound like Mark Zuckerberg?
+--------------------
+Well renew it for a season 2 damn it!
+--------------------
+Barry deserves it hardcore ! But Watchmen is complete garbage. I'm thoroughly surprised.
+--------------------
+I enjoyed Watchmen but fuck that cliffhanger ending if they’re not going to do a second season.
+--------------------
+Shame that Succession didn't get anything.
+--------------------
+Chernobyl was amazing. Barry was great. But, Watchmen? What the fuck? It was one of the most mediocre shows I've ever seen. Compared to the other two it was, "alright". I know tastes very, but whaaaaat...?
+--------------------
+I get Chernobyl but Watchmen was close to unwatchable. Really didn't do the source material justice.
+--------------------
+Chernobyl is one of the best shows ever.
+--------------------
+Oh man. Is this thread going to get brigaded with anti Watchmen trolls or have they moved on?
+REPLY:
+	Don’t worry, they’re here.
+--------------------
+Watchmen was/is fucking terrible.
+--------------------
+The first season of Barry was great right up until the last episode.  His actions kind of ruined the show for me though.  I mean I get it, but I completely stopped caring about his as a character after that.
+--------------------
+It's only a matter of time before only HBO subscribers get access to Sesame Street.
+
+Frankly, fuck HBO.
+--------------------
+Hahaha Watchmen won for best dramatic series? Well that invalidates every award given by the guild.
+--------------------
+Watchmen was absolute garbage
+REPLY:
+	Yeah? What made you think so?
+
+Did you like the source material or the film at all?
+--------------------
+Everybody needs to watch Watchmen.
+--------------------
+What about game of thrones??
+REPLY:
+	A show that hasn't been good since season 3 doesn't deserve anything.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [59]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hot_python</span> <span class="o">=</span> <span class="n">subreddit</span><span class="o">.</span><span class="n">hot</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">submission</span> <span class="ow">in</span> <span class="n">hot_python</span><span class="p">:</span>
+    <span class="c1"># stickied means pinned by moderator</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">submission</span><span class="o">.</span><span class="n">stickied</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Title: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">self text: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">ups: </span><span class="si">{}</span><span class="se">\n</span><span class="s1"> downs: </span><span class="si">{}</span><span class="se">\n</span><span class="s1"> Have we visited?: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                                                                             <span class="n">submission</span><span class="o">.</span><span class="n">selftext</span><span class="p">,</span> <span class="c1"># text in body textbox (under title)</span>
+                                                                           <span class="n">submission</span><span class="o">.</span><span class="n">ups</span><span class="p">,</span> <span class="c1"># up votes</span>
+                                                                           <span class="n">submission</span><span class="o">.</span><span class="n">downs</span><span class="p">,</span> <span class="c1"># down votes</span>
+                                                                           <span class="n">submission</span><span class="o">.</span><span class="n">visited</span><span class="p">))</span>
+        <span class="c1"># like clicking the more replies/comments button</span>
+        <span class="n">submission</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">replace_more</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># list returns flattened list of all comments. limiting to 15 results to save output</span>
+        <span class="k">for</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">submission</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">list</span><span class="p">()[:</span><span class="mi">15</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="s1">'#'</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">'Parent ID:'</span><span class="p">,</span><span class="n">comment</span><span class="o">.</span><span class="n">parent</span><span class="p">())</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">'Comment ID:'</span><span class="p">,</span><span class="n">comment</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="c1"># limiting output for space-saving-sake, feel free to not do this</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">comment</span><span class="o">.</span><span class="n">body</span><span class="p">[:</span><span class="mi">200</span><span class="p">])</span>
+
+<span class="c1"># the order you get things when you use the comments.list() is all of the top level comments, followed by 2nd level comments, followed by 3rd level... </span>
+<span class="c1"># rest of example shows how to put comments in dictionary reflecting tree structure of comments (see https://pythonprogramming.net/parsing-comments-python-reddit-api-wrapper-praw-tutorial/)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Title: HBO scores at the Directors Guild of America’s Awards: ‘Watchmen’ won best dramatic series, ‘Barry’ won best comedy series, ‘Chernobyl’ won best limited series, and ‘Song of Parkland’ won best children’s program
+self text: 
+ups: 3757
+ downs: 0
+ Have we visited?: False
+####################
+Parent ID: eu9j80
+Comment ID: ffnylef
+Barry is my favorite show
+####################
+Parent ID: eu9j80
+Comment ID: ffmvww3
+Wondering if Watchmen can keep they hype up all the way to  September for the Emmy's.
+####################
+Parent ID: eu9j80
+Comment ID: ffnr7se
+Irony is Watchmen is a limited series too now /s
+####################
+Parent ID: eu9j80
+Comment ID: ffnpqw4
+Barry is a comedy?
+####################
+Parent ID: eu9j80
+Comment ID: ffohvwu
+Wait. What did Season 8 of Gane of Thrones win?
+####################
+Parent ID: eu9j80
+Comment ID: ffoiztp
+No one I know is talking about Barry. I'm glad it's getting the love it deserves.
+####################
+Parent ID: eu9j80
+Comment ID: ffof1lz
+The nostalgia episode of Watchmen was my favorite bit of television from 2019. I didn’t love the finale nearly as much, but honestly I don’t know how the series could ever top the hooded justice backs
+####################
+Parent ID: eu9j80
+Comment ID: ffo5vi4
+No idea what Song of Parkland is but well deserved on all other fronts.
+####################
+Parent ID: eu9j80
+Comment ID: ffoz1ke
+The Boys is a better Watchmen show than Watchmen.
+####################
+Parent ID: eu9j80
+Comment ID: ffnf80h
+Watchmen over Succession? Ok...
+####################
+Parent ID: eu9j80
+Comment ID: ffo6e7h
+Man I'm really on the outside looking in with the Watchmen series. There was stuff I liked but clearly not on the same level as a lot of other people, really started falling a part for me towards the 
+####################
+Parent ID: eu9j80
+Comment ID: ffokn8g
+No love for Euphoria or Silicon Valley, huh? 
+
+Euphoria was amazingly well made with some of the best cinematography in any HBO show ever in my opinion.
+####################
+Parent ID: eu9j80
+Comment ID: ffoyt70
+Barry deserves it hardcore ! But Watchmen is complete garbage. I'm thoroughly surprised.
+####################
+Parent ID: eu9j80
+Comment ID: ffp0a3f
+Chernobyl was amazing. Barry was great. But, Watchmen? What the fuck? It was one of the most mediocre shows I've ever seen. Compared to the other two it was, "alright". I know tastes very, but whaaaaa
+####################
+Parent ID: eu9j80
+Comment ID: ffnl63w
+HBO: Maybe we CAN recover from that GoT fiasco
+
+Edit: people don’t understand a joke I guess
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../uml/" rel="prev" title="UML">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../restful-api/" rel="next" title="RESTful API">Next post</a>
+            </li>
+        </ul></nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article><!--End of body content--><footer id="footer">
+            Contents © 2020         <a href="mailto:n.tesla@example.com">Ryan</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script src="../../assets/js/moment-with-locales.min.js"></script><!-- fancy dates --><script>
+        moment.locale("en");
+        fancydates(2, "YYYY-MM-DD HH:mm");
+        </script><!-- end fancy dates --><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>
