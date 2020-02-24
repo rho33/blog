@@ -12,8 +12,8 @@
 # 
 - The Internet protocol suite is commonly known as TCP/IP because the foundational protocols in the suite are the Transmission Control Protocol (TCP) and the Internet Protocol (IP).
 - TCP/IP is a set of data transfer protocols used by modern data networks
-- made up of 4 layers: </br><img src="../images/tcp-ip-layers.jpg">
-- data flow: </br><img src="../images/tcp-ip-data-flow.png">
+- made up of 4 layers: </br><img src="../../images/tcp-ip-layers.jpg">
+- data flow: </br><img src="../../images/tcp-ip-data-flow.png">
 
 
 ## Layers

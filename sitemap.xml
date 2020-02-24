@@ -6,139 +6,119 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
-  <loc>https:///</loc>
-  <lastmod>2020-02-11T23:18:00Z</lastmod>
+  <loc>https://defclass.com/</loc>
+  <lastmod>2020-02-24T05:52:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///2020/</loc>
+  <loc>https://defclass.com/2020/</loc>
   <lastmod>2020-01-20T00:28:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///archive.html</loc>
-  <lastmod>2020-02-11T05:42:00Z</lastmod>
+  <loc>https://defclass.com/archive.html</loc>
+  <lastmod>2020-02-24T05:53:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///blog/</loc>
-  <lastmod>2020-01-25T20:25:00Z</lastmod>
+  <loc>https://defclass.com/blog/</loc>
+  <lastmod>2020-02-24T05:52:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///blog/index-1.html</loc>
-  <lastmod>2020-02-11T05:42:00Z</lastmod>
+  <loc>https://defclass.com/blog/index-1.html</loc>
+  <lastmod>2020-02-24T05:53:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///book-notes/</loc>
+  <loc>https://defclass.com/book-notes/</loc>
   <lastmod>2020-01-20T06:44:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///categories/</loc>
-  <lastmod>2020-01-20T05:20:00Z</lastmod>
+  <loc>https://defclass.com/categories/</loc>
+  <lastmod>2020-02-24T05:52:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///categories/cat_book-notes/</loc>
-  <lastmod>2020-01-20T03:29:00Z</lastmod>
+  <loc>https://defclass.com/categories/cat_book-notes/</loc>
+  <lastmod>2020-02-24T05:52:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///categories/cat_programming-notes/</loc>
+  <loc>https://defclass.com/categories/cat_programming-notes/</loc>
   <lastmod>2020-01-20T01:00:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///galleries/</loc>
+  <loc>https://defclass.com/galleries/</loc>
   <lastmod>2020-02-11T23:18:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///galleries/.ipynb_checkpoints/</loc>
+  <loc>https://defclass.com/galleries/.ipynb_checkpoints/</loc>
   <lastmod>2020-02-11T23:18:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///index.src.html</loc>
+  <loc>https://defclass.com/index.src.html</loc>
   <lastmod>2020-02-11T09:21:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///listings/</loc>
+  <loc>https://defclass.com/listings/</loc>
   <lastmod>2020-01-19T22:03:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///misc/</loc>
+  <loc>https://defclass.com/misc/</loc>
   <lastmod>2020-02-11T09:19:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///not/</loc>
+  <loc>https://defclass.com/not/</loc>
   <lastmod>2020-02-10T21:17:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///posts/adapter-pattern/</loc>
+  <loc>https://defclass.com/posts/adapter-pattern/</loc>
   <lastmod>2020-01-25T20:25:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///posts/f/</loc>
-  <lastmod>2020-01-23T01:15:00Z</lastmod>
- </url>
- <url>
-  <loc>https:///posts/http/</loc>
+  <loc>https://defclass.com/posts/http/</loc>
   <lastmod>2020-01-28T02:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///posts/inside-the-black-box/</loc>
+  <loc>https://defclass.com/posts/inside-the-black-box/</loc>
   <lastmod>2020-01-22T23:57:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///posts/json-notes/</loc>
-  <lastmod>2020-01-20T07:05:00Z</lastmod>
+  <loc>https://defclass.com/posts/json-notes/</loc>
+  <lastmod>2020-02-24T05:52:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///posts/multiprocessing/</loc>
-  <lastmod>2020-01-25T00:41:00Z</lastmod>
+  <loc>https://defclass.com/posts/never-split-the-difference/</loc>
+  <lastmod>2020-02-24T05:52:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///posts/never-split-the-difference/</loc>
-  <lastmod>2020-01-20T04:57:00Z</lastmod>
- </url>
- <url>
-  <loc>https:///posts/praw-notes/</loc>
+  <loc>https://defclass.com/posts/praw-notes/</loc>
   <lastmod>2020-01-27T01:57:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///posts/reading-and-writing-to-files/</loc>
+  <loc>https://defclass.com/posts/reading-and-writing-to-files/</loc>
   <lastmod>2020-01-25T02:24:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///posts/restful-api/</loc>
+  <loc>https://defclass.com/posts/restful-api/</loc>
   <lastmod>2020-01-27T01:58:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///posts/sample-book-2/</loc>
-  <lastmod>2020-01-20T06:59:00Z</lastmod>
- </url>
- <url>
-  <loc>https:///posts/sample-book-notes/</loc>
-  <lastmod>2020-01-20T00:28:00Z</lastmod>
- </url>
- <url>
-  <loc>https:///posts/sample-programming-notes/</loc>
-  <lastmod>2020-01-20T00:59:00Z</lastmod>
- </url>
- <url>
-  <loc>https:///posts/tcpip/</loc>
+  <loc>https://defclass.com/posts/tcpip/</loc>
   <lastmod>2020-01-27T19:47:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///posts/the-tipping-point/</loc>
+  <loc>https://defclass.com/posts/the-tipping-point/</loc>
   <lastmod>2020-02-10T20:31:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///posts/threading/</loc>
-  <lastmod>2020-01-25T00:23:00Z</lastmod>
+  <loc>https://defclass.com/posts/threading/</loc>
+  <lastmod>2020-02-24T05:52:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///posts/uml/</loc>
+  <loc>https://defclass.com/posts/uml/</loc>
   <lastmod>2020-01-25T21:26:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///python/</loc>
+  <loc>https://defclass.com/python/</loc>
   <lastmod>2020-02-11T06:08:00Z</lastmod>
  </url>
  <url>
-  <loc>https:///test-page/</loc>
+  <loc>https://defclass.com/test-page/</loc>
   <lastmod>2020-01-19T23:01:00Z</lastmod>
  </url>
 </urlset>

@@ -1,4 +1,4 @@
-Sitemap: https:///sitemapindex.xml
+Sitemap: https://defclass.com/sitemapindex.xml
 
 User-Agent: *
-Host: 
+Host: defclass.com

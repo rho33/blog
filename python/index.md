@@ -13,7 +13,6 @@ Jupyter notebooks with examples and notes on various python modules
 
 
 - [json](../posts/json-notes)
-- [multiprocessing](../posts/multiprocessing)
 - [PRAW](../posts/praw-notes) (Python Reddit API Wrapper)
 - [reading & writing to files](../posts/reading-and-writing-to-files)
 - [threading](../posts/threading)
