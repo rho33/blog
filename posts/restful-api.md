@@ -12,7 +12,6 @@
 
 
 - REST = Representational State Transfer
-
 - "REST is, in a nutshell, HTTP commands pushing JSON packets over the network."
     - This is not really true but a lot of people get by with this understanding.
     - HTTP and JSON not actually required to be REST

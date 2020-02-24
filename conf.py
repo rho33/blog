@@ -20,7 +20,7 @@ BLOG_AUTHOR = "Ryan"  # (translatable)
 BLOG_TITLE = "My Site"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-SITE_URL = "https://"
+SITE_URL = "https://defclass.com/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "https://example.com/"
@@ -141,14 +141,14 @@ NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         (
             (
-                ("/categories/cat_trading/", "Python"),
-                ("/categories/cat_python/", "Books"),
-                ("/archive.html/", "Misc"),
+                ("/python/", "Python"),
+                ("/book-notes/", "Books"),
+                ("/misc/", "Misc"),
                 ("/posts/", "All Posts"),
             ),
             "Topics"
         ),
-        ("/about-me/", "About"),
+#         ("/about-me/", "About"),
     ),
 }
 
