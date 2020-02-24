@@ -9654,7 +9654,7 @@ label,.radio label,.checkbox label,.help-block{
 }
 /* Keyword.Declaration */
  pre.code .kn, .highlight pre .kn {
-     color: #008000;
+     color: #00563F;
      font-weight: bold 
 }
 /* Keyword.Namespace */
@@ -9697,7 +9697,7 @@ label,.radio label,.checkbox label,.help-block{
 }
 /* Name.Constant */
  pre.code .nd, .highlight pre .nd {
-     color: #AA22FF 
+     color: #471069
 }
 /* Name.Decorator */
  pre.code .ni, .highlight pre .ni {
@@ -9817,7 +9817,7 @@ label,.radio label,.checkbox label,.help-block{
 }
 /* Literal.String.Symbol */
  pre.code .bp, .highlight pre .bp {
-     color: #008000 
+     color: #00000082
 }
 /* Name.Builtin.Pseudo */
  pre.code .fm, .highlight pre .fm {

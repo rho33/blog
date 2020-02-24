@@ -948,12 +948,25 @@ Edit: people don’t understand a joke I guess
         </div>
     </header><div class="e-content entry-content">
     <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Adapter-Pattern">Adapter Pattern<a class="anchor-link" href="../posts/adapter-pattern/#Adapter-Pattern">¶</a>
+<h2 id="Overview">Overview<a class="anchor-link" href="../posts/adapter-pattern/#Overview">¶</a>
 </h2>
 <ul>
 <li>structural design pattern</li>
@@ -961,8 +974,14 @@ Edit: people don’t understand a joke I guess
 <li>lets us reuse an existing solution when interfaces don't exactly match (this is usually better rewriting from scratch)</li>
 <li>UML:</li>
 </ul>
-<p><img src="../posts/images/adapter-uml.png" align="left"></p>
-
+<p><img src="http://www.defclass.com/images/adapter-uml.png"></p>
+<ul>
+<li>Use when:<ul>
+<li>you want to use an existing class (3rd-party, old code...) with incompatible interface.</li>
+<li>you want to add functionality to many sublcasses and the functionality can't be added to the superclass</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -971,17 +990,55 @@ Edit: people don’t understand a joke I guess
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Example">Example<a class="anchor-link" href="../posts/adapter-pattern/#Example">¶</a>
+<h2 id="Implementation-Steps">Implementation Steps<a class="anchor-link" href="../posts/adapter-pattern/#Implementation-Steps">¶</a>
 </h2>
+<ol>
+<li>Identify useful service class (Turkey in example below) to be adapted and all the client classes/methods/functions that would benefit from the service class ((duck_interaction in example below)</li>
+<li>Declare client interface (as DuckInterface in example below)</li>
+<li>Create adapter class with client interface methods</li>
+<li>Add field to adapter class for service object</li>
+<li>implement client interface methods using service object methods</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Examples">Examples<a class="anchor-link" href="../posts/adapter-pattern/#Examples">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Object-Adapter">Object Adapter<a class="anchor-link" href="../posts/adapter-pattern/#Object-Adapter">¶</a>
+</h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [1]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Duck</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Target interface. Enforcing this through an ABC is not required.</span>
+<span class="k">class</span> <span class="nc">DuckInterface</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">quack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Duck</span><span class="p">(</span><span class="n">DuckInterface</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">quack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
       <span class="nb">print</span><span class="p">(</span><span class="s1">'Quack'</span><span class="p">)</span>
@@ -989,15 +1046,8 @@ Edit: people don’t understand a joke I guess
     <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">"I'm flying"</span><span class="p">)</span>
 
-
-<span class="k">class</span> <span class="nc">Turkey</span><span class="p">:</span>
-
-    <span class="k">def</span> <span class="nf">gobble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">'Gobble gobble'</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"I'm flying a short distance"</span><span class="p">)</span>
-        
+<span class="c1"># Client expecting duck interface (quack and fly). This Doesn't necessarily need to be a function.</span>
+<span class="c1"># It could alternatively be a class relying on quack and fly methods.</span>
 <span class="k">def</span> <span class="nf">duck_interaction</span><span class="p">(</span><span class="n">duck</span><span class="p">):</span>
     <span class="n">duck</span><span class="o">.</span><span class="n">quack</span><span class="p">()</span>
     <span class="n">duck</span><span class="o">.</span><span class="n">fly</span><span class="p">()</span>
@@ -1030,6 +1080,26 @@ I'm flying
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Adaptee</span>
+<span class="k">class</span> <span class="nc">Turkey</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">gobble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Gobble gobble'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">turkey_fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"I'm flying a short distance"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1055,17 +1125,20 @@ I'm flying
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">TurkeyAdapter</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># object adapter</span>
+<span class="c1"># Again using DuckInterface isn't required. As long as quack and fly methods are present it's fine.</span>
+<span class="c1"># DuckInterface ABC class just helps enforce this requirement.</span>
+<span class="k">class</span> <span class="nc">TurkeyAdapter</span><span class="p">(</span><span class="n">DuckInterface</span><span class="p">):</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adaptee</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">adaptee</span> <span class="o">=</span> <span class="n">adaptee</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">turkey</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">turkey</span> <span class="o">=</span> <span class="n">turkey</span>
     
     <span class="k">def</span> <span class="nf">quack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">adaptee</span><span class="o">.</span><span class="n">gobble</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">turkey</span><span class="o">.</span><span class="n">gobble</span><span class="p">()</span>
         
     <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">adaptee</span><span class="o">.</span><span class="n">fly</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">turkey</span><span class="o">.</span><span class="n">turkey_fly</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -1075,7 +1148,7 @@ I'm flying
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [6]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">duck</span> <span class="o">=</span> <span class="n">Duck</span><span class="p">()</span>
@@ -1084,7 +1157,7 @@ I'm flying
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">'The Turkey says...'</span><span class="p">)</span>
 <span class="n">turkey</span><span class="o">.</span><span class="n">gobble</span><span class="p">()</span>
-<span class="n">turkey</span><span class="o">.</span><span class="n">fly</span><span class="p">()</span>
+<span class="n">turkey</span><span class="o">.</span><span class="n">turkey_fly</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">The Duck says...'</span><span class="p">)</span>
 <span class="n">duck_interaction</span><span class="p">(</span><span class="n">duck</span><span class="p">)</span>
@@ -1116,6 +1189,68 @@ Quack
 I'm flying
 
 The TurkeyAdapter says...
+Gobble gobble
+I'm flying a short distance
+I'm flying a short distance
+I'm flying a short distance
+I'm flying a short distance
+I'm flying a short distance
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Class-Adapter-Example">Class Adapter Example<a class="anchor-link" href="../posts/adapter-pattern/#Class-Adapter-Example">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># class adapter example using multiple inheritance.</span>
+<span class="c1"># Object adapters are usually preferred (composition over inheritance)</span>
+<span class="k">class</span> <span class="nc">TurkeyClassAdapter</span><span class="p">(</span><span class="n">Turkey</span><span class="p">,</span> <span class="n">Duck</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">quack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gobble</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">turkey_fly</span><span class="p">()</span>
+
+<span class="n">turkey_adapter</span> <span class="o">=</span> <span class="n">TurkeyClassAdapter</span><span class="p">()</span>          
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">The TurkeyClassAdapter says...'</span><span class="p">)</span>
+<span class="n">duck_interaction</span><span class="p">(</span><span class="n">turkey_adapter</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+The TurkeyClassAdapter says...
 Gobble gobble
 I'm flying a short distance
 I'm flying a short distance
