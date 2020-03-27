@@ -205,4 +205,6 @@
 'render_pages:output\\posts\\pandas-reshaping\\index.html', (1003008, 5012)
 'render_sources:output\\posts\\pandas-basic-index\\index.ipynb', (1008128, 270)
 'render_pages:output\\posts\\pandas-basic-index\\index.html', (1008640, 5024)
-'render_posts:cache\\posts\\pandas-basic-index.html', (1013760, 395)
+'render_posts:cache\\posts\\pandas-basic-index.html', (1013760, 394)
+'render_sources:output\\posts\\pandas-basic-idx\\index.ipynb', (1014272, 269)
+'render_pages:output\\posts\\pandas-basic-idx\\index.html', (1014784, 5023)
