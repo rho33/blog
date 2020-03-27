@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pandas reshaping | My Site</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https://defclass.com/posts/pandas-reshaping/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><!-- Font Awesome --><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<meta name="author" content="Ryan">
+<link rel="prev" href="../the-tipping-point/" title="The Tipping Point" type="text/html">
+<meta property="og:site_name" content="My Site">
+<meta property="og:title" content="pandas reshaping">
+<meta property="og:url" content="https://defclass.com/posts/pandas-reshaping/">
+<meta property="og:description" content="In [1]:
+
+    
+import pandas as pd
+
+
+    
+
+
+
+
+
+
+In [2]:
+
+    
+data = {
+    'day': ['Monday']*6 + ['Tuesday']*6,
+    'product': ['apple', 'banana', 'carrot', 'broccoli', 'pork', 'beef']*2,
+    'food_typ">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-03-26T12:25:17-08:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="https://defclass.com/">
+
+            <span id="blog-title">My Site</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto"><li class="nav-item dropdown">
+<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topics</a>
+            <div class="dropdown-menu">
+                    <a href="../../python/" class="dropdown-item">Python</a>
+                    <a href="../../book-notes/" class="dropdown-item">Books</a>
+                    <a href="../../misc/" class="dropdown-item">Misc</a>
+                    <a href="../" class="dropdown-item">All Posts</a>
+            </div>
+
+                
+            </li></ul>
+<ul class="navbar-nav navbar-right">
+<li class="nav-item">
+    <a href="index.ipynb" id="sourcelink" class="nav-link">Source</a>
+    </li>
+
+
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">pandas reshaping</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-03-26T12:25:17-08:00" itemprop="datePublished" title="2020-03-26 12:25">2020-03-26 12:25</time></a>
+            </p>
+            
+        <p class="sourceline"><a href="index.ipynb" class="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'day'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Monday'</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span> <span class="o">+</span> <span class="p">[</span><span class="s1">'Tuesday'</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span><span class="p">,</span>
+    <span class="s1">'product'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'banana'</span><span class="p">,</span> <span class="s1">'carrot'</span><span class="p">,</span> <span class="s1">'broccoli'</span><span class="p">,</span> <span class="s1">'pork'</span><span class="p">,</span> <span class="s1">'beef'</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s1">'food_type'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'fruit'</span><span class="p">,</span> <span class="s1">'fruit'</span><span class="p">,</span> <span class="s1">'vegetable'</span><span class="p">,</span> <span class="s1">'vegetable'</span><span class="p">,</span> <span class="s1">'meat'</span><span class="p">,</span> <span class="s1">'meat'</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s1">'amount_sold'</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+    <span class="s1">'sales'</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>product</th>
+      <th>food_type</th>
+      <th>amount_sold</th>
+      <th>sales</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Monday</td>
+      <td>apple</td>
+      <td>fruit</td>
+      <td>200</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Monday</td>
+      <td>banana</td>
+      <td>fruit</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>Monday</td>
+      <td>carrot</td>
+      <td>vegetable</td>
+      <td>300</td>
+      <td>60</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>Monday</td>
+      <td>broccoli</td>
+      <td>vegetable</td>
+      <td>75</td>
+      <td>25</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>Monday</td>
+      <td>pork</td>
+      <td>meat</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>5</th>
+      <td>Monday</td>
+      <td>beef</td>
+      <td>meat</td>
+      <td>50</td>
+      <td>150</td>
+    </tr>
+<tr>
+<th>6</th>
+      <td>Tuesday</td>
+      <td>apple</td>
+      <td>fruit</td>
+      <td>400</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>7</th>
+      <td>Tuesday</td>
+      <td>banana</td>
+      <td>fruit</td>
+      <td>100</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>8</th>
+      <td>Tuesday</td>
+      <td>carrot</td>
+      <td>vegetable</td>
+      <td>600</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>9</th>
+      <td>Tuesday</td>
+      <td>broccoli</td>
+      <td>vegetable</td>
+      <td>150</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>10</th>
+      <td>Tuesday</td>
+      <td>pork</td>
+      <td>meat</td>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+<tr>
+<th>11</th>
+      <td>Tuesday</td>
+      <td>beef</td>
+      <td>meat</td>
+      <td>100</td>
+      <td>300</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="pivot_table">pivot_table<a class="anchor-link" href="#pivot_table">¶</a>
+</h2>
+<ul>
+<li>pivot_table uses an aggregate function, pivot does not</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'sum'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>apple</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>banana</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>beef</th>
+      <td>150</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>broccoli</th>
+      <td>25</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>carrot</th>
+      <td>60</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>pork</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'food_type'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>food_type</th>
+      <th>fruit</th>
+      <th>meat</th>
+      <th>vegetable</th>
+    </tr>
+<tr>
+<th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>Monday</th>
+      <td>75.0</td>
+      <td>175.0</td>
+      <td>42.5</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>150.0</td>
+      <td>350.0</td>
+      <td>85.0</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'food_type'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'sum'</span><span class="p">)</span> <span class="c1"># aggfunc defaults to 'mean'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>food_type</th>
+      <th>fruit</th>
+      <th>meat</th>
+      <th>vegetable</th>
+    </tr>
+<tr>
+<th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>Monday</th>
+      <td>150</td>
+      <td>350</td>
+      <td>85</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>300</td>
+      <td>700</td>
+      <td>170</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'max'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">'amount_sold'</span><span class="p">,</span> <span class="s1">'sales'</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>amount_sold</th>
+      <td>300</td>
+      <td>600</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="pivot">pivot<a class="anchor-link" href="#pivot">¶</a>
+</h2>
+<ul>
+<li>pivot_table uses an aggregate function, pivot does not</li>
+<li>for pivot, column-index combos must be unique</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">'sales'</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th></th>
+      <th colspan="2" halign="left">sales</th>
+    </tr>
+<tr>
+<th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>apple</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>banana</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>beef</th>
+      <td>150</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>broccoli</th>
+      <td>25</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>carrot</th>
+      <td>60</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>pork</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="melt">melt<a class="anchor-link" href="#melt">¶</a>
+</h2>
+<ul>
+<li>use melt to go from wide to skinny</li>
+<li>can also think of it as un-pivoting</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wide_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">wide_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">name</span>  <span class="o">=</span> <span class="kc">None</span>
+<span class="n">wide_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>apple</th>
+      <th>banana</th>
+      <th>beef</th>
+      <th>broccoli</th>
+      <th>carrot</th>
+      <th>pork</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Monday</td>
+      <td>100</td>
+      <td>50</td>
+      <td>150</td>
+      <td>25</td>
+      <td>60</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Tuesday</td>
+      <td>200</td>
+      <td>100</td>
+      <td>300</td>
+      <td>50</td>
+      <td>120</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wide_df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>product</th>
+      <th>sales</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Monday</td>
+      <td>apple</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Tuesday</td>
+      <td>apple</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>Monday</td>
+      <td>banana</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>Tuesday</td>
+      <td>banana</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>Monday</td>
+      <td>beef</td>
+      <td>150</td>
+    </tr>
+<tr>
+<th>5</th>
+      <td>Tuesday</td>
+      <td>beef</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>6</th>
+      <td>Monday</td>
+      <td>broccoli</td>
+      <td>25</td>
+    </tr>
+<tr>
+<th>7</th>
+      <td>Tuesday</td>
+      <td>broccoli</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>8</th>
+      <td>Monday</td>
+      <td>carrot</td>
+      <td>60</td>
+    </tr>
+<tr>
+<th>9</th>
+      <td>Tuesday</td>
+      <td>carrot</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>10</th>
+      <td>Monday</td>
+      <td>pork</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>11</th>
+      <td>Tuesday</td>
+      <td>pork</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="stack">stack<a class="anchor-link" href="#stack">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pdf</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'day'</span><span class="p">)</span>
+<span class="n">pdf</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th></th>
+      <th colspan="2" halign="left">food_type</th>
+      <th colspan="2" halign="left">amount_sold</th>
+      <th colspan="2" halign="left">sales</th>
+    </tr>
+<tr>
+<th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>apple</th>
+      <td>fruit</td>
+      <td>fruit</td>
+      <td>200</td>
+      <td>400</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>banana</th>
+      <td>fruit</td>
+      <td>fruit</td>
+      <td>50</td>
+      <td>100</td>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>beef</th>
+      <td>meat</td>
+      <td>meat</td>
+      <td>50</td>
+      <td>100</td>
+      <td>150</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>broccoli</th>
+      <td>vegetable</td>
+      <td>vegetable</td>
+      <td>75</td>
+      <td>150</td>
+      <td>25</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>carrot</th>
+      <td>vegetable</td>
+      <td>vegetable</td>
+      <td>300</td>
+      <td>600</td>
+      <td>60</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>pork</th>
+      <td>meat</td>
+      <td>meat</td>
+      <td>100</td>
+      <td>200</td>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># level kwarg in stack refers to levels of multi-index</span>
+<span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'''</span>
+<span class="s1">Column Object Type: {type(pdf.columns)}</span>
+<span class="s1">Levels: </span><span class="si">{pdf.columns.levels}</span><span class="s1"></span>
+<span class="s1">First Level: </span><span class="si">{pdf.columns.levels[0]}</span><span class="s1"></span>
+<span class="s1">Second Level: </span><span class="si">{pdf.columns.levels[1]}</span><span class="s1"></span>
+<span class="s1">'''</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Column Object Type: &lt;class 'pandas.core.indexes.multi.MultiIndex'&gt;
+Levels: [['food_type', 'amount_sold', 'sales'], ['Monday', 'Tuesday']]
+First Level: Index(['food_type', 'amount_sold', 'sales'], dtype='object')
+Second Level: Index(['Monday', 'Tuesday'], dtype='object', name='day')
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># stacking level 0 takes the first level from column MuliIndex object and pivots it to inner-most level of index</span>
+<span class="n">pdf</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="3" valign="top">apple</th>
+      <th>amount_sold</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>fruit</td>
+      <td>fruit</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">banana</th>
+      <th>amount_sold</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>fruit</td>
+      <td>fruit</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">beef</th>
+      <th>amount_sold</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>meat</td>
+      <td>meat</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>150</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">broccoli</th>
+      <th>amount_sold</th>
+      <td>75</td>
+      <td>150</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>vegetable</td>
+      <td>vegetable</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>25</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">carrot</th>
+      <th>amount_sold</th>
+      <td>300</td>
+      <td>600</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>vegetable</td>
+      <td>vegetable</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>60</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">pork</th>
+      <th>amount_sold</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>meat</td>
+      <td>meat</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># stacking level 1 takes the second level from column MuliIndex object and pivots it to inner-most level of index</span>
+<span class="n">pdf</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+      <th></th>
+      <th>food_type</th>
+      <th>amount_sold</th>
+      <th>sales</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2" valign="top">apple</th>
+      <th>Monday</th>
+      <td>fruit</td>
+      <td>200</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>fruit</td>
+      <td>400</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">banana</th>
+      <th>Monday</th>
+      <td>fruit</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>fruit</td>
+      <td>100</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">beef</th>
+      <th>Monday</th>
+      <td>meat</td>
+      <td>50</td>
+      <td>150</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>meat</td>
+      <td>100</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">broccoli</th>
+      <th>Monday</th>
+      <td>vegetable</td>
+      <td>75</td>
+      <td>25</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>vegetable</td>
+      <td>150</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">carrot</th>
+      <th>Monday</th>
+      <td>vegetable</td>
+      <td>300</td>
+      <td>60</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>vegetable</td>
+      <td>600</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">pork</th>
+      <th>Monday</th>
+      <td>meat</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>meat</td>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>product</th>
+      <th>food_type</th>
+      <th>amount_sold</th>
+      <th>sales</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Monday</td>
+      <td>apple</td>
+      <td>fruit</td>
+      <td>200</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Monday</td>
+      <td>banana</td>
+      <td>fruit</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Stack level defaults to -1 (inner most column level) </span>
+<span class="c1"># calling stack on single level columns returns an unnamed MultiIndex series with columns pivoted to be inner-most level of index</span>
+<span class="n">df</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0  day            Monday
+   product         apple
+   food_type       fruit
+   amount_sold       200
+   sales             100
+1  day            Monday
+   product        banana
+   food_type       fruit
+   amount_sold        50
+   sales              50
+dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="unstack">unstack<a class="anchor-link" href="#unstack">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># multi-index dataframe</span>
+<span class="n">midf</span> <span class="o">=</span> <span class="n">pdf</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">midf</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="3" valign="top">apple</th>
+      <th>amount_sold</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>fruit</td>
+      <td>fruit</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">banana</th>
+      <th>amount_sold</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>fruit</td>
+      <td>fruit</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># unstack pivots a level of the index to the inner-most level of the columns</span>
+<span class="n">midf</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">level</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># defaults to level=-1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th>day</th>
+      <th colspan="3" halign="left">Monday</th>
+      <th colspan="3" halign="left">Tuesday</th>
+    </tr>
+<tr>
+<th></th>
+      <th>amount_sold</th>
+      <th>food_type</th>
+      <th>sales</th>
+      <th>amount_sold</th>
+      <th>food_type</th>
+      <th>sales</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>apple</th>
+      <td>200</td>
+      <td>fruit</td>
+      <td>100</td>
+      <td>400</td>
+      <td>fruit</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>banana</th>
+      <td>50</td>
+      <td>fruit</td>
+      <td>50</td>
+      <td>100</td>
+      <td>fruit</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>beef</th>
+      <td>50</td>
+      <td>meat</td>
+      <td>150</td>
+      <td>100</td>
+      <td>meat</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>broccoli</th>
+      <td>75</td>
+      <td>vegetable</td>
+      <td>25</td>
+      <td>150</td>
+      <td>vegetable</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>carrot</th>
+      <td>300</td>
+      <td>vegetable</td>
+      <td>60</td>
+      <td>600</td>
+      <td>vegetable</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>pork</th>
+      <td>100</td>
+      <td>meat</td>
+      <td>200</td>
+      <td>200</td>
+      <td>meat</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../the-tipping-point/" rel="prev" title="The Tipping Point">Previous post</a>
+            </li>
+        </ul></nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article><!--End of body content--><footer id="footer">
+            Contents © 2020         <a href="mailto:n.tesla@example.com">Ryan</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script src="../../assets/js/moment-with-locales.min.js"></script><!-- fancy dates --><script>
+        moment.locale("en");
+        fancydates(2, "YYYY-MM-DD HH:mm");
+        </script><!-- end fancy dates --><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

@@ -16,3 +16,5 @@ Jupyter notebooks with examples and notes on various python modules
 - [PRAW](../posts/praw-notes) (Python Reddit API Wrapper)
 - [reading & writing to files](../posts/reading-and-writing-to-files)
 - [threading](../posts/threading)
+- [pandas reshaping](../posts/pandas-reshaping)
+- [pandas basic indexing](../posts/pandas-basic-index)

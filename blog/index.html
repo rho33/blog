@@ -61,7 +61,1724 @@ navbar-dark bg-dark
 
     
 <div class="postindex">
-    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/the-tipping-point/" class="u-url">The Tipping Point</a></h1>
+    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/pandas-reshaping/" class="u-url">pandas reshaping</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/pandas-reshaping/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-03-26T12:25:17-08:00" itemprop="datePublished" title="2020-03-26 12:25">2020-03-26 12:25</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'day'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Monday'</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span> <span class="o">+</span> <span class="p">[</span><span class="s1">'Tuesday'</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span><span class="p">,</span>
+    <span class="s1">'product'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'banana'</span><span class="p">,</span> <span class="s1">'carrot'</span><span class="p">,</span> <span class="s1">'broccoli'</span><span class="p">,</span> <span class="s1">'pork'</span><span class="p">,</span> <span class="s1">'beef'</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s1">'food_type'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'fruit'</span><span class="p">,</span> <span class="s1">'fruit'</span><span class="p">,</span> <span class="s1">'vegetable'</span><span class="p">,</span> <span class="s1">'vegetable'</span><span class="p">,</span> <span class="s1">'meat'</span><span class="p">,</span> <span class="s1">'meat'</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s1">'amount_sold'</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+    <span class="s1">'sales'</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>product</th>
+      <th>food_type</th>
+      <th>amount_sold</th>
+      <th>sales</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Monday</td>
+      <td>apple</td>
+      <td>fruit</td>
+      <td>200</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Monday</td>
+      <td>banana</td>
+      <td>fruit</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>Monday</td>
+      <td>carrot</td>
+      <td>vegetable</td>
+      <td>300</td>
+      <td>60</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>Monday</td>
+      <td>broccoli</td>
+      <td>vegetable</td>
+      <td>75</td>
+      <td>25</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>Monday</td>
+      <td>pork</td>
+      <td>meat</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>5</th>
+      <td>Monday</td>
+      <td>beef</td>
+      <td>meat</td>
+      <td>50</td>
+      <td>150</td>
+    </tr>
+<tr>
+<th>6</th>
+      <td>Tuesday</td>
+      <td>apple</td>
+      <td>fruit</td>
+      <td>400</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>7</th>
+      <td>Tuesday</td>
+      <td>banana</td>
+      <td>fruit</td>
+      <td>100</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>8</th>
+      <td>Tuesday</td>
+      <td>carrot</td>
+      <td>vegetable</td>
+      <td>600</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>9</th>
+      <td>Tuesday</td>
+      <td>broccoli</td>
+      <td>vegetable</td>
+      <td>150</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>10</th>
+      <td>Tuesday</td>
+      <td>pork</td>
+      <td>meat</td>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+<tr>
+<th>11</th>
+      <td>Tuesday</td>
+      <td>beef</td>
+      <td>meat</td>
+      <td>100</td>
+      <td>300</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="pivot_table">pivot_table<a class="anchor-link" href="../posts/pandas-reshaping/#pivot_table">¶</a>
+</h2>
+<ul>
+<li>pivot_table uses an aggregate function, pivot does not</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'sum'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>apple</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>banana</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>beef</th>
+      <td>150</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>broccoli</th>
+      <td>25</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>carrot</th>
+      <td>60</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>pork</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'food_type'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>food_type</th>
+      <th>fruit</th>
+      <th>meat</th>
+      <th>vegetable</th>
+    </tr>
+<tr>
+<th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>Monday</th>
+      <td>75.0</td>
+      <td>175.0</td>
+      <td>42.5</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>150.0</td>
+      <td>350.0</td>
+      <td>85.0</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'food_type'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'sum'</span><span class="p">)</span> <span class="c1"># aggfunc defaults to 'mean'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>food_type</th>
+      <th>fruit</th>
+      <th>meat</th>
+      <th>vegetable</th>
+    </tr>
+<tr>
+<th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>Monday</th>
+      <td>150</td>
+      <td>350</td>
+      <td>85</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>300</td>
+      <td>700</td>
+      <td>170</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'max'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">'amount_sold'</span><span class="p">,</span> <span class="s1">'sales'</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>amount_sold</th>
+      <td>300</td>
+      <td>600</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="pivot">pivot<a class="anchor-link" href="../posts/pandas-reshaping/#pivot">¶</a>
+</h2>
+<ul>
+<li>pivot_table uses an aggregate function, pivot does not</li>
+<li>for pivot, column-index combos must be unique</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">'sales'</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th></th>
+      <th colspan="2" halign="left">sales</th>
+    </tr>
+<tr>
+<th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>apple</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>banana</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>beef</th>
+      <td>150</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>broccoli</th>
+      <td>25</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>carrot</th>
+      <td>60</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>pork</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="melt">melt<a class="anchor-link" href="../posts/pandas-reshaping/#melt">¶</a>
+</h2>
+<ul>
+<li>use melt to go from wide to skinny</li>
+<li>can also think of it as un-pivoting</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wide_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">wide_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">name</span>  <span class="o">=</span> <span class="kc">None</span>
+<span class="n">wide_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>apple</th>
+      <th>banana</th>
+      <th>beef</th>
+      <th>broccoli</th>
+      <th>carrot</th>
+      <th>pork</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Monday</td>
+      <td>100</td>
+      <td>50</td>
+      <td>150</td>
+      <td>25</td>
+      <td>60</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Tuesday</td>
+      <td>200</td>
+      <td>100</td>
+      <td>300</td>
+      <td>50</td>
+      <td>120</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wide_df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>product</th>
+      <th>sales</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Monday</td>
+      <td>apple</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Tuesday</td>
+      <td>apple</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>Monday</td>
+      <td>banana</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>Tuesday</td>
+      <td>banana</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>Monday</td>
+      <td>beef</td>
+      <td>150</td>
+    </tr>
+<tr>
+<th>5</th>
+      <td>Tuesday</td>
+      <td>beef</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>6</th>
+      <td>Monday</td>
+      <td>broccoli</td>
+      <td>25</td>
+    </tr>
+<tr>
+<th>7</th>
+      <td>Tuesday</td>
+      <td>broccoli</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>8</th>
+      <td>Monday</td>
+      <td>carrot</td>
+      <td>60</td>
+    </tr>
+<tr>
+<th>9</th>
+      <td>Tuesday</td>
+      <td>carrot</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>10</th>
+      <td>Monday</td>
+      <td>pork</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>11</th>
+      <td>Tuesday</td>
+      <td>pork</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="stack">stack<a class="anchor-link" href="../posts/pandas-reshaping/#stack">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pdf</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'day'</span><span class="p">)</span>
+<span class="n">pdf</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th></th>
+      <th colspan="2" halign="left">food_type</th>
+      <th colspan="2" halign="left">amount_sold</th>
+      <th colspan="2" halign="left">sales</th>
+    </tr>
+<tr>
+<th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>apple</th>
+      <td>fruit</td>
+      <td>fruit</td>
+      <td>200</td>
+      <td>400</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>banana</th>
+      <td>fruit</td>
+      <td>fruit</td>
+      <td>50</td>
+      <td>100</td>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>beef</th>
+      <td>meat</td>
+      <td>meat</td>
+      <td>50</td>
+      <td>100</td>
+      <td>150</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>broccoli</th>
+      <td>vegetable</td>
+      <td>vegetable</td>
+      <td>75</td>
+      <td>150</td>
+      <td>25</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>carrot</th>
+      <td>vegetable</td>
+      <td>vegetable</td>
+      <td>300</td>
+      <td>600</td>
+      <td>60</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>pork</th>
+      <td>meat</td>
+      <td>meat</td>
+      <td>100</td>
+      <td>200</td>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># level kwarg in stack refers to levels of multi-index</span>
+<span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'''</span>
+<span class="s1">Column Object Type: {type(pdf.columns)}</span>
+<span class="s1">Levels: </span><span class="si">{pdf.columns.levels}</span><span class="s1"></span>
+<span class="s1">First Level: </span><span class="si">{pdf.columns.levels[0]}</span><span class="s1"></span>
+<span class="s1">Second Level: </span><span class="si">{pdf.columns.levels[1]}</span><span class="s1"></span>
+<span class="s1">'''</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Column Object Type: &lt;class 'pandas.core.indexes.multi.MultiIndex'&gt;
+Levels: [['food_type', 'amount_sold', 'sales'], ['Monday', 'Tuesday']]
+First Level: Index(['food_type', 'amount_sold', 'sales'], dtype='object')
+Second Level: Index(['Monday', 'Tuesday'], dtype='object', name='day')
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># stacking level 0 takes the first level from column MuliIndex object and pivots it to inner-most level of index</span>
+<span class="n">pdf</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="3" valign="top">apple</th>
+      <th>amount_sold</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>fruit</td>
+      <td>fruit</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">banana</th>
+      <th>amount_sold</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>fruit</td>
+      <td>fruit</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">beef</th>
+      <th>amount_sold</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>meat</td>
+      <td>meat</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>150</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">broccoli</th>
+      <th>amount_sold</th>
+      <td>75</td>
+      <td>150</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>vegetable</td>
+      <td>vegetable</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>25</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">carrot</th>
+      <th>amount_sold</th>
+      <td>300</td>
+      <td>600</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>vegetable</td>
+      <td>vegetable</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>60</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">pork</th>
+      <th>amount_sold</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>meat</td>
+      <td>meat</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># stacking level 1 takes the second level from column MuliIndex object and pivots it to inner-most level of index</span>
+<span class="n">pdf</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+      <th></th>
+      <th>food_type</th>
+      <th>amount_sold</th>
+      <th>sales</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2" valign="top">apple</th>
+      <th>Monday</th>
+      <td>fruit</td>
+      <td>200</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>fruit</td>
+      <td>400</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">banana</th>
+      <th>Monday</th>
+      <td>fruit</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>fruit</td>
+      <td>100</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">beef</th>
+      <th>Monday</th>
+      <td>meat</td>
+      <td>50</td>
+      <td>150</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>meat</td>
+      <td>100</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">broccoli</th>
+      <th>Monday</th>
+      <td>vegetable</td>
+      <td>75</td>
+      <td>25</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>vegetable</td>
+      <td>150</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">carrot</th>
+      <th>Monday</th>
+      <td>vegetable</td>
+      <td>300</td>
+      <td>60</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>vegetable</td>
+      <td>600</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">pork</th>
+      <th>Monday</th>
+      <td>meat</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>meat</td>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>product</th>
+      <th>food_type</th>
+      <th>amount_sold</th>
+      <th>sales</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Monday</td>
+      <td>apple</td>
+      <td>fruit</td>
+      <td>200</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Monday</td>
+      <td>banana</td>
+      <td>fruit</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Stack level defaults to -1 (inner most column level) </span>
+<span class="c1"># calling stack on single level columns returns an unnamed MultiIndex series with columns pivoted to be inner-most level of index</span>
+<span class="n">df</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0  day            Monday
+   product         apple
+   food_type       fruit
+   amount_sold       200
+   sales             100
+1  day            Monday
+   product        banana
+   food_type       fruit
+   amount_sold        50
+   sales              50
+dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="unstack">unstack<a class="anchor-link" href="../posts/pandas-reshaping/#unstack">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># multi-index dataframe</span>
+<span class="n">midf</span> <span class="o">=</span> <span class="n">pdf</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">midf</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="3" valign="top">apple</th>
+      <th>amount_sold</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>fruit</td>
+      <td>fruit</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">banana</th>
+      <th>amount_sold</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>fruit</td>
+      <td>fruit</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># unstack pivots a level of the index to the inner-most level of the columns</span>
+<span class="n">midf</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">level</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># defaults to level=-1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th>day</th>
+      <th colspan="3" halign="left">Monday</th>
+      <th colspan="3" halign="left">Tuesday</th>
+    </tr>
+<tr>
+<th></th>
+      <th>amount_sold</th>
+      <th>food_type</th>
+      <th>sales</th>
+      <th>amount_sold</th>
+      <th>food_type</th>
+      <th>sales</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>apple</th>
+      <td>200</td>
+      <td>fruit</td>
+      <td>100</td>
+      <td>400</td>
+      <td>fruit</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>banana</th>
+      <td>50</td>
+      <td>fruit</td>
+      <td>50</td>
+      <td>100</td>
+      <td>fruit</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>beef</th>
+      <td>50</td>
+      <td>meat</td>
+      <td>150</td>
+      <td>100</td>
+      <td>meat</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>broccoli</th>
+      <td>75</td>
+      <td>vegetable</td>
+      <td>25</td>
+      <td>150</td>
+      <td>vegetable</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>carrot</th>
+      <td>300</td>
+      <td>vegetable</td>
+      <td>60</td>
+      <td>600</td>
+      <td>vegetable</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>pork</th>
+      <td>100</td>
+      <td>meat</td>
+      <td>200</td>
+      <td>200</td>
+      <td>meat</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/the-tipping-point/" class="u-url">The Tipping Point</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Ryan
@@ -1791,609 +3508,6 @@ Finished in 67.00409320000472 seconds
 </div>
 
 </div>
-</div>
-    </div>
-    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/inside-the-black-box/" class="u-url">  </a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
-                Ryan
-            </span></p>
-            <p class="dateline">
-            <a href="../posts/inside-the-black-box/" rel="bookmark">
-            <time class="published dt-published" datetime="2020-01-22T15:56:51-08:00" itemprop="datePublished" title="2020-01-22 15:56">2020-01-22 15:56</time></a>
-            </p>
-        </div>
-    </header><div class="e-content entry-content">
-    <div>
-<h2>Inside the Black Box: The Simple Truth About Quantitative Trading</h2>
-<p>by Rishi K Narange</p>
-<h3>Chapter 1. Why Does Quant Trading Matter</h3>
-<ul>
-<li>A rapidly growing proportion of all trading is automated.</li>
-<li>Quants are forced to theink deeply about trading strategies.</li>
-<li>Quants measure and mismeasure risk.</li>
-<li>Computers are more disciplined in execution of strategies.</li>
-</ul>
-<h3>Chapter 2. An Introduction to Quantitative Trading</h3>
-<ul>
-<li>Quant strategies are often viewed as complex and secretive (a "black box").</li>
-<li>A quant systematically applies an alpha-seeking investment strategy that was specified based on exhaustive research, emphasis is on how strategies are conceived and implemented.</li>
-<li>Once a strategy goes live, human judgement is generally limited in day-to-day management.</li>
-<li>Strategies exist on a spectrum between fully systematic and fully discretionary.</li>
-<li>Typical structure of quantitative system:
-    <img alt="f" src="https://gdurl.com/GipZ">
-</li>
-</ul>
-<h3>Chapter 3. Alpha Models: How Quants Make Money</h3>
-<ul>
-<li>Alpha models are "designed to time the selection and/or sizing of portfolio holdings. They hold as a core premise that no instrument is inherently good or bad, and therefore no instrument is worth always owning or perpetually ignoring."</li>
-<li>Alpha models are "the software that a quant builds and uses to conduct this timeing"<ul>
-<li>Synonyms for alpha model: <ul>
-<li>forecasts</li>
-<li>factors</li>
-<li>alphas</li>
-<li>models</li>
-<li>strategies</li>
-<li>estimators</li>
-<li>predictors</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Theory driven alpha models resemble traditional science where hypotheses are formulated then tested.</li>
-<li>Data driven alpha models rely on correctly performed empirical observations to predict future patterns in the absence of coherent explanation.<ul>
-<li>similar to The Human Genome Project</li>
-<li>also called data miners</li>
-</ul>
-</li>
-<li>Theory-Driven Alpha Models<ul>
-<li>Strategies utilizing price-related data:<ul>
-<li>trend following</li>
-<li>Mean reversion<ul>
-<li>Includes statistical arbitrage</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Strategies utilizing fundamental data:<ul>
-<li>
-<strong>value/yield</strong> - relies on measures of cheapness (P/E, E/P, book to price, EBITDA, carry trading...)</li>
-<li>
-<strong>growth</strong> - relies on historical/expected economic growth (EPS Growth rate, P/E vs EPS growth, sentiment data...)</li>
-<li>
-<strong>quality</strong> - seek to own "quality" instruments, values capital safety (debt to equity ratios, earnings quality signals)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Data-Driven Alpha Models<ul>
-<li>more difficult to understand</li>
-<li>more technically challenging</li>
-<li>favored by many high frequency traders</li>
-<li>may be more favorable at shorter time horizons</li>
-<li>shortcomings:<ul>
-<li>more likely to find spurious correlations and false signals</li>
-<li>often require substantial processing power</li>
-<li>need constant adjustments for market change</li>
-<li>often end up resembling trend following or mean reverting strategies anyway</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Implementing the Strategies<ul>
-<li>Strategies can forecast direction, magnitude, duration, and confidence level of a move.<ul>
-<li>Greater signal strength generally results in bigger positions.</li>
-</ul>
-</li>
-<li>Time Horizons<ul>
-<li>high frequency - less than a day</li>
-<li>short term - 1 day to 2 weeks</li>
-<li>medium term - weeks to months</li>
-<li>long term - several months or more</li>
-</ul>
-</li>
-<li>Bet Structures<ul>
-<li>intrinsic - betting on direction of instrument</li>
-<li>relative - betting on direction of instrument relative to other instruments<ul>
-<li>e.g. pairs trading, stock movement w/in sector</li>
-<li>important to note that the phrase "relative value" is hedgefund jargon which refers to relative bet structures but does not necessarily refer to value investing</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Investment Universe Choices<ul>
-<li>geography (e.g. USA vs Hong Kong)</li>
-<li>asset class (e.g. forex vs equities)</li>
-<li>instrument class (e.g. indicies vs individual stocks)</li>
-<li>Quants prefer liquid assets with large quantities of high quality data.</li>
-</ul>
-</li>
-<li>Model Specification<ul>
-<li>Every aspect of strategy must be defined before it is usable such as how to define a trend and how often to refit.</li>
-<li>Machine learning/data mining techniques are often more suited to defining model specification details than to finding alpha.</li>
-</ul>
-</li>
-<li>Run Frequency - how often to run model <ul>
-<li>more often can be noisy</li>
-<li>less often can miss opportunities and lead to larger trades that "move the market."</li>
-<li>Most quants run model at least once per week</li>
-</ul>
-</li>
-<li>Blending Alpha Models Approaches<ul>
-<li>linear (multiple regression)</li>
-<li>nonlinear<ul>
-<li>conditional - weight of one alpha factor based on weight of another</li>
-<li>rotational - follows trends in performance of alpha models</li>
-<li>machine learning - this is a good problem for ML</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3>Chapter 4. Risk Models</h3>
-<ul>
-<li>"But the fact remains that one of the great strengths of quant trading is to be able to measure various exposures and to be intentional about the selection of such exposures"</li>
-<li>limiting the amount of risk<ul>
-<li>by constraint - hard line limit level (e.g. no position larger than x% of portfolio)</li>
-<li>by penalty function - the further from the position limit level the position becomes the more difficult it is to add to position (more alpha/signal strength required)<ul>
-<li>can be thought of as making rules to govern exceptions</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>risk measures:<ul>
-<li>volatility - standard deviation of returns</li>
-<li>dispersion - correlation/covariance among instruments in a given universe</li>
-</ul>
-</li>
-<li>where limits can be applied<ul>
-<li>size of positions/groups of positions</li>
-<li>size of exposure to types of risk (e.g. +/- 5% net exposure to market direction)</li>
-<li>controlling leverage</li>
-<li>value at risk models (VaR)<ul>
-<li>current levels of volatility used to forecast portfolio gain/loss within given confidence interval</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>limiting types of risk<ul>
-<li>"some apporaches to risk modeling focus on eliminating whole types of exposure entirely."</li>
-<li>"As a general rule, it is always better to eliminate any unintentional exposures, siince there should be no expectation of being compensated sufficiently for accepting them."</li>
-<li>alpha models can incorporate risk management concepts (e.g. forecasting stocks relative to their sectors means not ahving to bet on sector itself)</li>
-<li>theory-driven risk models<ul>
-<li>"Theory-driven risk modeling uses a set of pre-defined systematic risks, which enables the quant to measure and calibrate a given portfolio's exposure"<ul>
-<li>systematic risk - risks that cannot be diversified away (e.g. sector risk, market cap risk, interest rate risk...)</li>
-</ul>
-</li>
-<li>risks derived from theory i.e. there are reasonable economic arguments for the existence of risk types</li>
-<li>either make intentional bets on systematic risk or eliminate exposure</li>
-</ul>
-</li>
-<li>empirical risk models<ul>
-<li>"uses historical data to determine what risks are and how exposed a given portfolio is to them"</li>
-<li>uses statistical techniques such as principal component analysis (PCA) to discern systematic risks that may or may not correspond to named risk factors</li>
-</ul>
-</li>
-<li>how quants choose a risk model<ul>
-<li>empirical risk models chosen for adaptiveness<ul>
-<li>however there is an adaptiveness vs. significance trade off</li>
-</ul>
-</li>
-<li>theory driven makes sense if it is likely to be true (i.e. strong theoretical underpinnings)</li>
-<li>most quants tend toward theory driven</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3>Chapter 5. Transaction Cost Models</h3>
-<ul>
-<li>"Note that transaction cost models are not designed to minimize the cost of trading, only to inform the portfolio construction engine of the costs of making any given trade"<ul>
-<li>execution algorithm responsible for minimizing costs</li>
-</ul>
-</li>
-<li>components of transaction cost model<ul>
-<li>commissions and fees - brokerage fees for clearing and settlement services</li>
-<li>slippage - change in price between time trader decides to transact and when the order is actually at exchange</li>
-<li>market impact - price moving as a result of traders order</li>
-</ul>
-</li>
-<li>types of transaction cost models<ul>
-<li>flat - same cost for each order<ul>
-<li>simplest</li>
-<li>not widely used</li>
-</ul>
-</li>
-<li>linear - cost increases with size of order in linear fashion</li>
-<li>piecewise linear<ul>
-<li>more accurate than linear</li>
-</ul>
-</li>
-<li>quadratic<ul>
-<li>most complex</li>
-<li>most accurate</li>
-<li>pain to build</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3>Chapter 6. Portfolio Construction Models</h3>
-<ul>
-<li>The portfolio construction models acts like an arbitrator, hearing all the arguments of the alpha model, risk model, and transaction cost model and then makes a decision about how to proceed.</li>
-<li>2 types: rule based and optimized</li>
-<li>rule-based portfolio construction models<ul>
-<li>equal position<ul>
-<li>eliminates disadvantages of unequal weighting (adverse selection bias, dificulty predicting magnitude of moves)</li>
-</ul>
-</li>
-<li>equal risk weighting<ul>
-<li>position sizes are inversely related to volatility (or other risk measure)</li>
-</ul>
-</li>
-<li>alpha-driven weighting<ul>
-<li>greater alpha prediction = greater position size</li>
-<li>often used with limits on position groups (aset classes, sectors...)</li>
-<li>can exascerbate drawdowns (e.g. by falling victim to adverse selection in a trend following strategy)</li>
-</ul>
-</li>
-<li>decision-tree models<ul>
-<li>decision trees with internal nodes representing model predictions and leaf nodes assigning a position size</li>
-<li>decision trees can be used to combine alpha models</li>
-<li>leaf node position sizes can be functions of the risk model and/or transaction cost model</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>portfolio optimizers<ul>
-<li>"Portfolio optimization is one of the most important topics in quantitative finance."</li>
-<li>mean variance optimization - seeks to determine the portfolios with highest return at each level of risk (called the efficient frontier)<ul>
-<li>also called modern portfolio theory</li>
-</ul>
-</li>
-<li>inputs to optimization<ul>
-<li>expected return (alpha)</li>
-<li>expected volatility<ul>
-<li>stochastic volatility models<ul>
-<li>Generalized Autoregressive Conditional Heteroskedasticity (GARCH) models</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>expected correlation between assets (correlation matrix)<ul>
-<li>Correlations can be unstable over time but stability should improve with appropriately selected groups</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>optimization techniques<ul>
-<li>unconstrained<ul>
-<li>can end up suggesting that all money be invested in the instrument with the highest risk-adjusted return</li>
-</ul>
-</li>
-<li>constrained<ul>
-<li>can defeat purpose of optimizing with constraints driving portfolio selection more than the optimizer</li>
-</ul>
-</li>
-<li>Black-Litterman optimizer (below notes are from wikipedia)<ul>
-<li>starts with the equilibrium assumption that the asset allocation of a representative agent should be proportional to the market values of the available assets , and then modifies that to take into account the 'views' (i.e., the specific opinions about asset returns) of the investor in question to arrive at a bespoke asset allocation (this is from wikipedia)<ul>
-<li>it assumes that the initial expected returns are whatever is required so that the equilibrium asset allocation is equal to what we observe in the markets</li>
-</ul>
-</li>
-<li>The user is only required to state how his assumptions about expected returns differ from the markets and to state his degree of confidence in the alternative assumptions. From this, the Black–Litterman method computes the desired (mean-variance efficient) asset allocation</li>
-</ul>
-</li>
-<li>Grinold and Kahn's approach: optimizing factor portfolios<ul>
-<li>builds factor portfolios, which are portfolios based on a signal alpha signal and usually rule based (e.g. one growth portfolio, one value portfolio, one momentum portfolio...)</li>
-<li>each factor portfolio is then treated as an instrument and fed to the optimizer</li>
-</ul>
-</li>
-<li>resampled efficiency<ul>
-<li>uses monte carlo simulation to create alternate histories and alternative efficient frontiers, then frontiers can be averaged to create a resampled efficient frontier</li>
-<li>adresses oversensitivity to estimation errors in expected alpha, volatility, and correlation</li>
-<li>thought to produce more robust predictions</li>
-</ul>
-</li>
-<li>data mining approaches to optimization<ul>
-<li>machine learning techniques such as supervised learning or genetic algorithms</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>how quants choose a portfolio construction model<ul>
-<li>Most quants using rule based portfolio construction are also using intrinsic alpha models (as opposed to relative), and most of these are futures traders.</li>
-<li>Most quants using optimizers are focused on relative alpha approaches (often equity market neutral strategies)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3>Chapter 7. Execution</h3>
-<ul>
-<li>3 ways to get execution algorithm:<ul>
-<li>build</li>
-<li>buy from broker</li>
-<li>3rd party software</li>
-</ul>
-</li>
-<li>Quants sometimes utilize portfolio bidding services from brokers where they bid on a "blind" portfolio described only by its characteristics.</li>
-<li>types of orders:<ul>
-<li>market<ul>
-<li>quick execution</li>
-<li>price varies</li>
-</ul>
-</li>
-<li>limit<ul>
-<li>execution time varies</li>
-<li>price fixed</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>limit order book - collection/queue of limit orders to buy and sell (better price = higher priority)</li>
-<li>Market orders are aggressive while limit orders vary in levels of aggression spectrum.<ul>
-<li>A limit order crossing the spread is more aggressive.</li>
-</ul>
-</li>
-<li>Passive orders get better transaction price (if filled) and also usually get rebate from exchange for providing liquidity.<ul>
-<li>Market orders "take" liquidity.</li>
-</ul>
-</li>
-<li>Momentum alpha strategies favor aggressive orders.</li>
-<li>Mean reversion alpha strategies favor passive orders.</li>
-<li>Stronger alpha signals favor aggressive orders.</li>
-<li>A middle ground beteween passive and agressive order would be putting a limit order in the middle of the spread.</li>
-<li>Large orders are often chunked into smaller orders and spread out over time.</li>
-<li>Hidden orders exist but will lose priority in queue to equivalent visible order<ul>
-<li>Not all exchanges allow hidden orders</li>
-</ul>
-</li>
-<li>iceberging - execution strategy theat hides most of a large order but leaves part of it visible</li>
-<li>Some markets have several pools of liquidity for the same instrument.</li>
-<li>smart order routing - determines which pool of liquidity is best to send order at any given moment</li>
-<li>Rapid placement and cancelling of large orders is sometimes used to test the markets reaction to changing depth in the order book or to manipulate perceptions</li>
-<li>High frequency trading focuses on micro structure alphas which focus on liquidity patterns in the order book<ul>
-<li>HFT strategies require heavy investment in infrastructure and research while being limited in how much money they can manage (due to market impact).</li>
-<li>HFT strategies often sound like a cutting edge computer game with names like guerilla, sniper, shark</li>
-<li>HFT can use </li>
-</ul>
-</li>
-<li>Most quants use direct market access (DMA) to conduct trades.</li>
-<li>Colocation and sponsored access are also available but are mostly used for HFT</li>
-<li>financial information exchange protocol (FIX) engines can be bought or built, and are often custom built by quants for optimal speed</li>
-<li>Quants have choice to build or buy hardware and software such as orderer management systems, extant hardware, and third party execution software.</li>
-<li>"Most quants use either Linux or UNIX operating systems because they are more efficient and therefore provide better computing performance than a PC/Windows configuration."</li>
-</ul>
-<h3>Chapter 8. Data</h3>
-<ul>
-<li>Data reaches black box through data servers which are connected to data sources<ul>
-<li>Data servers use data feed handlers</li>
-</ul>
-</li>
-<li>The best firms collect data from primary sources rather than from vendors</li>
-<li>Price data includes price, volume, indicies, and order book</li>
-<li>Price data strategies are usually faster than fundamental data strategies.</li>
-<li>primary sources of data:<ul>
-<li>exchanges</li>
-<li>regulators</li>
-<li>governments</li>
-<li>corporations</li>
-<li>news agencies</li>
-<li>proprietary data vendors</li>
-</ul>
-</li>
-<li>Primary sources usually cost more but provide more control over data cleaning and speed.</li>
-<li>data cleaning techniques/issues:<ul>
-<li>spike filters</li>
-<li>handling splits and dividends</li>
-<li>incorrect timestamps</li>
-<li>look ahead bias from asynchronous data (e.g. using end of of quarter reports at end of quarter when they aren't acutally published until several weeks after end of quarter. Also failing to account for different closing times of different markets)</li>
-</ul>
-</li>
-<li>data storage options:<ul>
-<li>flat files</li>
-<li>relational database<ul>
-<li>data cube</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3>Chapter 9. Research</h3>
-<ul>
-<li>Well behaved quants adhere to the scientific method which forces rogor and discipline.</li>
-<li>Process:<ol>
-<li>observe</li>
-<li>hypothesize</li>
-<li>deduce consequences of hypothesss</li>
-<li>seek to disprove hypothesis (based on deductions from step 3)</li>
-</ol>
-</li>
-<li>falsification - a theory that has not yet been disproved can be accepted as true for the moment, but we can never be certain that the next observation we make of the theory will not falsify it</li>
-<li>A key difference between markets and natural sciences is that nature is relatively stable while markets are not.</li>
-<li>sources of idea generation:<ul>
-<li>market observations</li>
-<li>academic literature</li>
-<li>discretionary traders</li>
-<li>migration - ideas from other quant shops</li>
-</ul>
-</li>
-<li>"First, build a model and train it on some subset of the data available (the <em>in-sample period</em>). Then test it on another subset of the data to see if it is profitable (the <em>out-of-sample period</em>)."</li>
-<li>when constructing an in-sample, a quant must consider<ul>
-<li>breadth - how many stocks to include and which ones</li>
-<li>length - length of time used for fitting the model</li>
-</ul>
-</li>
-<li>A wide variety of metrics are used to determine the "goodness" of a model<ul>
-<li>equity risk premium</li>
-<li>average rate of return</li>
-<li>variability of returns over time<ul>
-<li>standard deviation</li>
-<li>lumpiness</li>
-</ul>
-</li>
-<li>worst peak tovalley drawdowns</li>
-<li>r squared</li>
-<li>quantile bracketing</li>
-<li>percentage of winning trades or time periods</li>
-<li>risk adjusted return<ul>
-<li>Sharpe ratio</li>
-<li>Sterling ratio</li>
-<li>Omega ratio</li>
-<li>Calmar ratio</li>
-</ul>
-</li>
-<li>relationships with other strategies<ul>
-<li>correlation</li>
-<li>Do portfolio results improve or deteriorate with new strategy, i.e. Is the new strategy synergistic with the existing strategies?</li>
-</ul>
-</li>
-<li>time decay<ul>
-<li>Testing what returns would be if trades lagged behind signals can give insight into how crowded the strategy is.</li>
-</ul>
-</li>
-<li>sensitivity to specific parameters (tests overfitting)</li>
-<li>number of assumptions (fewer is better, occam's razor)</li>
-</ul>
-</li>
-<li>out of sample testing considerations<ul>
-<li>rolling window vs growing window</li>
-<li>burning data</li>
-<li>researchers already knowing characteristics of out of sample data (e.g. being aware of internet bubble in out of sample data)</li>
-</ul>
-</li>
-<li>Transaction costs and availability of short positions must also be considered when testing.</li>
-</ul>
-<h3>Chapter 10. Risks Inherent to Quant Strategies</h3>
-<ul>
-<li>model risk - "the risk that the strategy does not accurately describe, match, or predict the real-world phenomenon it is attempting to expliot"<ul>
-<li>inapplicability of modeling<ul>
-<li>choosing the wrong problem model</li>
-<li>misapplication of valid techniques (e.g. using techniques that assume normality when data actually has fat tails)</li>
-</ul>
-</li>
-<li>model misspecification</li>
-<li>implementation errors (programming errors)</li>
-</ul>
-</li>
-<li>regime change risk - risk of structural shift in market that would cause its behavior and relationships to change dramatically</li>
-<li>exogenous shock risk - risk of change that is driven by information not internal to the market (can't be predicted)</li>
-<li>contagion risk - risk of strategy becoming crowded</li>
-<li>how quants monitor risk<ul>
-<li>exposure tools</li>
-<li>profit and loss monitors</li>
-<li>execution monitoring tools</li>
-<li>hit rate</li>
-</ul>
-</li>
-</ul>
-<h3>Chapter 11. Criticisms of Quant Trading</h3>
-<ul>
-<li>Trading is an art not a science and human behavior can't be modeled<ul>
-<li>Over time, human behavior can be predicted enough to be profitable</li>
-</ul>
-</li>
-<li>Quants cause more market volatility by underestimating risk.<ul>
-<li>Decision makers in every field underestimate risk</li>
-</ul>
-</li>
-<li>Quants cannot handle unusual events or rapid changes in market conditions.<ul>
-<li>generally a valid criticism however some quant strategies are designed to profit from short reversals of longer-term trends</li>
-</ul>
-</li>
-<li>Quants are all the same.<ul>
-<li>correlation in quant return data is actually pretty low</li>
-</ul>
-</li>
-<li>Only a few large quants can survive in the long run<ul>
-<li>managing large amounts of money can be a disadvantage in times of stress</li>
-<li>managing large amounts of money makes many appealing strategies impossible</li>
-<li>smaller funds can specialize while larger funds diversify</li>
-</ul>
-</li>
-<li>Quants are guilty of data mining.<ul>
-<li>Most quants are theory driven.</li>
-<li>Data mining can be successful.</li>
-</ul>
-</li>
-</ul>
-<h3>Chapter 12. Evaluating Quants and Quant Strategies</h3>
-<ul>
-<li>You should seek to both understand the strategy and evaulate the practitioners.</li>
-<li>gathering information<ul>
-<li>build trust<ul>
-<li>don't ask for sensitive information</li>
-<li>don't share what other quants do</li>
-</ul>
-</li>
-<li>display knowledge of possible strategies (menu of options)</li>
-<li>keep information organized once gathered</li>
-</ul>
-</li>
-<li>6 investment process components to consider when evaluating quant strategy:<ol>
-<li>research and strategy development<ul>
-<li>How do you come up with new ideas for trading strategies?</li>
-<li>How do you test these ideas?</li>
-<li>What kinds of things are you looking for to determine whether a strategy works or not?</li>
-</ul>
-</li>
-<li>data sourcing, gathering, cleaning, and management<ul>
-<li>What data are you using?
-How do you store the data, and why that way?</li>
-<li>How do you clean the data?</li>
-</ul>
-</li>
-<li>investment selection and structuring<ul>
-<li>Are your alpha models theory driven or data driven?</li>
-<li>Which alpha strategies are you using (e.e., trend, reversion, value/yield, growth, or quality)?</li>
-<li>Are you making relative bets or a bunch of individual bets?</li>
-<li>If relative, what does relative mean, exactly?</li>
-<li>Over what time horizon, and in what investment universe?</li>
-<li>How are you mixing your various alpha models?</li>
-</ul>
-</li>
-<li>portfolio construction<ul>
-<li>How do you do portfolio construction?</li>
-<li>What are your limits, and why did you set them there?</li>
-<li>What are the inputs to your portfolio construction?</li>
-<li>What areyou trying to achieve with portfolio construction (i.e., what is your "objective function")?</li>
-</ul>
-</li>
-<li>execution<ul>
-<li>What kind of transaction cost model are you using, and why did you choose to model transaction costs the way you did?</li>
-<li>How are you executing trades--manually or algorithmically?</li>
-<li>Tell me about your order executioin algorithms: What kinds of things did you build into them (e.g., hidden vs. visible, or active v. passive)?</li>
-</ul>
-</li>
-<li>risk management and monitoring<ul>
-<li>What does your risk model account for, and why those things?</li>
-<li>What are your various risk limits, and why did you set them where you did?</li>
-<li>Under what circumstances would you ever intervene with your model?</li>
-<li>What are you monitoring on an ongoing basis?</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>evaluating the accumen of quantitative traders<ul>
-<li>do at least some members have live experience</li>
-<li>attitude should be cautious and humble</li>
-<li>should be able to dig deep into details with you in a few areas</li>
-</ul>
-</li>
-<li>Where does their edge come from and how sustainable is it?<ul>
-<li>edge must come from one of 6 components of investment process</li>
-<li>data edge<ul>
-<li>proprietary access</li>
-<li>superior gathering, cleaning, or storage techniques</li>
-<li>lack-of-competition edge</li>
-</ul>
-</li>
-<li>structural edge - relates to something in the market strucutre that puts the wind in the sails of a market participant (usually caused and removed by regulation)</li>
-</ul>
-</li>
-</ul>
 </div>
     </div>
     </article>

@@ -9568,7 +9568,7 @@ label,.radio label,.checkbox label,.help-block{
 }
 /* Keyword */
  pre.code .o, .highlight pre .o {
-     color: #666666 
+     color: #480202
 }
 /* Operator */
  pre.code .ch, .highlight pre .ch {
@@ -9591,7 +9591,7 @@ label,.radio label,.checkbox label,.help-block{
 }
 /* Comment.PreprocFile */
  pre.code .c1, .highlight pre .c1 {
-     color: #126180;
+     color: #752f00;
      font-style: italic 
 }
 /* Comment.Single */
@@ -9796,8 +9796,8 @@ label,.radio label,.checkbox label,.help-block{
 }
 /* Literal.String.Heredoc */
  pre.code .si, .highlight pre .si {
-     color: #8B0000;
-     font-weight: bold 
+     color: #480202;
+     font-weight: normal 
 }
 /* Literal.String.Interpol */
  pre.code .sx, .highlight pre .sx {
