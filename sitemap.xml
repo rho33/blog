@@ -15,15 +15,19 @@
  </url>
  <url>
   <loc>https://defclass.com/archive.html</loc>
-  <lastmod>2020-03-27T18:16:00Z</lastmod>
+  <lastmod>2020-03-30T04:45:00Z</lastmod>
  </url>
  <url>
   <loc>https://defclass.com/blog/</loc>
-  <lastmod>2020-02-24T05:52:00Z</lastmod>
+  <lastmod>2020-03-30T03:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://defclass.com/blog/index-1.html</loc>
-  <lastmod>2020-03-27T18:16:00Z</lastmod>
+  <lastmod>2020-03-30T03:16:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://defclass.com/blog/index-2.html</loc>
+  <lastmod>2020-03-30T04:45:00Z</lastmod>
  </url>
  <url>
   <loc>https://defclass.com/book-notes/</loc>
@@ -70,12 +74,20 @@
   <lastmod>2020-01-25T20:25:00Z</lastmod>
  </url>
  <url>
+  <loc>https://defclass.com/posts/df-construction/</loc>
+  <lastmod>2020-03-30T02:22:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://defclass.com/posts/http/</loc>
   <lastmod>2020-01-28T02:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://defclass.com/posts/inside-the-black-box/</loc>
   <lastmod>2020-01-22T23:57:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://defclass.com/posts/json-dumped/</loc>
+  <lastmod>2020-03-30T01:04:00Z</lastmod>
  </url>
  <url>
   <loc>https://defclass.com/posts/json-notes/</loc>
@@ -86,12 +98,56 @@
   <lastmod>2020-02-24T05:52:00Z</lastmod>
  </url>
  <url>
+  <loc>https://defclass.com/posts/numpy-array-creation-routines/</loc>
+  <lastmod>2020-03-30T04:45:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://defclass.com/posts/numpy-arrays/</loc>
+  <lastmod>2020-03-30T04:12:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://defclass.com/posts/pandas-basic-index/</loc>
   <lastmod>2020-03-27T18:16:00Z</lastmod>
  </url>
  <url>
+  <loc>https://defclass.com/posts/pandas-descriptive-statistics/</loc>
+  <lastmod>2020-03-30T02:18:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://defclass.com/posts/pandas-df-construction/</loc>
+  <lastmod>2020-03-30T02:39:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://defclass.com/posts/pandas-multiindex/</loc>
+  <lastmod>2020-03-30T02:47:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://defclass.com/posts/pandas-offsets/</loc>
+  <lastmod>2020-03-30T02:52:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://defclass.com/posts/pandas-options-settings/</loc>
+  <lastmod>2020-03-30T02:55:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://defclass.com/posts/pandas-periods/</loc>
+  <lastmod>2020-03-30T03:16:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://defclass.com/posts/pandas-reshaping/</loc>
   <lastmod>2020-03-27T07:25:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://defclass.com/posts/pandas-selecting/</loc>
+  <lastmod>2020-03-30T03:21:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://defclass.com/posts/pandas-timedeltas/</loc>
+  <lastmod>2020-03-30T03:24:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://defclass.com/posts/pandas-timestamp/</loc>
+  <lastmod>2020-03-30T03:45:00Z</lastmod>
  </url>
  <url>
   <loc>https://defclass.com/posts/praw-notes/</loc>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>json dumped | My Site</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https://defclass.com/posts/json-dumped/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><!-- Font Awesome --><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<meta name="author" content="Ryan">
+<link rel="prev" href="../numpy-array-creation-routines/" title="Numpy Array Creation Routines" type="text/html">
+<meta property="og:site_name" content="My Site">
+<meta property="og:title" content="json dumped">
+<meta property="og:url" content="https://defclass.com/posts/json-dumped/">
+<meta property="og:description" content="In [8]:
+
+    
+import os
+from collections import OrderedDict
+import pythoncom
+from win32com.shell import shell, shellcon
+
+def shortcut_target(filename):
+    # from http://timgolden.me.uk/python/win32_h">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-03-29T00:00:00-07:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="https://defclass.com/">
+
+            <span id="blog-title">My Site</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto"><li class="nav-item dropdown">
+<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topics</a>
+            <div class="dropdown-menu">
+                    <a href="../../python/" class="dropdown-item">Python</a>
+                    <a href="../../book-notes/" class="dropdown-item">Books</a>
+                    <a href="../../misc/" class="dropdown-item">Misc</a>
+                    <a href="../" class="dropdown-item">All Posts</a>
+            </div>
+
+                
+            </li></ul>
+<ul class="navbar-nav navbar-right">
+<li class="nav-item">
+    <a href="index.ipynb" id="sourcelink" class="nav-link">Source</a>
+    </li>
+
+
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">json dumped</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-03-29T00:00:00-07:00" itemprop="datePublished" title="2020-03-29 00:00">2020-03-29 00:00</time></a>
+            </p>
+            
+        <p class="sourceline"><a href="index.ipynb" class="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">import</span> <span class="nn">pythoncom</span>
+<span class="kn">from</span> <span class="nn">win32com.shell</span> <span class="kn">import</span> <span class="n">shell</span><span class="p">,</span> <span class="n">shellcon</span>
+
+<span class="k">def</span> <span class="nf">shortcut_target</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="c1"># from http://timgolden.me.uk/python/win32_how_do_i/read-a-shortcut.html</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="n">pythoncom</span><span class="o">.</span><span class="n">CoCreateInstance</span><span class="p">(</span>
+        <span class="n">shell</span><span class="o">.</span><span class="n">CLSID_ShellLink</span><span class="p">,</span>    
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">pythoncom</span><span class="o">.</span><span class="n">CLSCTX_INPROC_SERVER</span><span class="p">,</span>    
+        <span class="n">shell</span><span class="o">.</span><span class="n">IID_IShellLink</span>
+    <span class="p">)</span>
+    <span class="n">link</span><span class="o">.</span><span class="n">QueryInterface</span><span class="p">(</span><span class="n">pythoncom</span><span class="o">.</span><span class="n">IID_IPersistFile</span><span class="p">)</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">GetPath</span><span class="p">(</span><span class="n">shell</span><span class="o">.</span><span class="n">SLGP_UNCPRIORITY</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">name</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="sa">r</span><span class="s2">"C:\Users\rhohe\AppData\Roaming\Microsoft\Windows\Recent"</span><span class="p">)</span>
+<span class="n">shortcuts</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span><span class="o">==</span><span class="s1">'.lnk'</span><span class="p">]</span>
+<span class="n">shortcuts</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getctime</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">folders</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">shortcut</span> <span class="ow">in</span> <span class="n">shortcuts</span><span class="p">:</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">shortcut_target</span><span class="p">(</span><span class="n">shortcut</span><span class="p">)</span>
+    <span class="n">folders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">target</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">folders</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">OrderedDict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">folders</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">folder</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">folders</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">folders</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">'start cmd'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>73 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\TCL_55S423 - PrelimReport
+72 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\SamsungUN75RU7100 - GOOD
+71 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\TCL_55S423 - PrelimReport\Data
+70 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\SamsungUN58NU7100 - GOOD
+69 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\SamsungQN43Q60R - NO REPORT
+68 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\Vizio_V555-G1 - NO REPORT
+67 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\Vizio_V555-G1 - PrelimReport
+66 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\SamsungUN55RU7100 - GOOD
+65 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\LG_49UM7300-GOOD_TEST
+64 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\LG_65UM7300 - GOOD
+63 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\Vizio_M558-G1 - GOOD
+62 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\LG_OLED65B9 - NEW
+61 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\LG_55SM8100-GOOD_TEST
+60 G:\Shared drives\Automated Test\Final Test Files (All TVs)\LabTests\SamsungUN65RU7100 - GOOD
+59 G:\Shared drives\Automated Test\Final Test Files (All TVs)\Non-ESTAR Lab Tests\00 Dec17 Tests\LG_OLED65B8 - PrelimReport - gh
+58 D:\Documents\Projects\Blog
+57 C:\Users\rhohe\Desktop
+56 D:\Documents\Projects\Notes
+55 G:\Shared drives\Efficco\2019 STB Survey
+54 G:\Shared drives\Automated Test\PythonScripts
+53 C:\Users\rhohe\Downloads\LG_43UK6090
+52 C:\Users\rhohe
+51 C:\Users\rhohe\Downloads\AutoTestScripts\LG_43UK6090
+50 C:\Users\rhohe\PycharmProjects\NEEA-data-report\TestData\LG_43UM7300
+49 G:\Shared drives\Efficco
+48 G:\Shared drives\Efficco\2020\Sources
+47 C:\Users\rhohe\Downloads\Organize
+46 C:\Users\rhohe\Downloads\Organize\effico
+45 G:\Shared drives\Efficco\2020
+44 G:\Shared drives\Efficco\2020\Altice\RawData
+43 C:\Users\rhohe\Documents\EfficoJupyter
+42 C:\Users\rhohe\Documents
+41 G:\Shared drives\Efficco\2020\Cox
+40 G:\Shared drives\Automated Test
+39 C:\Users\rhohe\PycharmProjects\NEEA-data-report\TestData\LG_43UM7300\Data
+38 G:\Shared drives\Efficco\2018
+37 G:\Shared drives\Efficco\2019 STB Survey\Energy\Cox
+36 D:\Projects
+35 D:\
+34 G:\Shared drives\Efficco\2020\Cox\Analysis
+33 G:\Shared drives\Efficco\2020\Comcast
+32 G:\Shared drives\Efficco\2019 STB Survey\Energy
+31 G:\Shared drives\Efficco\2020\Altice
+30 D:\Projects\Lean\Common
+29 C:\Users\rhohe\AppData\Local\Programs\Python\Python36
+28 C:\Users\rhohe\AppData\Local\Programs\Python
+27 C:\Program Files\Git\mingw64\share\doc\git-doc
+26 C:\Program Files\Git\mingw64\share\doc
+25 D:\Projects\Lean\Common\Python
+24 D:\Projects\Lean\Engine\Setup
+23 D:\Projects\Lean\Engine
+22 D:\Projects\Lean\AlgorithmFactory
+21 D:\Projects\Lean\Report
+20 D:\Projects\Lean
+19 D:\Projects\Blog\Blog2\pages
+18 D:\Projects\Blog
+17 D:\Projects\Blog\Blog2\themes\custom\assets\css
+16 D:\Projects\Blog\Blog2\output\assets
+15 D:\Projects\Blog\Blog2\output\assets\css
+14 D:\Projects\Blog\Blog2\posts
+13 D:\Projects\Blog\Blog2
+12 C:\Users\rhohe\source\repos\FirstApplication
+11 C:\Users\rhohe\source\repos
+10 C:\Users\rhohe\Downloads
+9 C:\Users\rhohe\PycharmProjects\NEEA-data-report
+8 C:\Users\rhohe\PycharmProjects
+7 C:\Users\rhohe\source\repos\PythonApplication1
+6 C:\Users\rhohe\source
+5 
+4 C:\Users\rhohe\source\repos\PythonApplication1\PythonApplication1
+3 C:\Users\rhohe\PycharmProjects\PracticeGit\practice-git
+2 C:\Users\rhohe\PycharmProjects\PracticeGit
+1 C:\
+0 C:\MyPythonScripts
+0
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[45]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../numpy-array-creation-routines/" rel="prev" title="Numpy Array Creation Routines">Previous post</a>
+            </li>
+        </ul></nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article><!--End of body content--><footer id="footer">
+            Contents © 2020         <a href="mailto:n.tesla@example.com">Ryan</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script src="../../assets/js/moment-with-locales.min.js"></script><!-- fancy dates --><script>
+        moment.locale("en");
+        fancydates(2, "YYYY-MM-DD HH:mm");
+        </script><!-- end fancy dates --><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

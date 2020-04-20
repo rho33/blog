@@ -1,0 +1,5146 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="This is a demo site for Nikola.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Site (old posts, page 2) | My Site</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https://defclass.com/blog/index-2.html">
+<link rel="prev" href="." type="text/html">
+<link rel="next" href="index-1.html" type="text/html">
+<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]--><!-- Font Awesome --><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="https://defclass.com/">
+
+            <span id="blog-title">My Site</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto"><li class="nav-item dropdown">
+<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topics</a>
+            <div class="dropdown-menu">
+                    <a href="../python/" class="dropdown-item">Python</a>
+                    <a href="../book-notes/" class="dropdown-item">Books</a>
+                    <a href="../misc/" class="dropdown-item">Misc</a>
+                    <a href="../posts/" class="dropdown-item">All Posts</a>
+            </div>
+
+                
+            </li></ul>
+<ul class="navbar-nav navbar-right"></ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+
+    
+
+
+    
+<div class="postindex">
+    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/pandas-timedeltas/" class="u-url">Pandas Timedeltas</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/pandas-timedeltas/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-03-29T00:00:00-07:00" itemprop="datePublished" title="2020-03-29 00:00">2020-03-29 00:00</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># pd.Timedelta very similar to datetime but not exactly the same</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>False</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">units</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'ns'</span><span class="p">,</span> <span class="s1">'us'</span><span class="p">,</span> <span class="s1">'ms'</span><span class="p">,</span> <span class="s1">'s'</span><span class="p">,</span> <span class="s1">'m'</span><span class="p">,</span> <span class="s1">'h'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">,</span> <span class="s1">'W'</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">,</span> <span class="s1">'Y'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0 days 00:00:00.000000
+0 days 00:00:00.000001
+0 days 00:00:00.001000
+0 days 00:00:01
+0 days 00:01:00
+0 days 01:00:00
+1 days 00:00:00
+7 days 00:00:00
+30 days 10:29:06
+365 days 05:49:12
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>c:\program files\python37\lib\site-packages\ipykernel_launcher.py:3: FutureWarning: M and Y units are deprecated and will be removed in a future version.
+  This is separate from the ipykernel package so we can avoid doing imports until
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">day</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">'d'</span><span class="p">)</span>
+<span class="n">week</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">'W'</span><span class="p">)</span>
+<span class="n">day</span> <span class="o">+</span> <span class="n">week</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timedelta('8 days 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">day</span> <span class="o">-</span> <span class="n">week</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timedelta('-6 days +00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">week</span><span class="o">/</span><span class="n">day</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>7.0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">day</span><span class="o">*</span><span class="mi">7</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timedelta('7 days 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># add 10 years to a date</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">1995</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">decade_later</span> <span class="o">=</span> <span class="n">ts</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">'Y'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">decade_later</span><span class="p">)</span> <span class="c1"># remember a year is 365 days and change</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>2005-06-04 10:12:00
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>c:\program files\python37\lib\site-packages\ipykernel_launcher.py:4: FutureWarning: M and Y units are deprecated and will be removed in a future version.
+  after removing the cwd from sys.path.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># subtract datetimes to get timedelta</span>
+<span class="n">ts1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">1995</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ts2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">1995</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ts2</span> <span class="o">-</span> <span class="n">ts1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timedelta('27 days 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/pandas-timestamp/" class="u-url">Pandas Timestamp</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/pandas-timestamp/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-03-29T00:00:00-07:00" itemprop="datePublished" title="2020-03-29 00:00">2020-03-29 00:00</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Timestamp">Timestamp<a class="anchor-link" href="../posts/pandas-timestamp/#Timestamp">¶</a>
+</h2>
+<p>Pandas replacement for datetime.datetime</p>
+<p>datetime.datetime also supported in Pandas (can use with pd.datetime)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="From-String">From String<a class="anchor-link" href="../posts/pandas-timestamp/#From-String">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Date-String">Date String<a class="anchor-link" href="../posts/pandas-timestamp/#Date-String">¶</a>
+</h4>
+<p>Date string without time evaluates to midnight</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># mm-dd-yyyy</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'12-19-2008'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2008-12-19 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># m-d-yy</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'1-9-08'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2008-01-09 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># slashes and dots work too</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'1/9/08'</span><span class="p">),</span>  <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'1.9.08'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(Timestamp('2008-01-09 00:00:00'), Timestamp('2008-01-09 00:00:00'))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># yyyy-m-d</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2009-6-3'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2009-06-03 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># yyyy-mm-dd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2009-11-30'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2009-11-30 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># just year</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2008'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2008-01-01 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># second quarter 2009</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2Q2009'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2009-04-01 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2Q2009'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2009-04-01 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2017-01-01T12'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2017-01-01 12:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2017-01-01M12'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2017-01-01 12:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'ABCDEFGHIJKLMNOPQRSTUV'</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="sa">f</span><span class="s1">'2017</span><span class="si">{letter}</span><span class="s1">1'</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">': '</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Q:  2017-01-01 00:00:00
+T:  2017-01-01 00:00:00
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'ABCDEFGHIJKLMNOPQRSTUV'</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="sa">f</span><span class="s1">'2017-1</span><span class="si">{letter}</span><span class="s1">1'</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">': '</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>M:  2017-01-01 00:00:01
+T:  2017-01-01 00:00:00
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'ABCDEFGHIJKLMNOPQRSTUV'</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="sa">f</span><span class="s1">'2017-1-9</span><span class="si">{letter}</span><span class="s1">10'</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">': '</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>M:  2017-01-09 10:00:00
+T:  2017-01-09 10:00:00
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Time-String">Time String<a class="anchor-link" href="../posts/pandas-timestamp/#Time-String">¶</a>
+</h4>
+<p>Time string without date evaluates to current day</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># hh:mm:ss</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2:17:00'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2020-03-29 02:17:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># h:mm:ss</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2:17:00'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2020-03-29 02:17:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># decimals of seconds work too</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2:17:00.004999'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2020-03-29 02:17:00.004999')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Date-+-Time-String">Date + Time String<a class="anchor-link" href="../posts/pandas-timestamp/#Date-+-Time-String">¶</a>
+</h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># mm-dd-yyyy hh:mm:ss</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'12-19-2008 23:00:00'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[18]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2008-12-19 23:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="From-Keywords">From Keywords<a class="anchor-link" href="../posts/pandas-timestamp/#From-Keywords">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># can use keywords just like datetime object</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">1991</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nanosecond</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ts</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[19]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('1991-12-30 08:38:38.000001005')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Int-or-Float">Int or Float<a class="anchor-link" href="../posts/pandas-timestamp/#Int-or-Float">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># numbers interpreted as time since midnight Jan 1 1970, default nanosecond</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[20]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('1970-01-01 00:00:00.000000008')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># can specify units</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">'d'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[21]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('1970-01-09 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ts1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">1991</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nanosecond</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ts2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">1990</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nanosecond</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ts1</span> <span class="o">-</span> <span class="n">ts2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[22]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timedelta('365 days 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Alternate-Constructors">Alternate Constructors<a class="anchor-link" href="../posts/pandas-timestamp/#Alternate-Constructors">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># using current moment</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[23]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2020-03-29 20:43:16.122938')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># using current moment in coordinated universal time</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[24]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2020-03-30 03:43:16.128922+0000', tz='UTC')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Attributes">Attributes<a class="anchor-link" href="../posts/pandas-timestamp/#Attributes">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">1991</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nanosecond</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">month</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">minute</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">second</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">microsecond</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1991-12-30 08:38:38.000001005
+1991
+12
+30
+38
+38
+1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get datetime object</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[27]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>datetime.date(1991, 12, 30)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">day_name</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[28]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'Monday'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">month_name</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[29]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'December'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">dayofweek</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[30]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">dayofyear</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[31]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>364</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">days_in_month</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[32]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>31</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># week of year. dec 30 1991 was a monday so it's counted as first week of 1992</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">week</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[33]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># not the last day of the month so this is False</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">is_month_end</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[34]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>False</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get quarter of year. Quarters begin at jan, april, july, october</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'9-30-2008'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">quarter</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">is_quarter_end</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">is_month_end</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">daysinmonth</span><span class="p">)</span>
+
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'10-1-2008'</span><span class="p">)</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">quarter</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">is_quarter_start</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">is_month_start</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">daysinmonth</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3 True True 30
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[35]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(4, True, True, 31)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2008'</span><span class="p">)</span><span class="o">.</span><span class="n">is_leap_year</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[36]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/pandas-reshaping/" class="u-url">Reshaping DataFrames</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/pandas-reshaping/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-03-29T00:00:00-07:00" itemprop="datePublished" title="2020-03-29 00:00">2020-03-29 00:00</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'day'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Monday'</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span> <span class="o">+</span> <span class="p">[</span><span class="s1">'Tuesday'</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span><span class="p">,</span>
+    <span class="s1">'product'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'banana'</span><span class="p">,</span> <span class="s1">'carrot'</span><span class="p">,</span> <span class="s1">'broccoli'</span><span class="p">,</span> <span class="s1">'pork'</span><span class="p">,</span> <span class="s1">'beef'</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s1">'food_type'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'fruit'</span><span class="p">,</span> <span class="s1">'fruit'</span><span class="p">,</span> <span class="s1">'vegetable'</span><span class="p">,</span> <span class="s1">'vegetable'</span><span class="p">,</span> <span class="s1">'meat'</span><span class="p">,</span> <span class="s1">'meat'</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s1">'amount_sold'</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+    <span class="s1">'sales'</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>product</th>
+      <th>food_type</th>
+      <th>amount_sold</th>
+      <th>sales</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Monday</td>
+      <td>apple</td>
+      <td>fruit</td>
+      <td>200</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Monday</td>
+      <td>banana</td>
+      <td>fruit</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>Monday</td>
+      <td>carrot</td>
+      <td>vegetable</td>
+      <td>300</td>
+      <td>60</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>Monday</td>
+      <td>broccoli</td>
+      <td>vegetable</td>
+      <td>75</td>
+      <td>25</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>Monday</td>
+      <td>pork</td>
+      <td>meat</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>5</th>
+      <td>Monday</td>
+      <td>beef</td>
+      <td>meat</td>
+      <td>50</td>
+      <td>150</td>
+    </tr>
+<tr>
+<th>6</th>
+      <td>Tuesday</td>
+      <td>apple</td>
+      <td>fruit</td>
+      <td>400</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>7</th>
+      <td>Tuesday</td>
+      <td>banana</td>
+      <td>fruit</td>
+      <td>100</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>8</th>
+      <td>Tuesday</td>
+      <td>carrot</td>
+      <td>vegetable</td>
+      <td>600</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>9</th>
+      <td>Tuesday</td>
+      <td>broccoli</td>
+      <td>vegetable</td>
+      <td>150</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>10</th>
+      <td>Tuesday</td>
+      <td>pork</td>
+      <td>meat</td>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+<tr>
+<th>11</th>
+      <td>Tuesday</td>
+      <td>beef</td>
+      <td>meat</td>
+      <td>100</td>
+      <td>300</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="pivot_table">pivot_table<a class="anchor-link" href="../posts/pandas-reshaping/#pivot_table">¶</a>
+</h2>
+<ul>
+<li>pivot_table uses an aggregate function, pivot does not</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'sum'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>apple</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>banana</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>beef</th>
+      <td>150</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>broccoli</th>
+      <td>25</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>carrot</th>
+      <td>60</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>pork</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'food_type'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>food_type</th>
+      <th>fruit</th>
+      <th>meat</th>
+      <th>vegetable</th>
+    </tr>
+<tr>
+<th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>Monday</th>
+      <td>75.0</td>
+      <td>175.0</td>
+      <td>42.5</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>150.0</td>
+      <td>350.0</td>
+      <td>85.0</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'food_type'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'sum'</span><span class="p">)</span> <span class="c1"># aggfunc defaults to 'mean'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>food_type</th>
+      <th>fruit</th>
+      <th>meat</th>
+      <th>vegetable</th>
+    </tr>
+<tr>
+<th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>Monday</th>
+      <td>150</td>
+      <td>350</td>
+      <td>85</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>300</td>
+      <td>700</td>
+      <td>170</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'max'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">'amount_sold'</span><span class="p">,</span> <span class="s1">'sales'</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>amount_sold</th>
+      <td>300</td>
+      <td>600</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="pivot">pivot<a class="anchor-link" href="../posts/pandas-reshaping/#pivot">¶</a>
+</h2>
+<ul>
+<li>pivot_table uses an aggregate function, pivot does not</li>
+<li>for pivot, column-index combos must be unique</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">'sales'</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th></th>
+      <th colspan="2" halign="left">sales</th>
+    </tr>
+<tr>
+<th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>apple</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>banana</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>beef</th>
+      <td>150</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>broccoli</th>
+      <td>25</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>carrot</th>
+      <td>60</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>pork</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="melt">melt<a class="anchor-link" href="../posts/pandas-reshaping/#melt">¶</a>
+</h2>
+<ul>
+<li>use melt to go from wide to skinny</li>
+<li>can also think of it as un-pivoting</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wide_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">wide_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">name</span>  <span class="o">=</span> <span class="kc">None</span>
+<span class="n">wide_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>apple</th>
+      <th>banana</th>
+      <th>beef</th>
+      <th>broccoli</th>
+      <th>carrot</th>
+      <th>pork</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Monday</td>
+      <td>100</td>
+      <td>50</td>
+      <td>150</td>
+      <td>25</td>
+      <td>60</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Tuesday</td>
+      <td>200</td>
+      <td>100</td>
+      <td>300</td>
+      <td>50</td>
+      <td>120</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wide_df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s1">'day'</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">'sales'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>product</th>
+      <th>sales</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Monday</td>
+      <td>apple</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Tuesday</td>
+      <td>apple</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>Monday</td>
+      <td>banana</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>Tuesday</td>
+      <td>banana</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>Monday</td>
+      <td>beef</td>
+      <td>150</td>
+    </tr>
+<tr>
+<th>5</th>
+      <td>Tuesday</td>
+      <td>beef</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>6</th>
+      <td>Monday</td>
+      <td>broccoli</td>
+      <td>25</td>
+    </tr>
+<tr>
+<th>7</th>
+      <td>Tuesday</td>
+      <td>broccoli</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>8</th>
+      <td>Monday</td>
+      <td>carrot</td>
+      <td>60</td>
+    </tr>
+<tr>
+<th>9</th>
+      <td>Tuesday</td>
+      <td>carrot</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>10</th>
+      <td>Monday</td>
+      <td>pork</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>11</th>
+      <td>Tuesday</td>
+      <td>pork</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="stack">stack<a class="anchor-link" href="../posts/pandas-reshaping/#stack">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pdf</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'product'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'day'</span><span class="p">)</span>
+<span class="n">pdf</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th></th>
+      <th colspan="2" halign="left">food_type</th>
+      <th colspan="2" halign="left">amount_sold</th>
+      <th colspan="2" halign="left">sales</th>
+    </tr>
+<tr>
+<th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>apple</th>
+      <td>fruit</td>
+      <td>fruit</td>
+      <td>200</td>
+      <td>400</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>banana</th>
+      <td>fruit</td>
+      <td>fruit</td>
+      <td>50</td>
+      <td>100</td>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>beef</th>
+      <td>meat</td>
+      <td>meat</td>
+      <td>50</td>
+      <td>100</td>
+      <td>150</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>broccoli</th>
+      <td>vegetable</td>
+      <td>vegetable</td>
+      <td>75</td>
+      <td>150</td>
+      <td>25</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>carrot</th>
+      <td>vegetable</td>
+      <td>vegetable</td>
+      <td>300</td>
+      <td>600</td>
+      <td>60</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>pork</th>
+      <td>meat</td>
+      <td>meat</td>
+      <td>100</td>
+      <td>200</td>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># level kwarg in stack refers to levels of multi-index</span>
+<span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'''</span>
+<span class="s1">Column Object Type: {type(pdf.columns)}</span>
+<span class="s1">Levels: </span><span class="si">{pdf.columns.levels}</span><span class="s1"></span>
+<span class="s1">First Level: </span><span class="si">{pdf.columns.levels[0]}</span><span class="s1"></span>
+<span class="s1">Second Level: </span><span class="si">{pdf.columns.levels[1]}</span><span class="s1"></span>
+<span class="s1">'''</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Column Object Type: &lt;class 'pandas.core.indexes.multi.MultiIndex'&gt;
+Levels: [['food_type', 'amount_sold', 'sales'], ['Monday', 'Tuesday']]
+First Level: Index(['food_type', 'amount_sold', 'sales'], dtype='object')
+Second Level: Index(['Monday', 'Tuesday'], dtype='object', name='day')
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># stacking level 0 takes the first level from column MuliIndex object and pivots it to inner-most level of index</span>
+<span class="n">pdf</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="3" valign="top">apple</th>
+      <th>amount_sold</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>fruit</td>
+      <td>fruit</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">banana</th>
+      <th>amount_sold</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>fruit</td>
+      <td>fruit</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">beef</th>
+      <th>amount_sold</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>meat</td>
+      <td>meat</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>150</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">broccoli</th>
+      <th>amount_sold</th>
+      <td>75</td>
+      <td>150</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>vegetable</td>
+      <td>vegetable</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>25</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">carrot</th>
+      <th>amount_sold</th>
+      <td>300</td>
+      <td>600</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>vegetable</td>
+      <td>vegetable</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>60</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">pork</th>
+      <th>amount_sold</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>meat</td>
+      <td>meat</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># stacking level 1 takes the second level from column MuliIndex object and pivots it to inner-most level of index</span>
+<span class="n">pdf</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+      <th></th>
+      <th>food_type</th>
+      <th>amount_sold</th>
+      <th>sales</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2" valign="top">apple</th>
+      <th>Monday</th>
+      <td>fruit</td>
+      <td>200</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>fruit</td>
+      <td>400</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">banana</th>
+      <th>Monday</th>
+      <td>fruit</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>fruit</td>
+      <td>100</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">beef</th>
+      <th>Monday</th>
+      <td>meat</td>
+      <td>50</td>
+      <td>150</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>meat</td>
+      <td>100</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">broccoli</th>
+      <th>Monday</th>
+      <td>vegetable</td>
+      <td>75</td>
+      <td>25</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>vegetable</td>
+      <td>150</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">carrot</th>
+      <th>Monday</th>
+      <td>vegetable</td>
+      <td>300</td>
+      <td>60</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>vegetable</td>
+      <td>600</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th rowspan="2" valign="top">pork</th>
+      <th>Monday</th>
+      <td>meat</td>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>Tuesday</th>
+      <td>meat</td>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>product</th>
+      <th>food_type</th>
+      <th>amount_sold</th>
+      <th>sales</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>Monday</td>
+      <td>apple</td>
+      <td>fruit</td>
+      <td>200</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>Monday</td>
+      <td>banana</td>
+      <td>fruit</td>
+      <td>50</td>
+      <td>50</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Stack level defaults to -1 (inner most column level) </span>
+<span class="c1"># calling stack on single level columns returns an unnamed MultiIndex series with columns pivoted to be inner-most level of index</span>
+<span class="n">df</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0  day            Monday
+   product         apple
+   food_type       fruit
+   amount_sold       200
+   sales             100
+1  day            Monday
+   product        banana
+   food_type       fruit
+   amount_sold        50
+   sales              50
+dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="unstack">unstack<a class="anchor-link" href="../posts/pandas-reshaping/#unstack">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># multi-index dataframe</span>
+<span class="n">midf</span> <span class="o">=</span> <span class="n">pdf</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">midf</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+      <th>day</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="3" valign="top">apple</th>
+      <th>amount_sold</th>
+      <td>200</td>
+      <td>400</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>fruit</td>
+      <td>fruit</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>100</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th rowspan="3" valign="top">banana</th>
+      <th>amount_sold</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>food_type</th>
+      <td>fruit</td>
+      <td>fruit</td>
+    </tr>
+<tr>
+<th>sales</th>
+      <td>50</td>
+      <td>100</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># unstack pivots a level of the index to the inner-most level of the columns</span>
+<span class="n">midf</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">level</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># defaults to level=-1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr>
+<th>day</th>
+      <th colspan="3" halign="left">Monday</th>
+      <th colspan="3" halign="left">Tuesday</th>
+    </tr>
+<tr>
+<th></th>
+      <th>amount_sold</th>
+      <th>food_type</th>
+      <th>sales</th>
+      <th>amount_sold</th>
+      <th>food_type</th>
+      <th>sales</th>
+    </tr>
+<tr>
+<th>product</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>apple</th>
+      <td>200</td>
+      <td>fruit</td>
+      <td>100</td>
+      <td>400</td>
+      <td>fruit</td>
+      <td>200</td>
+    </tr>
+<tr>
+<th>banana</th>
+      <td>50</td>
+      <td>fruit</td>
+      <td>50</td>
+      <td>100</td>
+      <td>fruit</td>
+      <td>100</td>
+    </tr>
+<tr>
+<th>beef</th>
+      <td>50</td>
+      <td>meat</td>
+      <td>150</td>
+      <td>100</td>
+      <td>meat</td>
+      <td>300</td>
+    </tr>
+<tr>
+<th>broccoli</th>
+      <td>75</td>
+      <td>vegetable</td>
+      <td>25</td>
+      <td>150</td>
+      <td>vegetable</td>
+      <td>50</td>
+    </tr>
+<tr>
+<th>carrot</th>
+      <td>300</td>
+      <td>vegetable</td>
+      <td>60</td>
+      <td>600</td>
+      <td>vegetable</td>
+      <td>120</td>
+    </tr>
+<tr>
+<th>pork</th>
+      <td>100</td>
+      <td>meat</td>
+      <td>200</td>
+      <td>200</td>
+      <td>meat</td>
+      <td>400</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/pandas-basic-index/" class="u-url">Pandas Basic Indexing</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/pandas-basic-index/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-03-26T12:25:17-08:00" itemprop="datePublished" title="2020-03-26 12:25">2020-03-26 12:25</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">'ABCDEFGHIJ'</span><span class="p">))</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+      <th>G</th>
+      <th>H</th>
+      <th>I</th>
+      <th>J</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>159</td>
+      <td>132</td>
+      <td>157</td>
+      <td>145</td>
+      <td>157</td>
+      <td>114</td>
+      <td>153</td>
+      <td>181</td>
+      <td>137</td>
+      <td>143</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>179</td>
+      <td>181</td>
+      <td>121</td>
+      <td>131</td>
+      <td>122</td>
+      <td>141</td>
+      <td>138</td>
+      <td>197</td>
+      <td>138</td>
+      <td>109</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>108</td>
+      <td>139</td>
+      <td>107</td>
+      <td>140</td>
+      <td>185</td>
+      <td>181</td>
+      <td>148</td>
+      <td>158</td>
+      <td>178</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>112</td>
+      <td>137</td>
+      <td>119</td>
+      <td>146</td>
+      <td>197</td>
+      <td>174</td>
+      <td>118</td>
+      <td>110</td>
+      <td>153</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>189</td>
+      <td>156</td>
+      <td>153</td>
+      <td>194</td>
+      <td>118</td>
+      <td>140</td>
+      <td>134</td>
+      <td>153</td>
+      <td>146</td>
+      <td>177</td>
+    </tr>
+<tr>
+<th>5</th>
+      <td>175</td>
+      <td>126</td>
+      <td>141</td>
+      <td>189</td>
+      <td>190</td>
+      <td>112</td>
+      <td>135</td>
+      <td>140</td>
+      <td>142</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>6</th>
+      <td>165</td>
+      <td>117</td>
+      <td>185</td>
+      <td>135</td>
+      <td>124</td>
+      <td>121</td>
+      <td>127</td>
+      <td>102</td>
+      <td>169</td>
+      <td>153</td>
+    </tr>
+<tr>
+<th>7</th>
+      <td>147</td>
+      <td>150</td>
+      <td>185</td>
+      <td>121</td>
+      <td>171</td>
+      <td>149</td>
+      <td>145</td>
+      <td>167</td>
+      <td>118</td>
+      <td>139</td>
+    </tr>
+<tr>
+<th>8</th>
+      <td>114</td>
+      <td>121</td>
+      <td>188</td>
+      <td>174</td>
+      <td>126</td>
+      <td>180</td>
+      <td>132</td>
+      <td>129</td>
+      <td>133</td>
+      <td>148</td>
+    </tr>
+<tr>
+<th>9</th>
+      <td>142</td>
+      <td>130</td>
+      <td>131</td>
+      <td>107</td>
+      <td>136</td>
+      <td>165</td>
+      <td>136</td>
+      <td>181</td>
+      <td>168</td>
+      <td>179</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># new df defaults to RangeIndex if no index is specified</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>RangeIndex(start=0, stop=10, step=1)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Basic-Index-Manipulation">Basic Index Manipulation<a class="anchor-link" href="../posts/pandas-basic-index/#Basic-Index-Manipulation">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set column as index</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'A'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Int64Index([159, 179, 108, 112, 189, 175, 165, 147, 114, 142], dtype='int64', name='A')
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+      <th>G</th>
+      <th>H</th>
+      <th>I</th>
+      <th>J</th>
+    </tr>
+<tr>
+<th>A</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<th>159</th>
+      <td>132</td>
+      <td>157</td>
+      <td>145</td>
+      <td>157</td>
+      <td>114</td>
+      <td>153</td>
+      <td>181</td>
+      <td>137</td>
+      <td>143</td>
+    </tr>
+<tr>
+<th>179</th>
+      <td>181</td>
+      <td>121</td>
+      <td>131</td>
+      <td>122</td>
+      <td>141</td>
+      <td>138</td>
+      <td>197</td>
+      <td>138</td>
+      <td>109</td>
+    </tr>
+<tr>
+<th>108</th>
+      <td>139</td>
+      <td>107</td>
+      <td>140</td>
+      <td>185</td>
+      <td>181</td>
+      <td>148</td>
+      <td>158</td>
+      <td>178</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>112</th>
+      <td>137</td>
+      <td>119</td>
+      <td>146</td>
+      <td>197</td>
+      <td>174</td>
+      <td>118</td>
+      <td>110</td>
+      <td>153</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>189</th>
+      <td>156</td>
+      <td>153</td>
+      <td>194</td>
+      <td>118</td>
+      <td>140</td>
+      <td>134</td>
+      <td>153</td>
+      <td>146</td>
+      <td>177</td>
+    </tr>
+<tr>
+<th>175</th>
+      <td>126</td>
+      <td>141</td>
+      <td>189</td>
+      <td>190</td>
+      <td>112</td>
+      <td>135</td>
+      <td>140</td>
+      <td>142</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>165</th>
+      <td>117</td>
+      <td>185</td>
+      <td>135</td>
+      <td>124</td>
+      <td>121</td>
+      <td>127</td>
+      <td>102</td>
+      <td>169</td>
+      <td>153</td>
+    </tr>
+<tr>
+<th>147</th>
+      <td>150</td>
+      <td>185</td>
+      <td>121</td>
+      <td>171</td>
+      <td>149</td>
+      <td>145</td>
+      <td>167</td>
+      <td>118</td>
+      <td>139</td>
+    </tr>
+<tr>
+<th>114</th>
+      <td>121</td>
+      <td>188</td>
+      <td>174</td>
+      <td>126</td>
+      <td>180</td>
+      <td>132</td>
+      <td>129</td>
+      <td>133</td>
+      <td>148</td>
+    </tr>
+<tr>
+<th>142</th>
+      <td>130</td>
+      <td>131</td>
+      <td>107</td>
+      <td>136</td>
+      <td>165</td>
+      <td>136</td>
+      <td>181</td>
+      <td>168</td>
+      <td>179</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># reset index to RangeIndex</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+      <th>G</th>
+      <th>H</th>
+      <th>I</th>
+      <th>J</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>159</td>
+      <td>132</td>
+      <td>157</td>
+      <td>145</td>
+      <td>157</td>
+      <td>114</td>
+      <td>153</td>
+      <td>181</td>
+      <td>137</td>
+      <td>143</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>179</td>
+      <td>181</td>
+      <td>121</td>
+      <td>131</td>
+      <td>122</td>
+      <td>141</td>
+      <td>138</td>
+      <td>197</td>
+      <td>138</td>
+      <td>109</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>108</td>
+      <td>139</td>
+      <td>107</td>
+      <td>140</td>
+      <td>185</td>
+      <td>181</td>
+      <td>148</td>
+      <td>158</td>
+      <td>178</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>112</td>
+      <td>137</td>
+      <td>119</td>
+      <td>146</td>
+      <td>197</td>
+      <td>174</td>
+      <td>118</td>
+      <td>110</td>
+      <td>153</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>189</td>
+      <td>156</td>
+      <td>153</td>
+      <td>194</td>
+      <td>118</td>
+      <td>140</td>
+      <td>134</td>
+      <td>153</td>
+      <td>146</td>
+      <td>177</td>
+    </tr>
+<tr>
+<th>5</th>
+      <td>175</td>
+      <td>126</td>
+      <td>141</td>
+      <td>189</td>
+      <td>190</td>
+      <td>112</td>
+      <td>135</td>
+      <td>140</td>
+      <td>142</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>6</th>
+      <td>165</td>
+      <td>117</td>
+      <td>185</td>
+      <td>135</td>
+      <td>124</td>
+      <td>121</td>
+      <td>127</td>
+      <td>102</td>
+      <td>169</td>
+      <td>153</td>
+    </tr>
+<tr>
+<th>7</th>
+      <td>147</td>
+      <td>150</td>
+      <td>185</td>
+      <td>121</td>
+      <td>171</td>
+      <td>149</td>
+      <td>145</td>
+      <td>167</td>
+      <td>118</td>
+      <td>139</td>
+    </tr>
+<tr>
+<th>8</th>
+      <td>114</td>
+      <td>121</td>
+      <td>188</td>
+      <td>174</td>
+      <td>126</td>
+      <td>180</td>
+      <td>132</td>
+      <td>129</td>
+      <td>133</td>
+      <td>148</td>
+    </tr>
+<tr>
+<th>9</th>
+      <td>142</td>
+      <td>130</td>
+      <td>131</td>
+      <td>107</td>
+      <td>136</td>
+      <td>165</td>
+      <td>136</td>
+      <td>181</td>
+      <td>168</td>
+      <td>179</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set index directly</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s1">'ABCDEFGHIJ'</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+      <th>G</th>
+      <th>H</th>
+      <th>I</th>
+      <th>J</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>A</th>
+      <td>159</td>
+      <td>132</td>
+      <td>157</td>
+      <td>145</td>
+      <td>157</td>
+      <td>114</td>
+      <td>153</td>
+      <td>181</td>
+      <td>137</td>
+      <td>143</td>
+    </tr>
+<tr>
+<th>B</th>
+      <td>179</td>
+      <td>181</td>
+      <td>121</td>
+      <td>131</td>
+      <td>122</td>
+      <td>141</td>
+      <td>138</td>
+      <td>197</td>
+      <td>138</td>
+      <td>109</td>
+    </tr>
+<tr>
+<th>C</th>
+      <td>108</td>
+      <td>139</td>
+      <td>107</td>
+      <td>140</td>
+      <td>185</td>
+      <td>181</td>
+      <td>148</td>
+      <td>158</td>
+      <td>178</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>D</th>
+      <td>112</td>
+      <td>137</td>
+      <td>119</td>
+      <td>146</td>
+      <td>197</td>
+      <td>174</td>
+      <td>118</td>
+      <td>110</td>
+      <td>153</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>E</th>
+      <td>189</td>
+      <td>156</td>
+      <td>153</td>
+      <td>194</td>
+      <td>118</td>
+      <td>140</td>
+      <td>134</td>
+      <td>153</td>
+      <td>146</td>
+      <td>177</td>
+    </tr>
+<tr>
+<th>F</th>
+      <td>175</td>
+      <td>126</td>
+      <td>141</td>
+      <td>189</td>
+      <td>190</td>
+      <td>112</td>
+      <td>135</td>
+      <td>140</td>
+      <td>142</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>G</th>
+      <td>165</td>
+      <td>117</td>
+      <td>185</td>
+      <td>135</td>
+      <td>124</td>
+      <td>121</td>
+      <td>127</td>
+      <td>102</td>
+      <td>169</td>
+      <td>153</td>
+    </tr>
+<tr>
+<th>H</th>
+      <td>147</td>
+      <td>150</td>
+      <td>185</td>
+      <td>121</td>
+      <td>171</td>
+      <td>149</td>
+      <td>145</td>
+      <td>167</td>
+      <td>118</td>
+      <td>139</td>
+    </tr>
+<tr>
+<th>I</th>
+      <td>114</td>
+      <td>121</td>
+      <td>188</td>
+      <td>174</td>
+      <td>126</td>
+      <td>180</td>
+      <td>132</td>
+      <td>129</td>
+      <td>133</td>
+      <td>148</td>
+    </tr>
+<tr>
+<th>J</th>
+      <td>142</td>
+      <td>130</td>
+      <td>131</td>
+      <td>107</td>
+      <td>136</td>
+      <td>165</td>
+      <td>136</td>
+      <td>181</td>
+      <td>168</td>
+      <td>179</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use reindex to conform existing df to new index.</span>
+<span class="c1"># This is different than just writing over index values. Rows will follow index value to new position.</span>
+<span class="c1"># Can use to reorder, exclude rows, add new rows with fill logic. Returns new object</span>
+<span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">'EDCBAZYXWV'</span><span class="p">),</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+      <th>G</th>
+      <th>H</th>
+      <th>I</th>
+      <th>J</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>E</th>
+      <td>189</td>
+      <td>156</td>
+      <td>153</td>
+      <td>194</td>
+      <td>118</td>
+      <td>140</td>
+      <td>134</td>
+      <td>153</td>
+      <td>146</td>
+      <td>177</td>
+    </tr>
+<tr>
+<th>D</th>
+      <td>112</td>
+      <td>137</td>
+      <td>119</td>
+      <td>146</td>
+      <td>197</td>
+      <td>174</td>
+      <td>118</td>
+      <td>110</td>
+      <td>153</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>C</th>
+      <td>108</td>
+      <td>139</td>
+      <td>107</td>
+      <td>140</td>
+      <td>185</td>
+      <td>181</td>
+      <td>148</td>
+      <td>158</td>
+      <td>178</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>B</th>
+      <td>179</td>
+      <td>181</td>
+      <td>121</td>
+      <td>131</td>
+      <td>122</td>
+      <td>141</td>
+      <td>138</td>
+      <td>197</td>
+      <td>138</td>
+      <td>109</td>
+    </tr>
+<tr>
+<th>A</th>
+      <td>159</td>
+      <td>132</td>
+      <td>157</td>
+      <td>145</td>
+      <td>157</td>
+      <td>114</td>
+      <td>153</td>
+      <td>181</td>
+      <td>137</td>
+      <td>143</td>
+    </tr>
+<tr>
+<th>Z</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+<tr>
+<th>Y</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+<tr>
+<th>X</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+<tr>
+<th>W</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+<tr>
+<th>V</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Index objects are very similar to series objects in attributes and methods e.g. name, is_unique, value_counts(), sort_values()...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Interval-Index">Interval Index<a class="anchor-link" href="../posts/pandas-basic-index/#Interval-Index">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># interval index</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">interval_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+      <th>G</th>
+      <th>H</th>
+      <th>I</th>
+      <th>J</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>(0, 1]</th>
+      <td>159</td>
+      <td>132</td>
+      <td>157</td>
+      <td>145</td>
+      <td>157</td>
+      <td>114</td>
+      <td>153</td>
+      <td>181</td>
+      <td>137</td>
+      <td>143</td>
+    </tr>
+<tr>
+<th>(1, 2]</th>
+      <td>179</td>
+      <td>181</td>
+      <td>121</td>
+      <td>131</td>
+      <td>122</td>
+      <td>141</td>
+      <td>138</td>
+      <td>197</td>
+      <td>138</td>
+      <td>109</td>
+    </tr>
+<tr>
+<th>(2, 3]</th>
+      <td>108</td>
+      <td>139</td>
+      <td>107</td>
+      <td>140</td>
+      <td>185</td>
+      <td>181</td>
+      <td>148</td>
+      <td>158</td>
+      <td>178</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>(3, 4]</th>
+      <td>112</td>
+      <td>137</td>
+      <td>119</td>
+      <td>146</td>
+      <td>197</td>
+      <td>174</td>
+      <td>118</td>
+      <td>110</td>
+      <td>153</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>(4, 5]</th>
+      <td>189</td>
+      <td>156</td>
+      <td>153</td>
+      <td>194</td>
+      <td>118</td>
+      <td>140</td>
+      <td>134</td>
+      <td>153</td>
+      <td>146</td>
+      <td>177</td>
+    </tr>
+<tr>
+<th>(5, 6]</th>
+      <td>175</td>
+      <td>126</td>
+      <td>141</td>
+      <td>189</td>
+      <td>190</td>
+      <td>112</td>
+      <td>135</td>
+      <td>140</td>
+      <td>142</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>(6, 7]</th>
+      <td>165</td>
+      <td>117</td>
+      <td>185</td>
+      <td>135</td>
+      <td>124</td>
+      <td>121</td>
+      <td>127</td>
+      <td>102</td>
+      <td>169</td>
+      <td>153</td>
+    </tr>
+<tr>
+<th>(7, 8]</th>
+      <td>147</td>
+      <td>150</td>
+      <td>185</td>
+      <td>121</td>
+      <td>171</td>
+      <td>149</td>
+      <td>145</td>
+      <td>167</td>
+      <td>118</td>
+      <td>139</td>
+    </tr>
+<tr>
+<th>(8, 9]</th>
+      <td>114</td>
+      <td>121</td>
+      <td>188</td>
+      <td>174</td>
+      <td>126</td>
+      <td>180</td>
+      <td>132</td>
+      <td>129</td>
+      <td>133</td>
+      <td>148</td>
+    </tr>
+<tr>
+<th>(9, 10]</th>
+      <td>142</td>
+      <td>130</td>
+      <td>131</td>
+      <td>107</td>
+      <td>136</td>
+      <td>165</td>
+      <td>136</td>
+      <td>181</td>
+      <td>168</td>
+      <td>179</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Categorical-Index">Categorical Index<a class="anchor-link" href="../posts/pandas-basic-index/#Categorical-Index">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># categorical index. just like a series, use to enforce categories and/or specify order/rank of categories</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s1">'cat1'</span><span class="p">,</span> <span class="s1">'cat2'</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">'cat2'</span><span class="p">,</span> <span class="s1">'cat1'</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+      <th>G</th>
+      <th>H</th>
+      <th>I</th>
+      <th>J</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>cat1</th>
+      <td>159</td>
+      <td>132</td>
+      <td>157</td>
+      <td>145</td>
+      <td>157</td>
+      <td>114</td>
+      <td>153</td>
+      <td>181</td>
+      <td>137</td>
+      <td>143</td>
+    </tr>
+<tr>
+<th>cat2</th>
+      <td>179</td>
+      <td>181</td>
+      <td>121</td>
+      <td>131</td>
+      <td>122</td>
+      <td>141</td>
+      <td>138</td>
+      <td>197</td>
+      <td>138</td>
+      <td>109</td>
+    </tr>
+<tr>
+<th>cat1</th>
+      <td>108</td>
+      <td>139</td>
+      <td>107</td>
+      <td>140</td>
+      <td>185</td>
+      <td>181</td>
+      <td>148</td>
+      <td>158</td>
+      <td>178</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>cat2</th>
+      <td>112</td>
+      <td>137</td>
+      <td>119</td>
+      <td>146</td>
+      <td>197</td>
+      <td>174</td>
+      <td>118</td>
+      <td>110</td>
+      <td>153</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>cat1</th>
+      <td>189</td>
+      <td>156</td>
+      <td>153</td>
+      <td>194</td>
+      <td>118</td>
+      <td>140</td>
+      <td>134</td>
+      <td>153</td>
+      <td>146</td>
+      <td>177</td>
+    </tr>
+<tr>
+<th>cat2</th>
+      <td>175</td>
+      <td>126</td>
+      <td>141</td>
+      <td>189</td>
+      <td>190</td>
+      <td>112</td>
+      <td>135</td>
+      <td>140</td>
+      <td>142</td>
+      <td>125</td>
+    </tr>
+<tr>
+<th>cat1</th>
+      <td>165</td>
+      <td>117</td>
+      <td>185</td>
+      <td>135</td>
+      <td>124</td>
+      <td>121</td>
+      <td>127</td>
+      <td>102</td>
+      <td>169</td>
+      <td>153</td>
+    </tr>
+<tr>
+<th>cat2</th>
+      <td>147</td>
+      <td>150</td>
+      <td>185</td>
+      <td>121</td>
+      <td>171</td>
+      <td>149</td>
+      <td>145</td>
+      <td>167</td>
+      <td>118</td>
+      <td>139</td>
+    </tr>
+<tr>
+<th>cat1</th>
+      <td>114</td>
+      <td>121</td>
+      <td>188</td>
+      <td>174</td>
+      <td>126</td>
+      <td>180</td>
+      <td>132</td>
+      <td>129</td>
+      <td>133</td>
+      <td>148</td>
+    </tr>
+<tr>
+<th>cat2</th>
+      <td>142</td>
+      <td>130</td>
+      <td>131</td>
+      <td>107</td>
+      <td>136</td>
+      <td>165</td>
+      <td>136</td>
+      <td>181</td>
+      <td>168</td>
+      <td>179</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>CategoricalIndex(['cat1', 'cat2', 'cat1', 'cat2', 'cat1', 'cat2', 'cat1',
+                  'cat2', 'cat1', 'cat2'],
+                 categories=['cat2', 'cat1'], ordered=True, dtype='category')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/the-tipping-point/" class="u-url">The Tipping Point</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/the-tipping-point/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-31T19:24:35-08:00" itemprop="datePublished" title="2020-01-31 19:24">2020-01-31 19:24</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<p><a href="http://www.wikisummaries.org/wiki/The_Tipping_Point#Introduction" target="_blank">detailed notes 1</a><br><a href="https://github.com/huyqut/books/wiki/The-Tipping-Point" target="_blank">detailed notes 2</a><br><a href="https://medium.com/@sawantprasad/the-tipping-point-by-malcolm-gladwell-notes-c9afe4a24d71" target="_blank">detailed notes 3</a></p>
+<h2>Biggest Takeaways</h2>
+<ul>
+<li>Ideas, trends, products, messages, behaviors... spread like viruses/epidemics.<ul>
+<li>These things can grow at seemingly insignificant rates until they reach a tipping point where significant change happens all at once (like a geometric progression)</li>
+</ul>
+</li>
+<li>Law of the Few - trends rely on small groups of people to become popular (Connectors, Mavens, and Salesmen).<ul>
+<li>Connectors - people that have many weak ties to other people from various backgrounds</li>
+<li>Mavens - information brokers who share and trade what they know</li>
+<li>Salesmen - extremely charismatic people who have persusasive influenc over others buying decisions and behaviors</li>
+</ul>
+</li>
+<li>The Stickiness Factor - the quality that compels people to pay close, sustained attention to a product, concept, or idea.</li>
+<li>The Power of Context - properties of and changes to the environment can greatly influence whether an idea will tip<ul>
+<li>broken windows theory</li>
+<li>rule of 150 (Dunbar's number)</li>
+</ul>
+</li>
+<li>Afterword ideas (written some years after the book)<ul>
+<li>The Rise of Isolation - In some/many ways the modern economy allows communities to become more isolated from one another and communities with higher degrees of isolation become are more susceptible to contagious messages.</li>
+<li>Immunity - overexposure to a communication method/network (e.g. phone, email) eventually makes people less responsive to messages delivered by the given method/network (and more reliant on other methods such as face to face interaction)</li>
+<li>Mavens become more important as immunity builds to other forms of communication. It also isn't as easy to identify mavens as it is connectors and salesmen.<ul>
+<li>maven traps - strategies to identify and/or influence mavens</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/http/" class="u-url">http</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/http/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-27T18:58:14-08:00" itemprop="datePublished" title="2020-01-27 18:58">2020-01-27 18:58</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<h2>HTTP/HTTPS - hypertext transfer protocol</h2>
+<ul>
+<li>communication protocol between web servers and clients</li>
+<li>each command executed independently (i.e. stateless)</li>
+<li>when you enter a URL in your browser, this actually sends an HTTP command to the Web server directing it to fetch and transmit the requested Web page.</li>
+<li>client sends request, server sends response</li>
+<li>HTTP requests made up of: endpoint, method, headers, data (body)</li>
+<li>endpoint (route) is the url you request for</li>
+<li>http methods (verbs)<ul>
+<li>get - retrieves data from server<ul>
+<li>less secure, typically not used with a form</li>
+</ul>
+</li>
+<li>post - submits data to server</li>
+<li>put - updates data already on server</li>
+<li>delete - deletes data from server</li>
+</ul>
+</li>
+<li>http header fields (https://en.wikipedia.org/wiki/List_of_HTTP_header_fields)<ul>
+<li>general - general applicability for both request and response messages.</li>
+<li>response<ul>
+<li>Set-Cookie - An HTTP cookie<ul>
+<li>Set-Cookie: UserID=JohnDoe; Max-Age=3600; Version=1</li>
+</ul>
+</li>
+<li>Server - A name for the server<ul>
+<li>example:<ul>
+<li>Server: Apache/2.4.1 (Unix)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Content-Type - the media type of the content<ul>
+<li>example:<ul>
+<li>Content-Type: text/html; charset=utf-8</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Content-Length - The length of the response body in octets (8-bit bytes)<ul>
+<li>example:<ul>
+<li>Content-Length: 348</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Date - The date and time that the message was sent<ul>
+<li>example:<ul>
+<li>Date: Tue, 15 Nov 1994 08:12:31 GMT</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>request (http://gethttp.info/most-common-http-headers.php)<ul>
+<li>Host - specifies domain of the server it is communicating with<ul>
+<li>examples:<ul>
+<li>Host: gethttp.info</li>
+<li>Host: apple.com:8080</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Cookie - An HTTP cookie previously sent by the server with Set-Cookie</li>
+<li>Accept - how the client tells the server what kind of content it can accept in the HTTP response<ul>
+<li>examples:<ul>
+<li>Accept: text/html, text/plain; q=0.6, <em>/</em>; q=0.1</li>
+<li>Accept: application/graphql, application/json; q=0.8, application/xml; q=0.7</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Accept-Encoding - defines what type of content encoding the client can accept in the response body<ul>
+<li>examples:<ul>
+<li>Accept-Encoding: gzip, deflate</li>
+<li>Accept-Encoding: br, gzip;q=0.9, deflate;q=0.8, *;q=0.1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Accept-Language - tells the server the cient's preferred natural language<ul>
+<li>examples:<ul>
+<li>Accept-Language: en-GB, en-US, en;q=0.9</li>
+<li>Accept-Language: de-AT, de-DE;q=0.9, en;q=0.5</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Authorization - specifies the authorization scheme and any associated data or token<ul>
+<li>
+</li>
+<li>examples:<ul>
+<li>Authorization: Basic ZmFsa2VuOmpvc2h1YTU=</li>
+<li>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Referer - tells server where requested URL came from (e.g. from a link, typed into browser address bar...)<ul>
+<li>examples<ul>
+<li>Referer: https://www.google.co.uk/</li>
+<li>Referer: https://www.quora.com/profile/Lee-Dowthwaite</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>User-Agent - identifies the requesting system<ul>
+<li>examples:<ul>
+<li>User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The data (sometimes called “body” or “message”) contains information you want to be sent to the server. This option is only used with POST, PUT, PATCH or DELETE requests.</li>
+</ul>
+</div>
+    </div>
+    </article>
+</div>
+
+        <ul class="pager postindexpager clearfix">
+<li class="previous"><a href="." rel="prev">Newer posts</a></li>
+            <li class="next"><a href="index-1.html" rel="next">Older posts</a></li>
+        </ul>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script><!--End of body content--><footer id="footer">
+            Contents © 2020         <a href="mailto:n.tesla@example.com">Ryan</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../assets/js/all-nocdn.js"></script><script src="../assets/js/moment-with-locales.min.js"></script><!-- fancy dates --><script>
+        moment.locale("en");
+        fancydates(2, "YYYY-MM-DD HH:mm");
+        </script><!-- end fancy dates --><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

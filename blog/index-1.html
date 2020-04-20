@@ -12,7 +12,7 @@
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="canonical" href="https://defclass.com/blog/index-1.html">
-<link rel="prev" href="." type="text/html">
+<link rel="prev" href="index-2.html" type="text/html">
 <!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]--><!-- Font Awesome --><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <body>
@@ -61,7 +61,1197 @@ navbar-dark bg-dark
 
     
 <div class="postindex">
-    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/threading/" class="u-url">Threading</a></h1>
+    <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/tcpip/" class="u-url">TCP/IP</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/tcpip/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-27T11:47:24-08:00" itemprop="datePublished" title="2020-01-27 11:47">2020-01-27 11:47</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<h2></h2>
+<ul>
+<li>The Internet protocol suite is commonly known as TCP/IP because the foundational protocols in the suite are the Transmission Control Protocol (TCP) and the Internet Protocol (IP).</li>
+<li>TCP/IP is a set of data transfer protocols used by modern data networks</li>
+<li>made up of 4 layers: <img src="../images/tcp-ip-layers.jpg">
+</li>
+<li>data flow: <img src="../images/tcp-ip-data-flow.png">
+</li>
+</ul>
+<h3>Layers</h3>
+<ul>
+<li>
+<p>application layer</p>
+<ul>
+<li>protocols:<ul>
+<li>HTTP - hypertext transfer protocol<ul>
+<li>communication protocol between web servers and clients</li>
+<li>port 80, 443 (HTTPS)</li>
+</ul>
+</li>
+<li>FTP - file transfer protocol<ul>
+<li>used for the transfer of computer files between a clent and a server</li>
+<li>port 20, 21</li>
+</ul>
+</li>
+<li>SMTP - simple mail transfer protocol<ul>
+<li>communication protocol for email transmissions</li>
+<li>ports 25, 465 (smtps), 587 (smtps)</li>
+</ul>
+</li>
+<li>IMAP - internet message access protocol<ul>
+<li>protocol used by email clients to retrieve email messages from a mail server </li>
+<li>ports 143, 993 (IMAPS)</li>
+</ul>
+</li>
+<li>DNS - domain name system<ul>
+<li>a hierarchical and decentralized naming system for computers, services, or other resources connected to the Internet or a private network</li>
+<li>port 53</li>
+</ul>
+</li>
+<li>SSH - secure shell<ul>
+<li>protocol for operating network services securely over an unsecured network</li>
+<li>Typical applications include remote command-line, login, and remote command execution, but any network service can be secured with SSH.</li>
+<li>port 22</li>
+</ul>
+</li>
+<li>Telnet<ul>
+<li>one of the earliest remote login protocols</li>
+<li>SSH is generally preferred over telnet for security reasons</li>
+<li>port 23</li>
+</ul>
+</li>
+<li>POP3 - post office protocol 3<ul>
+<li>protocol used by e-mail clients to retrieve e-mail from a mail server</li>
+<li>port 110, 95</li>
+</ul>
+</li>
+<li>DHCP - dynamic host configuration protocol<ul>
+<li>network management protocol</li>
+<li>dynamically assigns ip addresses to each device on a network so they can communicate with other IP networks</li>
+<li>ports 546, 547</li>
+</ul>
+</li>
+<li>TLS - transport layer security<ul>
+<li>encrypts data sent over the internet</li>
+<li>TLS operates between the Transport layer and the Application Layer (kind of). Really it just wraps Application Layer traffic in encryption during transport.</li>
+<li>succeeded SSL - secure sockets layer</li>
+<li>when you see S at the end of a protocol (e.g. HTTPS) it is because it is also using TLS/SSL</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>transport layer</p>
+<ul>
+<li>connected to application layer by ports</li>
+<li>Port numbers are categorized into three basic categories: well-known, registered, and dynamic/private.</li>
+<li>protocols<ul>
+<li>TCP - transmission control protocol<ul>
+<li>enables two hosts to establish a connection and exchange streams of data</li>
+<li>guarantees delivery of data</li>
+<li>guarantees packets will be delivered in the same order in which they were sent</li>
+</ul>
+</li>
+<li>UDP - user datagram protocol<ul>
+<li>connectionless protocol for sending datagrams (packets)</li>
+<li>unlike TCP it provides very few error recovery services</li>
+<li>primarily used for broadcasting messages over a network</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>internet layer<ul>
+<li>uses IP to attach origin and destination ip addresses to packets</li>
+<li>protocols:<ul>
+<li>IP - internet protocol<ul>
+<li>specifies format of packets and adressing scheme</li>
+<li>like the postal system,  it allows you to address a package and drop it in the system</li>
+</ul>
+</li>
+<li>ICMP - internet control message protocol<ul>
+<li>an error-reporting protocol network devices like routers use to generate error messages to the source IP address when network problems prevent delivery of IP packets</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>network access layer<ul>
+<li>aka: link layer, data link layer, physical layer...</li>
+<li>includes the protocols that define communication between local (on-link) network nodes</li>
+<li>handles mac addressing</li>
+<li>protocols:<ul>
+<li>ARP - address resolution protocol<ul>
+<li>a communication protocol used for discovering the link layer address, such as a MAC address</li>
+</ul>
+</li>
+<li>NDP - neighbor discovery protocol<ul>
+<li>responsible for gathering various information required for internet communication, including the configuration of local connections and the domain name servers and gateways used to communicate with more distant systems</li>
+</ul>
+</li>
+<li>OSPF - open shortest path first<ul>
+<li>routing protocol</li>
+</ul>
+</li>
+<li>ethernet</li>
+<li>Wi-Fi</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/restful-api/" class="u-url">RESTful API</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/restful-api/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-26T17:57:59-08:00" itemprop="datePublished" title="2020-01-26 17:57">2020-01-26 17:57</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <ul>
+<li>REST = Representational State Transfer</li>
+<li>"REST is, in a nutshell, HTTP commands pushing JSON packets over the network."<ul>
+<li>This is not really true but a lot of people get by with this understanding.</li>
+<li>HTTP and JSON not actually required to be REST</li>
+</ul>
+</li>
+<li>understanding HTTP and being able to work with the response data (usually JSON or XML) seems to be more important for using API than actually understanding REST architectural constraints. </li>
+<li>restful api example:  https://pokeapi.co/</li>
+<li>REST's Architectural Constraints<ul>
+<li>client-server</li>
+<li>stateless<ul>
+<li>servers don't maintain any client state</li>
+<li>No client data is stored on the server between requests and session state is stored on the client</li>
+<li>If the client application needs to be a stateful application for the end-user, where user logs in once and do other authorized operations after that, then each request from the client should contain all the information necessary to service the request – including authentication and authorization details.</li>
+</ul>
+</li>
+<li>cacheable<ul>
+<li>servers must mark their responses as cacheable or not. So, infrastructures and clients can cache them when possible to improve performance.</li>
+</ul>
+</li>
+<li>uniform interface<ul>
+<li>the resource representations across the system should follow specific guidelines such as naming conventions, link formats, or data format (XML or/and JSON).</li>
+</ul>
+</li>
+<li>layered system<ul>
+<li>REST allows you to use a layered system architecture where you deploy the APIs on server A, and store data on server B and authenticate requests in Server C, for example. A client cannot ordinarily tell whether it is connected directly to the end server, or to an intermediary along the way.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/praw-notes/" class="u-url">PRAW Notes</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/praw-notes/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-26T12:25:17-08:00" itemprop="datePublished" title="2020-01-26 12:25">2020-01-26 12:25</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">praw</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># obviously not real passwords/api keys</span>
+<span class="n">reddit</span> <span class="o">=</span> <span class="n">praw</span><span class="o">.</span><span class="n">Reddit</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="s1">'*****'</span><span class="p">,</span>
+                    <span class="n">client_secret</span><span class="o">=</span><span class="s1">'****'</span><span class="p">,</span>
+                    <span class="n">username</span><span class="o">=</span><span class="s1">'****'</span><span class="p">,</span>
+                    <span class="n">password</span><span class="o">=</span><span class="s1">'****'</span><span class="p">,</span>
+                    <span class="n">user_agent</span><span class="o">=</span><span class="s1">'****'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [58]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://pythonprogramming.net/parsing-comments-python-reddit-api-wrapper-praw-tutorial/</span>
+
+<span class="n">subreddit</span> <span class="o">=</span> <span class="n">reddit</span><span class="o">.</span><span class="n">subreddit</span><span class="p">(</span><span class="s1">'television'</span><span class="p">)</span>
+
+<span class="c1"># can choose between hot, top, controversial, new... just like on the website</span>
+<span class="n">hot_python</span> <span class="o">=</span> <span class="n">subreddit</span><span class="o">.</span><span class="n">hot</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">submission</span> <span class="ow">in</span> <span class="n">hot_python</span><span class="p">:</span>
+    <span class="c1"># stickied means pinned by moderator</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">submission</span><span class="o">.</span><span class="n">stickied</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Title: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">self text: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">ups: </span><span class="si">{}</span><span class="se">\n</span><span class="s1"> downs: </span><span class="si">{}</span><span class="se">\n</span><span class="s1"> Have we visited?: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                                                                             <span class="n">submission</span><span class="o">.</span><span class="n">selftext</span><span class="p">,</span> <span class="c1"># text in body textbox (under title)</span>
+                                                                           <span class="n">submission</span><span class="o">.</span><span class="n">ups</span><span class="p">,</span> <span class="c1"># up votes</span>
+                                                                           <span class="n">submission</span><span class="o">.</span><span class="n">downs</span><span class="p">,</span> <span class="c1"># down votes</span>
+                                                                           <span class="n">submission</span><span class="o">.</span><span class="n">visited</span><span class="p">))</span>
+        <span class="n">comments</span> <span class="o">=</span> <span class="n">submission</span><span class="o">.</span><span class="n">comments</span>
+        <span class="k">for</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="s1">'-'</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">comment</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comment</span><span class="o">.</span><span class="n">replies</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">reply</span> <span class="ow">in</span> <span class="n">comment</span><span class="o">.</span><span class="n">replies</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">'REPLY:'</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="o">+</span><span class="n">reply</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Title: HBO scores at the Directors Guild of America’s Awards: ‘Watchmen’ won best dramatic series, ‘Barry’ won best comedy series, ‘Chernobyl’ won best limited series, and ‘Song of Parkland’ won best children’s program
+self text: 
+ups: 3616
+ downs: 0
+ Have we visited?: False
+--------------------
+Barry is my favorite show
+REPLY:
+	Definitely deserves that award, can’t wait for season 3
+REPLY:
+	It's fucking perfect
+REPLY:
+	the whole cast is incredible. No Ho Hank is my favorite.
+REPLY:
+	Barry was my favorite show, but then Watchmen took the title. Now that watchmen is officially done, Barry is back to my favorite show.
+REPLY:
+	I binged the whole thing two or three days ago and it has easily become one of my new favorite shows. Brilliant all around.
+REPLY:
+	Everyone should watch it, absolutely amazing
+REPLY:
+	I want to start, what style of comedy is it?
+REPLY:
+	I am between Barry and The Boys. Barry for his quiet desperation, The Boys for the complete opposite.
+--------------------
+Wondering if Watchmen can keep they hype up all the way to  September for the Emmy's.
+REPLY:
+	lol I doubt it. The leftovers was snubbed. Thats one of my favourite shows(granted I have only watched a few shows of the prestige kind).
+REPLY:
+	Imo watchmen had a great premise, cool universe and started off with a nice plot. Then sorta crashed all of that in a ditch for a simple megalomaniacal villain plot.
+
+Its amazing in that it brought attention to the Tulsa massacre and that it dared to use race and racism as a central theme at the start, but then didnt manage to make any statements or dramatic insights into any of it. Demonic racists being beaten up by a heroic black character was fun to watch, but I feel it kind of lacks the depth of human experience and drama that Watchmen the comic (or the movie) brought to the surface. stellar performances and some quirky and original stuff throughout it though, so if it gets more content with more original characters I would enjoy watching it.
+REPLY:
+	It won't make it and it doesn't deserve it. I think people are giving it praise due to what it came from rather than what it is.
+--------------------
+Irony is Watchmen is a limited series too now /s
+REPLY:
+	I fully believe it was always planned as a limited series but HBO didn't want to compete with themselves for awards in that category since Chernobyl was pretty much a lock.
+--------------------
+Barry is a comedy?
+REPLY:
+	It's a dark comedy, or one could even call it a dark dramedy, but the comedy very important to its identity
+REPLY:
+	Hey Ike, ya shit bird. You want a little pie?
+REPLY:
+	[NoHo Hank is amazing](https://youtu.be/5zXrjeTNXJw)
+REPLY:
+	I can...stab him in the nut...
+REPLY:
+	How is it not??
+REPLY:
+	Of course? It’s hilarious every episode.
+REPLY:
+	Funnier than the Martian.
+REPLY:
+	optometrist by nature
+REPLY:
+	It’s not funny enough to win this award. It is funny, but there’s gotta be funnier stuff out there.
+--------------------
+Wait. What did Season 8 of Gane of Thrones win?
+REPLY:
+	What it deserved, nothing
+REPLY:
+	I watched GoT and Chernobyl.  One was the faithful  production of one of the greatest manmade disasters of modern times and the other was Chernobyl.
+REPLY:
+	Worst finale.
+--------------------
+No one I know is talking about Barry. I'm glad it's getting the love it deserves.
+REPLY:
+	I like it, but I love The Good Place and hope it wins something, anything, before it's over and gone forever. :(
+--------------------
+The nostalgia episode of Watchmen was my favorite bit of television from 2019. I didn’t love the finale nearly as much, but honestly I don’t know how the series could ever top the hooded justice backstory.
+REPLY:
+	Yeah I liked the new characters and the early episodes but felt the ending and bringing back Dr Manhattan wasn’t a compelling ending.  It was the easy way out and didn’t hold true to the character or the story.  Still it was well done and I accept my judgement may be skewed as a long time fan of the comic.
+--------------------
+No idea what Song of Parkland is but well deserved on all other fronts.
+REPLY:
+	I looked it up and it seems to be a documentary about the parkland school after the shooting, and really doesn’t strike me as a “children’s program”
+--------------------
+Watchmen over Succession? Ok...
+REPLY:
+	Succession is overrated, and that comes from someone that really enjoyed both seasons so far.
+
+(let the downvotes begin)
+--------------------
+Man I'm really on the outside looking in with the Watchmen series. There was stuff I liked but clearly not on the same level as a lot of other people, really started falling a part for me towards the end and so many unanswered/unexplored plot points.
+
+Chernobyl was great, don't know what Song of Parkland is.
+REPLY:
+	There was literally one thing that could be described as a plot point that needed further explanation, that being Lubeman, and that was addressed in the supplemental Peteypedia.
+REPLY:
+	I don’t think shows like watchmen really need to have answers to everything. It’s like a snippet of their world, you don’t get all the context on purpose.
+REPLY:
+	Same. Don't know why *Watchmen* gets so much hype. I got  bored halfway through and gave up.
+
+*The Boys*, however, I loved. A way, way better TV adaptation of the source material, imo.
+--------------------
+No love for Euphoria or Silicon Valley, huh? 
+
+Euphoria was amazingly well made with some of the best cinematography in any HBO show ever in my opinion.
+REPLY:
+	Also the soundtrack fit perfectly with the style of the show, labirinth did an amazing job!
+--------------------
+HBO is a level above every other TV service
+REPLY:
+	Looking at how many nominations Netflix has have for the Oscars and other awards in the last 2 years I would disagree.
+--------------------
+HBO: Maybe we CAN recover from that GoT fiasco
+
+Edit: people don’t understand a joke I guess
+REPLY:
+	The Outsider is pretty fuckin' good (so far).. and this genre isn't even my thing.
+REPLY:
+	12M viewers on average per episode during the final season, and [the DVDs/Blu-rays are selling well](https://www.mediaplaynews.com/game-of-thrones-final-season-tops-disc-sales-charts/) despite this dematerialized streaming era we're now living in.
+
+GoT fiasco? More like internet bias.
+
+Not saying S8 was a masterpiece, but it's not a financial fiasco for HBO, not at all.
+--------------------
+Well deserved all around
+--------------------
+The Boys is a better Watchmen show than Watchmen.
+--------------------
+"Game of Thrones" worst finale series.
+--------------------
+Deserved, Watchmen was great and that episode of Barry was insane and one of the best episodes of television I’ve ever seen
+REPLY:
+	Which Barry episode?
+--------------------
+Who even watches the Watchmen?
+--------------------
+Watchmen was great but didn't quite stick the landing IMO. The Manhattan reveal was cool, but I couldn't get past the cheap design and the direction of the story. Episode 6 however will go down as one of the best episodes of anything ever.
+--------------------
+and people thought HBO was in trouble when GoT was gone ... they did fine before GoT and they'll do fine afterwards (as evidenced)
+--------------------
+TIL HBO has its own award ceremony.
+--------------------
+Happy for watchmen, as a fan of the original I was nervous about a sequel but they did a spectacular job. “This extraordinary being” and “God walks into Abar” we’re seriously amazing
+REPLY:
+	Also a fan of the original and I had problems with “God walks into Abar” it’s the point where the story fell apart for me.  Was much more interested in the early episodes and the new characters like Will Reeves and Looking Glass.
+REPLY:
+	Is it just me or did the original Manhattan sound like Mark Zuckerberg?
+--------------------
+Well renew it for a season 2 damn it!
+--------------------
+Barry deserves it hardcore ! But Watchmen is complete garbage. I'm thoroughly surprised.
+--------------------
+I enjoyed Watchmen but fuck that cliffhanger ending if they’re not going to do a second season.
+--------------------
+Shame that Succession didn't get anything.
+--------------------
+Chernobyl was amazing. Barry was great. But, Watchmen? What the fuck? It was one of the most mediocre shows I've ever seen. Compared to the other two it was, "alright". I know tastes very, but whaaaaat...?
+--------------------
+I get Chernobyl but Watchmen was close to unwatchable. Really didn't do the source material justice.
+--------------------
+Chernobyl is one of the best shows ever.
+--------------------
+Oh man. Is this thread going to get brigaded with anti Watchmen trolls or have they moved on?
+REPLY:
+	Don’t worry, they’re here.
+--------------------
+Watchmen was/is fucking terrible.
+--------------------
+The first season of Barry was great right up until the last episode.  His actions kind of ruined the show for me though.  I mean I get it, but I completely stopped caring about his as a character after that.
+--------------------
+It's only a matter of time before only HBO subscribers get access to Sesame Street.
+
+Frankly, fuck HBO.
+--------------------
+Hahaha Watchmen won for best dramatic series? Well that invalidates every award given by the guild.
+--------------------
+Watchmen was absolute garbage
+REPLY:
+	Yeah? What made you think so?
+
+Did you like the source material or the film at all?
+--------------------
+Everybody needs to watch Watchmen.
+--------------------
+What about game of thrones??
+REPLY:
+	A show that hasn't been good since season 3 doesn't deserve anything.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [59]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hot_python</span> <span class="o">=</span> <span class="n">subreddit</span><span class="o">.</span><span class="n">hot</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">submission</span> <span class="ow">in</span> <span class="n">hot_python</span><span class="p">:</span>
+    <span class="c1"># stickied means pinned by moderator</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">submission</span><span class="o">.</span><span class="n">stickied</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Title: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">self text: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">ups: </span><span class="si">{}</span><span class="se">\n</span><span class="s1"> downs: </span><span class="si">{}</span><span class="se">\n</span><span class="s1"> Have we visited?: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                                                                             <span class="n">submission</span><span class="o">.</span><span class="n">selftext</span><span class="p">,</span> <span class="c1"># text in body textbox (under title)</span>
+                                                                           <span class="n">submission</span><span class="o">.</span><span class="n">ups</span><span class="p">,</span> <span class="c1"># up votes</span>
+                                                                           <span class="n">submission</span><span class="o">.</span><span class="n">downs</span><span class="p">,</span> <span class="c1"># down votes</span>
+                                                                           <span class="n">submission</span><span class="o">.</span><span class="n">visited</span><span class="p">))</span>
+        <span class="c1"># like clicking the more replies/comments button</span>
+        <span class="n">submission</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">replace_more</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># list returns flattened list of all comments. limiting to 15 results to save output</span>
+        <span class="k">for</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">submission</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">list</span><span class="p">()[:</span><span class="mi">15</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="s1">'#'</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">'Parent ID:'</span><span class="p">,</span><span class="n">comment</span><span class="o">.</span><span class="n">parent</span><span class="p">())</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">'Comment ID:'</span><span class="p">,</span><span class="n">comment</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="c1"># limiting output for space-saving-sake, feel free to not do this</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">comment</span><span class="o">.</span><span class="n">body</span><span class="p">[:</span><span class="mi">200</span><span class="p">])</span>
+
+<span class="c1"># the order you get things when you use the comments.list() is all of the top level comments, followed by 2nd level comments, followed by 3rd level... </span>
+<span class="c1"># rest of example shows how to put comments in dictionary reflecting tree structure of comments (see https://pythonprogramming.net/parsing-comments-python-reddit-api-wrapper-praw-tutorial/)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Title: HBO scores at the Directors Guild of America’s Awards: ‘Watchmen’ won best dramatic series, ‘Barry’ won best comedy series, ‘Chernobyl’ won best limited series, and ‘Song of Parkland’ won best children’s program
+self text: 
+ups: 3757
+ downs: 0
+ Have we visited?: False
+####################
+Parent ID: eu9j80
+Comment ID: ffnylef
+Barry is my favorite show
+####################
+Parent ID: eu9j80
+Comment ID: ffmvww3
+Wondering if Watchmen can keep they hype up all the way to  September for the Emmy's.
+####################
+Parent ID: eu9j80
+Comment ID: ffnr7se
+Irony is Watchmen is a limited series too now /s
+####################
+Parent ID: eu9j80
+Comment ID: ffnpqw4
+Barry is a comedy?
+####################
+Parent ID: eu9j80
+Comment ID: ffohvwu
+Wait. What did Season 8 of Gane of Thrones win?
+####################
+Parent ID: eu9j80
+Comment ID: ffoiztp
+No one I know is talking about Barry. I'm glad it's getting the love it deserves.
+####################
+Parent ID: eu9j80
+Comment ID: ffof1lz
+The nostalgia episode of Watchmen was my favorite bit of television from 2019. I didn’t love the finale nearly as much, but honestly I don’t know how the series could ever top the hooded justice backs
+####################
+Parent ID: eu9j80
+Comment ID: ffo5vi4
+No idea what Song of Parkland is but well deserved on all other fronts.
+####################
+Parent ID: eu9j80
+Comment ID: ffoz1ke
+The Boys is a better Watchmen show than Watchmen.
+####################
+Parent ID: eu9j80
+Comment ID: ffnf80h
+Watchmen over Succession? Ok...
+####################
+Parent ID: eu9j80
+Comment ID: ffo6e7h
+Man I'm really on the outside looking in with the Watchmen series. There was stuff I liked but clearly not on the same level as a lot of other people, really started falling a part for me towards the 
+####################
+Parent ID: eu9j80
+Comment ID: ffokn8g
+No love for Euphoria or Silicon Valley, huh? 
+
+Euphoria was amazingly well made with some of the best cinematography in any HBO show ever in my opinion.
+####################
+Parent ID: eu9j80
+Comment ID: ffoyt70
+Barry deserves it hardcore ! But Watchmen is complete garbage. I'm thoroughly surprised.
+####################
+Parent ID: eu9j80
+Comment ID: ffp0a3f
+Chernobyl was amazing. Barry was great. But, Watchmen? What the fuck? It was one of the most mediocre shows I've ever seen. Compared to the other two it was, "alright". I know tastes very, but whaaaaa
+####################
+Parent ID: eu9j80
+Comment ID: ffnl63w
+HBO: Maybe we CAN recover from that GoT fiasco
+
+Edit: people don’t understand a joke I guess
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/uml/" class="u-url">UML</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/uml/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-25T13:26:02-08:00" itemprop="datePublished" title="2020-01-25 13:26">2020-01-25 13:26</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<ul>
+<li>Unified modeling language (UML) is a way of visualizing a software program using a collection of diagrams</li>
+<li>In software engineering, a class diagram in the Unified Modeling Language (UML) is a type of static structure diagram that describes the structure of a system by showing the system's classes, their attributes, operations (or methods), and the relationships among objects.</li>
+</ul>
+<h4>Class Diagram:</h4>
+<p><!-- - <img src='../../images/uml-class-example.png' align='left' width=40%><br /><br /><br /><br /><br /><br /><br /><br /><br /> -->
+<img alt="image" src="../images/uml-class-example.png"></p>
+<ul>
+<li>displayed as rectangles divided into (horizontal) compartments<ul>
+<li>1st compartment = name of class</li>
+<li>2nd compartment = attributes</li>
+<li>3rd compartment = operations</li>
+<li>To specify the visibility of a class member (i.e. any attribute or method), these notations must be placed before the member's name:<ul>
+<li>+ Public</li>
+<li>- Private</li>
+<li># Protected</li>
+<li>~ Package</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>Relationships</h4>
+<p><img alt="image" src="../images/uml-associations.png"></p>
+<h5>Dependency</h5>
+<ul>
+<li>typically (but not always) implies that an object accepts another object as a method parameter, instantiates, or uses another object. A dependency is very much implied by an association.</li>
+<li>To quote from the 3rd edition of UML Distilled (now just out) "a dependency exists between two elements if changes to the definition of one element (the supplier) may cause changes to the other (the client)". (https://martinfowler.com/bliki/DependencyAndAssociation.html)<ul>
+<li>You don't want to show every dependency on a UML diagram. There are far too many. You need to be very selective and show only those that are important to whatever it is you are communicating. (https://martinfowler.com/bliki/DependencyAndAssociation.html)</li>
+</ul>
+</li>
+</ul>
+<h5>Association</h5>
+<ul>
+<li>almost always implies that one object has the other object as a field/property/attribute (terminology differs).</li>
+<li>
+<p>arrows describe navigability</p>
+<ul>
+<li>if B is navigable from A (usually meaning A has B as an attribute) then the arrow will point at B (see 2nd example below).
+<img alt="image" src="../images/uml-navigability.png">
+</li>
+</ul>
+</li>
+<li>
+<p>association types:</p>
+<ul>
+<li>bi-directional<ul>
+<li>associations assumed to be bi-directional</li>
+</ul>
+</li>
+<li>uni-directional<ul>
+<li>In a unidirectional association, two classes are related, but only one class knows that the relationship exists.</li>
+</ul>
+</li>
+<li>
+<p>aggregation</p>
+<ul>
+<li>"has a" relationship</li>
+<li>e.g. class and student, company and people</li>
+<li>
+<p>composition</p>
+<ul>
+<li>"is part of"</li>
+<li>"owns"</li>
+<li>the composed (contained) object cannot exist without the other entity (container)</li>
+<li>e.g. company and accounts<br><img alt="image" src="../images/association-composition-aggregation.jpg">
+</li>
+</ul>
+</li>
+<li>
+<p>In Aggregation (that is not composition), both the entries can survive individually which means ending one entity will not effect the other entity</p>
+<ul>
+<li>reflexive - objects of same class related to each other</li>
+</ul>
+</li>
+</ul>
+<h5>Realization</h5>
+<ul>
+<li>a specialized abstraction relationship between two sets of model elements, one representing a specification (the supplier) and the other represents an implementation of the latter (the client)</li>
+<li>interface realization - relationship between a classifier and an interface where classifier conforms to the interface (e.g. adapter pattern)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/adapter-pattern/" class="u-url">Adapter Pattern</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/adapter-pattern/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-25T12:25:17-08:00" itemprop="datePublished" title="2020-01-25 12:25">2020-01-25 12:25</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overview">Overview<a class="anchor-link" href="../posts/adapter-pattern/#Overview">¶</a>
+</h2>
+<ul>
+<li>structural design pattern</li>
+<li>converts the interface of a class into another interface clients expect which lets classes work together that couldn’t otherwise</li>
+<li>lets us reuse an existing solution when interfaces don't exactly match (this is usually better rewriting from scratch)</li>
+<li>UML:</li>
+</ul>
+<p><img src="http://www.defclass.com/images/adapter-uml.png"></p>
+<ul>
+<li>Use when:<ul>
+<li>you want to use an existing class (3rd-party, old code...) with incompatible interface.</li>
+<li>you want to add functionality to many sublcasses and the functionality can't be added to the superclass</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Implementation-Steps">Implementation Steps<a class="anchor-link" href="../posts/adapter-pattern/#Implementation-Steps">¶</a>
+</h2>
+<ol>
+<li>Identify useful service class (Turkey in example below) to be adapted and all the client classes/methods/functions that would benefit from the service class ((duck_interaction in example below)</li>
+<li>Declare client interface (as DuckInterface in example below)</li>
+<li>Create adapter class with client interface methods</li>
+<li>Add field to adapter class for service object</li>
+<li>implement client interface methods using service object methods</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Examples">Examples<a class="anchor-link" href="../posts/adapter-pattern/#Examples">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Object-Adapter">Object Adapter<a class="anchor-link" href="../posts/adapter-pattern/#Object-Adapter">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Target interface. Enforcing this through an ABC is not required.</span>
+<span class="k">class</span> <span class="nc">DuckInterface</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">quack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Duck</span><span class="p">(</span><span class="n">DuckInterface</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">quack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s1">'Quack'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"I'm flying"</span><span class="p">)</span>
+
+<span class="c1"># Client expecting duck interface (quack and fly). This Doesn't necessarily need to be a function.</span>
+<span class="c1"># It could alternatively be a class relying on quack and fly methods.</span>
+<span class="k">def</span> <span class="nf">duck_interaction</span><span class="p">(</span><span class="n">duck</span><span class="p">):</span>
+    <span class="n">duck</span><span class="o">.</span><span class="n">quack</span><span class="p">()</span>
+    <span class="n">duck</span><span class="o">.</span><span class="n">fly</span><span class="p">()</span>
+    
+<span class="n">duck</span> <span class="o">=</span> <span class="n">Duck</span><span class="p">()</span>
+<span class="n">duck_interaction</span><span class="p">(</span><span class="n">duck</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Quack
+I'm flying
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Adaptee</span>
+<span class="k">class</span> <span class="nc">Turkey</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">gobble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Gobble gobble'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">turkey_fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"I'm flying a short distance"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You want your turkeys to behave like ducks, so you need to apply the Adapter pattern. In the same file, write a class called TurkeyAdapter and make sure it takes into account the following:</p>
+<ul>
+<li>
+<p>The adapter’s <strong>init</strong> method should take its adaptee as an argument.</p>
+</li>
+<li>
+<p>The quack translation between classes is easy: just call the gobble method when appropriate.</p>
+</li>
+<li>
+<p>Even though both classes have a fly method, turkeys can only fly in short spurts — they can’t do long-distance flying like ducks. To map between a duck’s fly method and the turkey’s method, you need to call the turkey’s fly method five times to make up for it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># object adapter</span>
+<span class="c1"># Again using DuckInterface isn't required. As long as quack and fly methods are present it's fine.</span>
+<span class="c1"># DuckInterface ABC class just helps enforce this requirement.</span>
+<span class="k">class</span> <span class="nc">TurkeyAdapter</span><span class="p">(</span><span class="n">DuckInterface</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">turkey</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">turkey</span> <span class="o">=</span> <span class="n">turkey</span>
+    
+    <span class="k">def</span> <span class="nf">quack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">turkey</span><span class="o">.</span><span class="n">gobble</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">turkey</span><span class="o">.</span><span class="n">turkey_fly</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duck</span> <span class="o">=</span> <span class="n">Duck</span><span class="p">()</span>
+<span class="n">turkey</span> <span class="o">=</span> <span class="n">Turkey</span><span class="p">()</span>
+<span class="n">turkey_adapter</span> <span class="o">=</span> <span class="n">TurkeyAdapter</span><span class="p">(</span><span class="n">turkey</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'The Turkey says...'</span><span class="p">)</span>
+<span class="n">turkey</span><span class="o">.</span><span class="n">gobble</span><span class="p">()</span>
+<span class="n">turkey</span><span class="o">.</span><span class="n">turkey_fly</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">The Duck says...'</span><span class="p">)</span>
+<span class="n">duck_interaction</span><span class="p">(</span><span class="n">duck</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">The TurkeyAdapter says...'</span><span class="p">)</span>
+<span class="n">duck_interaction</span><span class="p">(</span><span class="n">turkey_adapter</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The Turkey says...
+Gobble gobble
+I'm flying a short distance
+
+The Duck says...
+Quack
+I'm flying
+
+The TurkeyAdapter says...
+Gobble gobble
+I'm flying a short distance
+I'm flying a short distance
+I'm flying a short distance
+I'm flying a short distance
+I'm flying a short distance
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Class-Adapter-Example">Class Adapter Example<a class="anchor-link" href="../posts/adapter-pattern/#Class-Adapter-Example">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># class adapter example using multiple inheritance.</span>
+<span class="c1"># Object adapters are usually preferred (composition over inheritance)</span>
+<span class="k">class</span> <span class="nc">TurkeyClassAdapter</span><span class="p">(</span><span class="n">Turkey</span><span class="p">,</span> <span class="n">Duck</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">quack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gobble</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">turkey_fly</span><span class="p">()</span>
+
+<span class="n">turkey_adapter</span> <span class="o">=</span> <span class="n">TurkeyClassAdapter</span><span class="p">()</span>          
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">The TurkeyClassAdapter says...'</span><span class="p">)</span>
+<span class="n">duck_interaction</span><span class="p">(</span><span class="n">turkey_adapter</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+The TurkeyClassAdapter says...
+Gobble gobble
+I'm flying a short distance
+I'm flying a short distance
+I'm flying a short distance
+I'm flying a short distance
+I'm flying a short distance
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/reading-and-writing-to-files/" class="u-url">Reading and Writing to Files</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="../posts/reading-and-writing-to-files/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-01-24T18:24:04-08:00" itemprop="datePublished" title="2020-01-24 18:24">2020-01-24 18:24</time></a>
+            </p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Available-modes-for-opening-files">Available modes for opening files<a class="anchor-link" href="../posts/reading-and-writing-to-files/#Available-modes-for-opening-files">¶</a>
+</h3>
+<ul>
+<li>'r' - open for reading (default)</li>
+<li>'w' - open for writing, truncating the file first</li>
+<li>'x' - open for exclusive creation, failing if the file already exists</li>
+<li>'a' - open for writing, appending to the end of the file if it exists</li>
+<li>'b' - binary mode</li>
+<li>'t' -text mode (default)</li>
+<li>'+' - open for updating (reading and writing)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [50]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Using a context manager is a best practice</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'test.txt'</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [51]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'test.txt'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="c1"># read first 10 characters</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span> <span class="c1"># read all remaining characters</span>
+    
+    <span class="c1"># use f.seek(0) to reset stream position at 1st character</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">tell</span><span class="p">())</span> <span class="c1"># use f.tell() to return current stream position</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">tell</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Lorem ipsu
+m dolor sit amet, consectetur adipiscing elit.
+0
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+56
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [52]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># use mode 'a' to append. 'w' would overwrite</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'test.txt'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">Suspendisse non massa sed quam pulvinar consequat eget at nibh.'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [56]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'test.txt'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># gets list of lines, note that \n will still on end of line strings</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span> 
+    
+    <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># we can also iterate through lines like this</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n', 'Suspendisse non massa sed quam pulvinar consequat eget at nibh.']
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+Suspendisse non massa sed quam pulvinar consequat eget at nibh.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [63]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Copying an image. Open in binary mode</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"image.jpg"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">rf</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"image_copy.jpg"</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">wf</span><span class="p">:</span>
+        <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">4096</span>
+        <span class="n">rf_chunk</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">rf_chunk</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">wf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">rf_chunk</span><span class="p">)</span>
+            <span class="n">rf_chunk</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="../posts/threading/" class="u-url">Threading</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                 Ryan
@@ -1255,7 +2445,7 @@ How do you store the data, and why that way?</li>
 </div>
 
         <ul class="pager postindexpager clearfix">
-<li class="previous"><a href="." rel="prev">Newer posts</a></li>
+<li class="previous"><a href="index-2.html" rel="prev">Newer posts</a></li>
         </ul>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});

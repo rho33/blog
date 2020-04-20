@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pandas Options and Settings | My Site</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https://defclass.com/posts/pandas-options-settings/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><!-- Font Awesome --><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<meta name="author" content="Ryan">
+<link rel="prev" href="../pandas-periods/" title="Pandas Periods" type="text/html">
+<link rel="next" href="../pandas-offsets/" title="Pandas Offsets" type="text/html">
+<meta property="og:site_name" content="My Site">
+<meta property="og:title" content="Pandas Options and Settings">
+<meta property="og:url" content="https://defclass.com/posts/pandas-options-settings/">
+<meta property="og:description" content="In [1]:
+
+    
+import numpy as np
+import pandas as pd
+
+
+    
+
+
+
+
+
+
+In [2]:
+
+    
+df = pd.DataFrame(np.random.rand(10, 10), columns=list('ABCDEFGHIJ')) * 10**7
+df
+
+
+    
+
+
+
+
+
+
+
+
+
+    Out[2]:
+
+
+
+
+
+
+    .">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-03-29T00:00:00-07:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="https://defclass.com/">
+
+            <span id="blog-title">My Site</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto"><li class="nav-item dropdown">
+<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topics</a>
+            <div class="dropdown-menu">
+                    <a href="../../python/" class="dropdown-item">Python</a>
+                    <a href="../../book-notes/" class="dropdown-item">Books</a>
+                    <a href="../../misc/" class="dropdown-item">Misc</a>
+                    <a href="../" class="dropdown-item">All Posts</a>
+            </div>
+
+                
+            </li></ul>
+<ul class="navbar-nav navbar-right">
+<li class="nav-item">
+    <a href="index.ipynb" id="sourcelink" class="nav-link">Source</a>
+    </li>
+
+
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Pandas Options and Settings</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-03-29T00:00:00-07:00" itemprop="datePublished" title="2020-03-29 00:00">2020-03-29 00:00</time></a>
+            </p>
+            
+        <p class="sourceline"><a href="index.ipynb" class="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">'ABCDEFGHIJ'</span><span class="p">))</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">7</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+      <th>G</th>
+      <th>H</th>
+      <th>I</th>
+      <th>J</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>7.185917e+06</td>
+      <td>1.898680e+06</td>
+      <td>8.559152e+06</td>
+      <td>6.467466e+06</td>
+      <td>1.354230e+06</td>
+      <td>4.935422e+06</td>
+      <td>4.203680e+06</td>
+      <td>7.212383e+06</td>
+      <td>2.165359e+06</td>
+      <td>5.236440e+06</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>1.458406e+06</td>
+      <td>4.387591e+06</td>
+      <td>2.655780e+06</td>
+      <td>4.351074e+06</td>
+      <td>7.259367e+06</td>
+      <td>2.510267e+06</td>
+      <td>8.622930e+06</td>
+      <td>1.426475e+06</td>
+      <td>3.552837e+06</td>
+      <td>8.278566e+06</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>6.212476e+06</td>
+      <td>4.126049e+06</td>
+      <td>6.848307e+06</td>
+      <td>7.227176e+06</td>
+      <td>8.664449e+06</td>
+      <td>4.067298e+05</td>
+      <td>4.237244e+06</td>
+      <td>5.249348e+06</td>
+      <td>2.890431e+06</td>
+      <td>6.765472e+06</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>2.337154e+06</td>
+      <td>1.098136e+06</td>
+      <td>4.009220e+06</td>
+      <td>9.803311e+06</td>
+      <td>1.306166e+06</td>
+      <td>8.549947e+05</td>
+      <td>9.515346e+06</td>
+      <td>5.879958e+06</td>
+      <td>2.440901e+06</td>
+      <td>6.403621e+06</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>2.052663e+06</td>
+      <td>8.845251e+06</td>
+      <td>5.800530e+05</td>
+      <td>3.375020e+05</td>
+      <td>4.915520e+06</td>
+      <td>5.454618e+06</td>
+      <td>7.239360e+06</td>
+      <td>4.919389e+05</td>
+      <td>5.417191e+06</td>
+      <td>1.869248e+06</td>
+    </tr>
+<tr>
+<th>5</th>
+      <td>9.420784e+06</td>
+      <td>4.183468e+06</td>
+      <td>6.566999e+06</td>
+      <td>7.929240e+06</td>
+      <td>4.254634e+05</td>
+      <td>1.373791e+06</td>
+      <td>3.061949e+06</td>
+      <td>6.284632e+06</td>
+      <td>2.786494e+05</td>
+      <td>2.241313e+06</td>
+    </tr>
+<tr>
+<th>6</th>
+      <td>1.625912e+06</td>
+      <td>3.587928e+06</td>
+      <td>6.647600e+06</td>
+      <td>8.762467e+06</td>
+      <td>3.298594e+06</td>
+      <td>4.272221e+06</td>
+      <td>7.815525e+06</td>
+      <td>4.441663e+06</td>
+      <td>7.119722e+06</td>
+      <td>4.081421e+05</td>
+    </tr>
+<tr>
+<th>7</th>
+      <td>4.075684e+06</td>
+      <td>4.236281e+06</td>
+      <td>5.755465e+05</td>
+      <td>6.641514e+06</td>
+      <td>8.324524e+06</td>
+      <td>7.981302e+06</td>
+      <td>1.044166e+06</td>
+      <td>6.378662e+04</td>
+      <td>6.203922e+06</td>
+      <td>3.659234e+06</td>
+    </tr>
+<tr>
+<th>8</th>
+      <td>1.410785e+06</td>
+      <td>3.648447e+06</td>
+      <td>1.767731e+06</td>
+      <td>8.115813e+06</td>
+      <td>8.433291e+06</td>
+      <td>5.847000e+06</td>
+      <td>2.825943e+06</td>
+      <td>2.575784e+06</td>
+      <td>9.579325e+06</td>
+      <td>5.079805e+06</td>
+    </tr>
+<tr>
+<th>9</th>
+      <td>3.809965e+06</td>
+      <td>4.450504e+06</td>
+      <td>6.223885e+06</td>
+      <td>6.757665e+06</td>
+      <td>5.331363e+06</td>
+      <td>9.334193e+06</td>
+      <td>1.725900e+06</td>
+      <td>5.192276e+06</td>
+      <td>2.436415e+06</td>
+      <td>8.680667e+06</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># supress scientific notation and control decimal points shown with float_format</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span>  <span class="o">=</span> <span class="s1">'</span><span class="si">{:.2f}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+      <th>G</th>
+      <th>H</th>
+      <th>I</th>
+      <th>J</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>7185917.11</td>
+      <td>1898679.93</td>
+      <td>8559152.24</td>
+      <td>6467466.13</td>
+      <td>1354230.00</td>
+      <td>4935421.81</td>
+      <td>4203679.65</td>
+      <td>7212383.08</td>
+      <td>2165359.19</td>
+      <td>5236440.22</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>1458406.14</td>
+      <td>4387590.50</td>
+      <td>2655779.68</td>
+      <td>4351074.03</td>
+      <td>7259366.86</td>
+      <td>2510266.79</td>
+      <td>8622930.44</td>
+      <td>1426474.70</td>
+      <td>3552836.86</td>
+      <td>8278565.93</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>6212475.73</td>
+      <td>4126049.46</td>
+      <td>6848307.36</td>
+      <td>7227175.70</td>
+      <td>8664448.54</td>
+      <td>406729.78</td>
+      <td>4237243.69</td>
+      <td>5249347.81</td>
+      <td>2890430.94</td>
+      <td>6765471.59</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>2337153.91</td>
+      <td>1098135.87</td>
+      <td>4009220.15</td>
+      <td>9803310.55</td>
+      <td>1306165.51</td>
+      <td>854994.74</td>
+      <td>9515346.11</td>
+      <td>5879958.23</td>
+      <td>2440901.48</td>
+      <td>6403620.93</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>2052663.44</td>
+      <td>8845251.22</td>
+      <td>580052.98</td>
+      <td>337502.05</td>
+      <td>4915520.01</td>
+      <td>5454617.90</td>
+      <td>7239359.74</td>
+      <td>491938.85</td>
+      <td>5417191.24</td>
+      <td>1869248.35</td>
+    </tr>
+<tr>
+<th>5</th>
+      <td>9420783.85</td>
+      <td>4183467.85</td>
+      <td>6566998.52</td>
+      <td>7929240.47</td>
+      <td>425463.36</td>
+      <td>1373790.84</td>
+      <td>3061948.53</td>
+      <td>6284631.72</td>
+      <td>278649.35</td>
+      <td>2241312.96</td>
+    </tr>
+<tr>
+<th>6</th>
+      <td>1625912.08</td>
+      <td>3587928.48</td>
+      <td>6647600.10</td>
+      <td>8762467.48</td>
+      <td>3298593.95</td>
+      <td>4272220.59</td>
+      <td>7815524.61</td>
+      <td>4441663.35</td>
+      <td>7119722.14</td>
+      <td>408142.12</td>
+    </tr>
+<tr>
+<th>7</th>
+      <td>4075683.74</td>
+      <td>4236280.81</td>
+      <td>575546.48</td>
+      <td>6641513.80</td>
+      <td>8324523.70</td>
+      <td>7981301.85</td>
+      <td>1044165.97</td>
+      <td>63786.62</td>
+      <td>6203921.62</td>
+      <td>3659233.90</td>
+    </tr>
+<tr>
+<th>8</th>
+      <td>1410785.28</td>
+      <td>3648447.37</td>
+      <td>1767731.49</td>
+      <td>8115813.02</td>
+      <td>8433290.93</td>
+      <td>5847000.45</td>
+      <td>2825942.81</td>
+      <td>2575783.96</td>
+      <td>9579325.44</td>
+      <td>5079804.73</td>
+    </tr>
+<tr>
+<th>9</th>
+      <td>3809965.14</td>
+      <td>4450503.99</td>
+      <td>6223884.74</td>
+      <td>6757665.21</td>
+      <td>5331362.78</td>
+      <td>9334192.56</td>
+      <td>1725900.49</td>
+      <td>5192276.44</td>
+      <td>2436414.75</td>
+      <td>8680667.33</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># control max rows and columns</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_columns</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>...</th>
+      <th>I</th>
+      <th>J</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>7185917.11</td>
+      <td>1898679.93</td>
+      <td>...</td>
+      <td>2165359.19</td>
+      <td>5236440.22</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>1458406.14</td>
+      <td>4387590.50</td>
+      <td>...</td>
+      <td>3552836.86</td>
+      <td>8278565.93</td>
+    </tr>
+<tr>
+<th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+<tr>
+<th>8</th>
+      <td>1410785.28</td>
+      <td>3648447.37</td>
+      <td>...</td>
+      <td>9579325.44</td>
+      <td>5079804.73</td>
+    </tr>
+<tr>
+<th>9</th>
+      <td>3809965.14</td>
+      <td>4450503.99</td>
+      <td>...</td>
+      <td>2436414.75</td>
+      <td>8680667.33</td>
+    </tr>
+</tbody>
+</table>
+<p>10 rows × 10 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># large_repr lets you select whether to display dataframes that exceed max_columns or max_rows</span>
+<span class="c1"># as a truncated frame ('truncate'), or as a summary ('info'). 'truncate' is default</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">large_repr</span> <span class="o">=</span> <span class="s1">'info'</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<pre>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 10 entries, 0 to 9
+Data columns (total 10 columns):
+A    10 non-null float64
+B    10 non-null float64
+C    10 non-null float64
+D    10 non-null float64
+E    10 non-null float64
+F    10 non-null float64
+G    10 non-null float64
+H    10 non-null float64
+I    10 non-null float64
+J    10 non-null float64
+dtypes: float64(10)
+memory usage: 928.0 bytes
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># reset options</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">'all'</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+      <th>G</th>
+      <th>H</th>
+      <th>I</th>
+      <th>J</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>7.185917e+06</td>
+      <td>1.898680e+06</td>
+      <td>8.559152e+06</td>
+      <td>6.467466e+06</td>
+      <td>1.354230e+06</td>
+      <td>4.935422e+06</td>
+      <td>4.203680e+06</td>
+      <td>7.212383e+06</td>
+      <td>2.165359e+06</td>
+      <td>5.236440e+06</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>1.458406e+06</td>
+      <td>4.387591e+06</td>
+      <td>2.655780e+06</td>
+      <td>4.351074e+06</td>
+      <td>7.259367e+06</td>
+      <td>2.510267e+06</td>
+      <td>8.622930e+06</td>
+      <td>1.426475e+06</td>
+      <td>3.552837e+06</td>
+      <td>8.278566e+06</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>6.212476e+06</td>
+      <td>4.126049e+06</td>
+      <td>6.848307e+06</td>
+      <td>7.227176e+06</td>
+      <td>8.664449e+06</td>
+      <td>4.067298e+05</td>
+      <td>4.237244e+06</td>
+      <td>5.249348e+06</td>
+      <td>2.890431e+06</td>
+      <td>6.765472e+06</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>2.337154e+06</td>
+      <td>1.098136e+06</td>
+      <td>4.009220e+06</td>
+      <td>9.803311e+06</td>
+      <td>1.306166e+06</td>
+      <td>8.549947e+05</td>
+      <td>9.515346e+06</td>
+      <td>5.879958e+06</td>
+      <td>2.440901e+06</td>
+      <td>6.403621e+06</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>2.052663e+06</td>
+      <td>8.845251e+06</td>
+      <td>5.800530e+05</td>
+      <td>3.375020e+05</td>
+      <td>4.915520e+06</td>
+      <td>5.454618e+06</td>
+      <td>7.239360e+06</td>
+      <td>4.919389e+05</td>
+      <td>5.417191e+06</td>
+      <td>1.869248e+06</td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../pandas-periods/" rel="prev" title="Pandas Periods">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../pandas-offsets/" rel="next" title="Pandas Offsets">Next post</a>
+            </li>
+        </ul></nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article><!--End of body content--><footer id="footer">
+            Contents © 2020         <a href="mailto:n.tesla@example.com">Ryan</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script src="../../assets/js/moment-with-locales.min.js"></script><!-- fancy dates --><script>
+        moment.locale("en");
+        fancydates(2, "YYYY-MM-DD HH:mm");
+        </script><!-- end fancy dates --><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pandas Periods | My Site</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="canonical" href="https://defclass.com/posts/pandas-periods/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><!-- Font Awesome --><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<meta name="author" content="Ryan">
+<link rel="prev" href="../pandas-reshaping/" title="Reshaping DataFrames" type="text/html">
+<link rel="next" href="../pandas-options-settings/" title="Pandas Options and Settings" type="text/html">
+<meta property="og:site_name" content="My Site">
+<meta property="og:title" content="Pandas Periods">
+<meta property="og:url" content="https://defclass.com/posts/pandas-periods/">
+<meta property="og:description" content="In [1]:
+
+    
+import pandas as pd
+
+
+    
+
+
+
+
+
+
+
+periods represent specific periods of time (e.g. all of January 2011)
+similar to timestamps in attributes and instantiation, but period has start_time a">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-03-29T00:00:00-07:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-expand-md static-top mb-4
+navbar-dark bg-dark
+"><div class="container">
+<!-- This keeps the margins nice -->
+        <a class="navbar-brand" href="https://defclass.com/">
+
+            <span id="blog-title">My Site</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="navbar-nav mr-auto"><li class="nav-item dropdown">
+<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topics</a>
+            <div class="dropdown-menu">
+                    <a href="../../python/" class="dropdown-item">Python</a>
+                    <a href="../../book-notes/" class="dropdown-item">Books</a>
+                    <a href="../../misc/" class="dropdown-item">Misc</a>
+                    <a href="../" class="dropdown-item">All Posts</a>
+            </div>
+
+                
+            </li></ul>
+<ul class="navbar-nav navbar-right">
+<li class="nav-item">
+    <a href="index.ipynb" id="sourcelink" class="nav-link">Source</a>
+    </li>
+
+
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Pandas Periods</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Ryan
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-03-29T00:00:00-07:00" itemprop="datePublished" title="2020-03-29 00:00">2020-03-29 00:00</time></a>
+            </p>
+            
+        <p class="sourceline"><a href="index.ipynb" class="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>periods represent specific periods of time (e.g. all of January 2011)</p>
+<p>similar to timestamps in attributes and instantiation, but period has start_time and end_time and always has an associated frequency</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Instantiation">Instantiation<a class="anchor-link" href="#Instantiation">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># represents month of January 2011</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="s1">'2011-01'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Period('2011-01', 'M')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># day of July 7 2011</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="s1">'2012-7-7'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Period('2012-07-07', 'D')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># if using keywords, freq must be specified</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2006</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'W'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Period('2006-06-05/2006-06-11', 'W-SUN')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># can enter same format strings as timestamps</span>
+<span class="c1"># default period frequency (length) is lowest time resolution of date time string</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="s1">'7-7-12 1:00:01'</span><span class="p">)</span> <span class="c1"># will default to second ('S') freq </span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Period('2012-07-07 01:00:01', 'S')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># can specify freq but lower resolution time data is lost</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="s1">'7-7-12 1:00:01'</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'M'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Period('2012-07', 'M')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># construct using current time, freq must be specified</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Period</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s1">'D'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Period('2020-03-29', 'D')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Date-Offsets/Frequency-Strings">Date Offsets/Frequency Strings<a class="anchor-link" href="#Date-Offsets/Frequency-Strings">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Alias...Description<br>
+B.......business day frequency<br>
+C.......custom business day frequency (experimental)<br>
+D.......calendar day frequency<br>
+W.......weekly frequency<br>
+M.......month end frequency<br>
+BM......business month end frequency<br>
+CBM.....custom business month end frequency<br>
+MS......month start frequency<br>
+BMS.....business month start frequency<br>
+CBMS....custom business month start frequency<br>
+Q.......quarter end frequency<br>
+BQ......business quarter endfrequency<br>
+QS......quarter start frequency<br>
+BQS.....business quarter start frequency<br>
+A.......year end frequency<br>
+BA......business year end frequency<br>
+AS......year start frequency<br>
+BAS.....business year start frequency<br>
+BH......business hour frequency<br>
+H.......hourly frequency<br>
+T, min..minutely frequency<br>
+S.......secondly frequency<br>
+L, ms...milliseonds<br>
+U, us...microseconds<br>
+N.......nanoseconds</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">freqs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Y'</span><span class="p">,</span> <span class="s1">'A'</span><span class="p">,</span> <span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">,</span> <span class="s1">'W'</span><span class="p">,</span> <span class="s1">'D'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'C'</span><span class="p">,</span> <span class="s1">'H'</span><span class="p">,</span> <span class="s1">'T'</span><span class="p">,</span> <span class="s1">'S'</span><span class="p">,</span> <span class="s1">'L'</span><span class="p">,</span> <span class="s1">'U'</span><span class="p">,</span> <span class="s1">'N'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">freqs</span><span class="p">:</span>
+    <span class="n">prd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2006</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="s1">':'</span><span class="p">,</span> <span class="n">prd</span><span class="o">.</span><span class="n">freq</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Y : &lt;YearEnd: month=12&gt;
+A : &lt;YearEnd: month=12&gt;
+Q : &lt;QuarterEnd: startingMonth=12&gt;
+M : &lt;MonthEnd&gt;
+W : &lt;Week: weekday=6&gt;
+D : &lt;Day&gt;
+B : &lt;BusinessDay&gt;
+C : &lt;CustomBusinessDay&gt;
+H : &lt;Hour&gt;
+T : &lt;Minute&gt;
+S : &lt;Second&gt;
+L : &lt;Milli&gt;
+U : &lt;Micro&gt;
+N : &lt;Nano&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If Period freq is daily or higher (D, H, T, S, L, U, N), offsets and timedelta-like can be added if the result can have the same freq. Otherwise, ValueError will be raised.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Attributes/Methods">Attributes/Methods<a class="anchor-link" href="#Attributes/Methods">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># use start_time and end_time to check if timestamp is in period</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">'2009-1-8'</span><span class="p">)</span>
+<span class="n">prd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="s1">'2009-1'</span><span class="p">)</span>
+<span class="n">prd</span><span class="o">.</span><span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">ts</span> <span class="o">&lt;</span> <span class="n">prd</span><span class="o">.</span><span class="n">end_time</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># attributes similar to timestamp</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prd</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prd</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prd</span><span class="o">.</span><span class="n">month</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prd</span><span class="o">.</span><span class="n">week</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prd</span><span class="o">.</span><span class="n">weekofyear</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prd</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prd</span><span class="o">.</span><span class="n">weekday</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prd</span><span class="o">.</span><span class="n">minute</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prd</span><span class="o">.</span><span class="n">second</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>2009-01
+2009
+1
+5
+5
+31
+5
+0
+0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prd</span><span class="o">.</span><span class="n">freq</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;MonthEnd&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prd</span><span class="o">.</span><span class="n">to_timestamp</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Timestamp('2009-01-01 00:00:00')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prd</span><span class="o">.</span><span class="n">asfreq</span><span class="p">(</span><span class="s1">'Y'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Period('2009', 'A-DEC')</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../pandas-reshaping/" rel="prev" title="Reshaping DataFrames">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../pandas-options-settings/" rel="next" title="Pandas Options and Settings">Next post</a>
+            </li>
+        </ul></nav></aside><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+        </script></article><!--End of body content--><footer id="footer">
+            Contents © 2020         <a href="mailto:n.tesla@example.com">Ryan</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="../../assets/js/all-nocdn.js"></script><script src="../../assets/js/moment-with-locales.min.js"></script><!-- fancy dates --><script>
+        moment.locale("en");
+        fancydates(2, "YYYY-MM-DD HH:mm");
+        </script><!-- end fancy dates --><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>
